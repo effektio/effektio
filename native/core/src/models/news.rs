@@ -1,4 +1,5 @@
 use super::{Color, Tag};
+use serde::{Serialize, Deserialize};
 
 #[cfg(feature = "with-mocks")]
 use super::mocks::ColorFaker;
@@ -33,10 +34,10 @@ pub(crate) mod mocks {
 }
 
 #[cfg_attr(feature = "with-mocks", derive(Dummy))]
-#[derive(Default)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 pub struct News {
     #[cfg_attr(feature = "with-mocks", dummy(faker = "Sentence(3..24)"))]
-    text: Option<String>,
+    pub(crate) text: Option<String>,
     pub(crate) tags: Vec<Tag>,
     #[cfg_attr(feature = "with-mocks", dummy(faker = "0..1024"))]
     pub(crate) likes_count: u64,

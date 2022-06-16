@@ -1,0 +1,1 @@
+pub use ruma::events::room::message::TextMessageEventContent;

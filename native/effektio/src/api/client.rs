@@ -7,7 +7,7 @@ use effektio_core::{
     ruma::api::client::account::register,
     RestoreToken,
 };
-use futures::{stream, Stream, StreamExt};
+use futures::{future::try_join_all, stream, Stream, StreamExt};
 use lazy_static::lazy_static;
 pub use matrix_sdk::ruma::{self, DeviceId, MxcUri, RoomId, ServerName};
 use matrix_sdk::{
@@ -31,6 +31,10 @@ pub struct ClientState {
     #[builder(default)]
     pub is_syncing: bool,
     #[builder(default)]
+    pub is_catching_up: bool,
+    #[builder(default)]
+    pub is_cought_up: bool,
+    #[builder(default)]
     pub should_stop_syncing: bool,
 }
 
@@ -51,44 +55,7 @@ static PURPOSE_FIELD: &str = "m.room.purpose";
 static PURPOSE_FIELD_DEV: &str = "org.matrix.msc3088.room.purpose";
 static PURPOSE_VALUE: &str = "org.effektio";
 
-async fn devide_groups_from_common(client: MatrixClient) -> (Vec<Group>, Vec<Conversation>) {
-    stream::iter(client.rooms().into_iter())
-        .fold(
-            (Vec::new(), Vec::new()),
-            async move |(mut groups, mut conversations), room| {
-                let is_effektio_group = {
-                    #[allow(clippy::match_like_matches_macro)]
-                    if let Ok(Some(_)) = room
-                        .get_state_event(PURPOSE_FIELD.into(), PURPOSE_VALUE)
-                        .await
-                    {
-                        true
-                    } else if let Ok(Some(_)) = room
-                        .get_state_event(PURPOSE_FIELD_DEV.into(), PURPOSE_VALUE)
-                        .await
-                    {
-                        true
-                    } else {
-                        false
-                    }
-                };
-
-                if is_effektio_group {
-                    groups.push(Group {
-                        inner: Room { room },
-                    });
-                } else {
-                    conversations.push(Conversation {
-                        inner: Room { room },
-                    });
-                }
-
-                (groups, conversations)
-            },
-        )
-        .await
-}
-
+// public API
 impl Client {
     pub(crate) fn new(client: MatrixClient, state: ClientState) -> Self {
         Client {
@@ -98,13 +65,15 @@ impl Client {
     }
 
     pub(crate) fn start_sync(&self) {
+        let me = self.clone();
         let client = self.client.clone();
         let state = self.state.clone();
         RUNTIME.spawn(async move {
             client
                 .sync_with_callback(matrix_sdk::config::SyncSettings::new(), |_response| async {
                     if !state.read().has_first_synced {
-                        state.write().has_first_synced = true
+                        state.write().has_first_synced = true;
+                        me.catch_up();
                     }
 
                     if state.read().should_stop_syncing {
@@ -146,22 +115,16 @@ impl Client {
     }
 
     pub async fn conversations(&self) -> Result<Vec<Conversation>> {
-        let c = self.client.clone();
+        let me = self.clone();
         RUNTIME
-            .spawn(async move {
-                let (_, conversations) = devide_groups_from_common(c).await;
-                Ok(conversations)
-            })
+            .spawn(async move { Ok(me.get_convos().await) })
             .await?
     }
 
     pub async fn groups(&self) -> Result<Vec<Group>> {
-        let c = self.client.clone();
+        let me = self.clone();
         RUNTIME
-            .spawn(async move {
-                let (groups, _) = devide_groups_from_common(c).await;
-                Ok(groups)
-            })
+            .spawn(async move { Ok(me.get_groups().await) })
             .await?
     }
 
@@ -194,10 +157,11 @@ impl Client {
     pub async fn room(&self, room_name: String) -> Result<Room> {
         let room_id = RoomId::parse(room_name)?;
         let l = self.client.clone();
+        let client = self.clone();
         RUNTIME
             .spawn(async move {
                 if let Some(room) = l.get_room(&room_id) {
-                    return Ok(Room { room });
+                    return Ok(Room { room, client });
                 }
                 bail!("Room not found")
             })
@@ -234,5 +198,73 @@ impl Client {
 
     pub async fn avatar(&self) -> Result<api::FfiBuffer<u8>> {
         self.account().await?.avatar().await
+    }
+}
+
+// Internal API
+impl Client {
+    async fn devide_groups_from_common(&self) -> (Vec<MatrixRoom>, Vec<MatrixRoom>) {
+        stream::iter(self.client.rooms().into_iter())
+            .fold(
+                (Vec::new(), Vec::new()),
+                async move |(mut groups, mut conversations), room| {
+                    let is_effektio_group = {
+                        #[allow(clippy::match_like_matches_macro)]
+                        if let Ok(Some(_)) = room
+                            .get_state_event(PURPOSE_FIELD.into(), PURPOSE_VALUE)
+                            .await
+                        {
+                            true
+                        } else if let Ok(Some(_)) = room
+                            .get_state_event(PURPOSE_FIELD_DEV.into(), PURPOSE_VALUE)
+                            .await
+                        {
+                            true
+                        } else {
+                            false
+                        }
+                    };
+
+                    if is_effektio_group {
+                        groups.push(room);
+                    } else {
+                        conversations.push(room);
+                    }
+
+                    (groups, conversations)
+                },
+            )
+            .await
+    }
+
+    async fn get_groups(&self) -> Vec<Group> {
+        let (groups, _) = self.devide_groups_from_common().await;
+        groups
+            .into_iter()
+            .map(|room| Group {
+                inner: Room {
+                    room,
+                    client: self.clone(),
+                },
+            })
+            .collect()
+    }
+    async fn get_convos(&self) -> Vec<Conversation> {
+        let (_, convos) = self.devide_groups_from_common().await;
+        convos
+            .into_iter()
+            .map(|room| Conversation {
+                inner: Room {
+                    room,
+                    client: self.clone(),
+                },
+            })
+            .collect()
+    }
+
+    async fn catch_up(&self) -> Result<()> {
+        let groups = self.get_groups().await;
+        try_join_all(groups.iter().map(|g| g.sync_up())).await?;
+        Ok(())
     }
 }

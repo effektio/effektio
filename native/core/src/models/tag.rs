@@ -1,4 +1,5 @@
 use super::Color;
+use serde::{Serialize, Deserialize};
 
 #[cfg(feature = "with-mocks")]
 use super::mocks::ColorFaker;
@@ -6,7 +7,7 @@ use super::mocks::ColorFaker;
 use fake::{faker::lorem::en::Word, Dummy, Fake};
 
 #[cfg_attr(feature = "with-mocks", derive(Dummy))]
-#[derive(Clone)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Tag {
     #[cfg_attr(feature = "with-mocks", dummy(faker = "Word()"))]
     pub(crate) title: String,

@@ -36,6 +36,7 @@ tracing = { version = "0.1.29", default-features = false }
 tracing-log = "0.1.2"
 tracing-subscriber = { version = "0.3.3", default-features = false, features = ["env-filter", "fmt"] }
 url = "2.2.2"
+bincode = "1.3.3"
 
 [dependencies.effektio-core]
 path = "../core"
@@ -46,6 +47,7 @@ default-features = false
 features = [
     "e2e-encryption",
     "rustls-tls",
+    "experimental-timeline",
 #    "qrcode",
     "sled",
     "anyhow",

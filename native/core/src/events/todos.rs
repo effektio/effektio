@@ -1,5 +1,5 @@
 use super::TextMessageEventContent;
-use matrix_sdk::ruma::events::macros::EventContent;
+use ruma::events::macros::EventContent;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 

@@ -1,5 +1,5 @@
 use super::messages::{sync_event_to_message, RoomMessage};
-use super::{api, TimelineStream, RUNTIME};
+use super::{api, Client, TimelineStream, RUNTIME};
 use anyhow::{bail, Context, Result};
 use effektio_core::RestoreToken;
 use futures::{pin_mut, stream, Stream, StreamExt};
@@ -46,6 +46,7 @@ impl Member {
 
 pub struct Room {
     pub(crate) room: MatrixRoom,
+    pub(crate) client: Client,
 }
 
 impl Room {
