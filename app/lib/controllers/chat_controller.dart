@@ -39,6 +39,8 @@ class ChatController extends GetxController {
     room = convoRoom;
     user = convoUser;
     isLoading.value = true;
+    String inviter = await room.getInviter();
+    debugPrint('room inviter: ' + inviter);
     _stream = await room.timeline();
     // i am fetching messages from remote
     var _messages = await _stream!.paginateBackwards(10);

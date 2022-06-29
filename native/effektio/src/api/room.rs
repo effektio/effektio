@@ -7,7 +7,8 @@ use matrix_sdk::{
     ruma::{
         events::{
             room::message::{MessageType, RoomMessageEventContent},
-            AnyMessageLikeEvent, AnyMessageLikeEventContent, AnyRoomEvent, MessageLikeEvent,
+            AnyMessageLikeEvent, AnyMessageLikeEventContent, AnyRoomEvent, AnyStrippedStateEvent,
+            AnySyncRoomEvent, AnySyncStateEvent, MessageLikeEvent, StateEventType,
         },
         EventId, OwnedUserId, UInt,
     },
@@ -396,11 +397,145 @@ impl Room {
             })
             .await?
     }
+
+    pub async fn get_inviter(&self) -> Result<String> {
+        let room = if let MatrixRoom::Invited(r) = &self.room {
+            r.clone()
+        } else {
+            bail!("Can't send message to a room we are not in")
+        };
+        let client = self.client.clone();
+        RUNTIME
+            .spawn(async move {
+                let events = room.get_state_events(StateEventType::PolicyRuleRoom).await?;
+                println!("policy rule room: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::PolicyRuleServer).await?;
+                println!("policy rule server: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::PolicyRuleUser).await?;
+                println!("policy rule user: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomAliases).await?;
+                println!("room aliases: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomAvatar).await?;
+                println!("room avatar: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomCanonicalAlias).await?;
+                println!("room canonical alias: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomCreate).await?;
+                println!("room create: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomEncryption).await?;
+                println!("room encryption: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomGuestAccess).await?;
+                println!("room guest access: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomHistoryVisibility).await?;
+                println!("room history visibility: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomJoinRules).await?;
+                println!("room join rules: {} {:?}", events.len(), events);
+                let room_member_events = room.get_state_events(StateEventType::RoomMember).await?;
+                println!("room member: {} {:?}", room_member_events.len(), room_member_events);
+                let events = room.get_state_events(StateEventType::RoomName).await?;
+                println!("room name: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomPinnedEvents).await?;
+                println!("room pinned events: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomPowerLevels).await?;
+                println!("room power levels: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomServerAcl).await?;
+                println!("room server acl: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomThirdPartyInvite).await?;
+                println!("room third party invite: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomTombstone).await?;
+                println!("room tombstone: {} {:?}", events.len(), events);
+                let events = room.get_state_events(StateEventType::RoomTopic).await?;
+                println!("room topic: {} {:?}", events.len(), events);
+                // for event in events {
+                //     println!("xxx");
+                //     if let Ok(AnySyncStateEvent::RoomMember(member)) = event.deserialize() {
+                //         println!("sender: {}", member.sender());
+                //     }
+                // }
+                let user_id = client.user_id().await.unwrap();
+                let event = room.get_state_event(StateEventType::RoomMember, user_id.to_string().as_str()).await?;
+                println!("get_state_event: {:?}", event);
+                if room_member_events.len() == 0 {
+                    Ok("No".to_owned())
+                } else {
+                    Ok("Yes".to_owned())
+                }
+            })
+            .await?
+    }
 }
 
 impl std::ops::Deref for Room {
     type Target = MatrixRoom;
     fn deref(&self) -> &MatrixRoom {
         &self.room
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use anyhow::Result;
+    use matrix_sdk::{
+        config::SyncSettings,
+        Client as MatrixClient, LoopCtrl,
+    };
+    use tokio::time::{Duration, sleep};
+    use zenv::Zenv;
+
+    use crate::api::{room::Room, Client, ClientStateBuilder, login_new_client};
+
+    async fn login_and_sync(
+        homeserver_url: String,
+        base_path: String,
+        username: String,
+        password: String,
+    ) -> Result<Client> {
+        let mut client_builder = MatrixClient::builder().homeserver_url(homeserver_url);
+
+        #[cfg(feature = "sled")]
+        {
+            let state_store = matrix_sdk_sled::StateStore::open_with_path(base_path)?;
+            client_builder = client_builder.state_store(state_store);
+        }
+
+        let client = client_builder.build().await.unwrap();
+        client.login(&username, &password, None, Some("command bot")).await?;
+        println!("logged in as {}", username);
+
+        let sync_settings = SyncSettings::new().timeout(Duration::from_secs(5));
+        client.sync_once(sync_settings).await.unwrap();
+
+        // let settings = SyncSettings::default().token(client.sync_token().await.unwrap());
+        // client.sync(settings).await;
+        // println!("456");
+
+        let c = Client::new(
+            client,
+            ClientStateBuilder::default().is_guest(false).build()?,
+        );
+        Ok(c)
+    }
+
+    #[tokio::test]
+    async fn test_get_inviter() -> Result<()> {
+        let z = Zenv::new(".env", false).parse()?;
+        let homeserver_url: String = z.get("HOMESERVER_URL").unwrap().to_owned();
+        let base_path: String = z.get("BASE_PATH").unwrap().to_owned();
+        let username: String = z.get("USERNAME").unwrap().to_owned();
+        let password: String = z.get("PASSWORD").unwrap().to_owned();
+        std::env::set_var("RUST_BACKTRACE", "1");
+
+        // let client = login_and_sync(homeserver_url, base_path, username, password).await?;
+
+        let client = login_new_client(base_path, username, password).await?;
+
+        sleep(Duration::from_secs(5)).await;
+
+        let room_id: String = "!jKEBNbuUeVwZptOIaV:effektio.org".to_owned();
+        let room: Room = client.room(room_id).await.expect("Expected room to be available");
+        let res: String = room.get_inviter().await?;
+        println!("inviter: {}", res);
+
+        assert_eq!(1, 1);
+        Ok(())
     }
 }

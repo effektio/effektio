@@ -6,8 +6,14 @@ use effektio_core::{
     RestoreToken,
 };
 use futures::{stream, Stream, StreamExt};
-pub use matrix_sdk::ruma::{self, DeviceId, MxcUri, RoomId, ServerName};
-use matrix_sdk::{Client as MatrixClient, LoopCtrl};
+use matrix_sdk::{
+    config::SyncSettings,
+    ruma::{
+        events::{AnySyncStateEvent, StateEventType},
+        DeviceId, MxcUri, OwnedUserId, RoomId, ServerName,
+    },
+    Client as MatrixClient, LoopCtrl,
+};
 use parking_lot::RwLock;
 use std::sync::Arc;
 
@@ -100,7 +106,7 @@ impl Client {
         let state = self.state.clone();
         RUNTIME.spawn(async move {
             client
-                .sync_with_callback(matrix_sdk::config::SyncSettings::new(), |_response| async {
+                .sync_with_callback(SyncSettings::new(), |_response| async {
                     if !state.read().has_first_synced {
                         state.write().has_first_synced = true
                     }
@@ -179,7 +185,7 @@ impl Client {
     //     }).await?
     // }
 
-    pub async fn user_id(&self) -> Result<ruma::OwnedUserId> {
+    pub async fn user_id(&self) -> Result<OwnedUserId> {
         let l = self.client.clone();
         RUNTIME
             .spawn(async move {
@@ -235,5 +241,93 @@ impl Client {
 
     pub async fn avatar(&self) -> Result<api::FfiBuffer<u8>> {
         self.account().await?.avatar().await
+    }
+
+    pub async fn get_inviter(&self, room_id: String) -> Result<String> {
+        let room_id = RoomId::parse(room_id)?;
+        let l = self.client.clone();
+        RUNTIME
+            .spawn(async move {
+                if let Some(room) = l.get_invited_room(&room_id) {
+                    let events = room.get_state_events(StateEventType::RoomMember).await?;
+                    println!("state events: {}", events.len());
+                    for event in events {
+                        println!("xxx");
+                        if let Ok(AnySyncStateEvent::RoomMember(member)) = event.deserialize() {
+                            println!("sender: {}", member.sender());
+                        }
+                    }
+                    return Ok("123".to_owned());
+                }
+                bail!("Room not found")
+            })
+            .await?
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use anyhow::Result;
+    use matrix_sdk::{
+        config::SyncSettings,
+        Client as MatrixClient, LoopCtrl,
+    };
+    use tokio::time::{Duration, sleep};
+    use zenv::Zenv;
+
+    use crate::api::{Client, ClientStateBuilder, login_new_client};
+
+    async fn login_and_sync(
+        homeserver_url: String,
+        base_path: String,
+        username: String,
+        password: String,
+    ) -> Result<Client> {
+        let mut client_builder = MatrixClient::builder().homeserver_url(homeserver_url);
+
+        #[cfg(feature = "sled")]
+        {
+            let state_store = matrix_sdk_sled::StateStore::open_with_path(base_path)?;
+            client_builder = client_builder.state_store(state_store);
+        }
+
+        let client = client_builder.build().await.unwrap();
+        client.login(&username, &password, None, Some("command bot")).await?;
+        println!("logged in as {}", username);
+
+        let sync_settings = SyncSettings::new().timeout(Duration::from_secs(5));
+        client.sync_once(sync_settings).await.unwrap();
+
+        // let settings = SyncSettings::default().token(client.sync_token().await.unwrap());
+        // client.sync(settings).await;
+        // println!("456");
+
+        let c = Client::new(
+            client,
+            ClientStateBuilder::default().is_guest(false).build()?,
+        );
+        Ok(c)
+    }
+
+    // #[tokio::test]
+    async fn test_get_inviter() -> Result<()> {
+        let z = Zenv::new(".env", false).parse()?;
+        let homeserver_url: String = z.get("HOMESERVER_URL").unwrap().to_owned();
+        let base_path: String = z.get("BASE_PATH").unwrap().to_owned();
+        let username: String = z.get("USERNAME").unwrap().to_owned();
+        let password: String = z.get("PASSWORD").unwrap().to_owned();
+
+        let client = login_and_sync(homeserver_url, base_path, username, password).await?;
+
+        // let client = login_new_client(base_path, username, password).await?;
+
+        sleep(Duration::from_secs(5)).await;
+
+        let room_id: String = "!jXsqlnitogAbTTSksT:effektio.org".to_owned();
+        let res: String = client.get_inviter(room_id).await?;
+        println!("inviter: {}", res);
+
+        assert_eq!(1, 1);
+        Ok(())
     }
 }

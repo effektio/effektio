@@ -193,6 +193,9 @@ object Conversation {
 
     /// get the path that file was saved
     fn file_path(event_id: string) -> Future<Result<string>>;
+
+    /// get the id of user that invited user at past
+    fn get_inviter() -> Future<Result<string>>;
 }
 
 object Group {

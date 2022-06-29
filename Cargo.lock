@@ -881,6 +881,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "tokio-test",
  "tracing",
  "tracing-android",
  "tracing-log",
@@ -888,6 +889,7 @@ dependencies = [
  "tracing-wasm",
  "url",
  "wasm-bindgen-futures",
+ "zenv",
 ]
 
 [[package]]
@@ -3079,6 +3081,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "tokio-stream"
+version = "0.1.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df54d54117d6fdc4e4fea40fe1e4e566b3505700e148a6827e59b34b0d2600d9"
+dependencies = [
+ "futures-core",
+ "pin-project-lite",
+ "tokio",
+]
+
+[[package]]
+name = "tokio-test"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53474327ae5e166530d17f2d956afcb4f8a004de581b3cae10f12006bc8163e3"
+dependencies = [
+ "async-stream",
+ "bytes",
+ "futures-core",
+ "tokio",
+ "tokio-stream",
+]
+
+[[package]]
 name = "tokio-util"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3591,6 +3617,12 @@ dependencies = [
  "serde",
  "zeroize",
 ]
+
+[[package]]
+name = "zenv"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9796800451fe49442dbf89682907514649afd7222894c686e62762454c986007"
 
 [[package]]
 name = "zeroize"
