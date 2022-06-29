@@ -1,3 +1,7 @@
+object Invitation {
+    fn get_event_id() -> string;
+    fn get_sender() -> string;
+}
 
 /// Initialize logging
 fn init_logging(filter: Option<string>) -> Result<()>;
@@ -11,11 +15,11 @@ fn login_with_token(basepath: string, restore_token: string) -> Future<Result<Cl
 /// Create a new client anonymous client connecting to the homeserver
 fn guest_client(basepath: string, homeserver: string) -> Future<Result<Client>>;
 
-/// generate news mock items
-fn gen_mock_news() -> Vec<News>;
-
 /// Create a new client from the restore token
 fn register_with_registration_token(basepath: string, username: string, password: string, registration_token: string) -> Future<Result<Client>>;
+
+/// generate news mock items
+fn gen_mock_news() -> Vec<News>;
 
 
 /// Representing a color
@@ -145,6 +149,15 @@ object TimelineStream {
     fn paginate_backwards(count: u64) -> Future<Result<Vec<RoomMessage>>>;
 }
 
+/// History with Invitation Events
+object InvitationStream {
+    /// Fires whenever a new event arrived
+    fn next() -> Future<Result<Invitation>>;
+
+    /// Get the next count events backwards,
+    fn paginate_backwards(count: u64) -> Future<Result<Vec<Invitation>>>;
+}
+
 object Conversation {
     /// Calculate the display name
     fn display_name() -> Future<Result<string>>;
@@ -157,6 +170,9 @@ object Conversation {
 
     /// Get the timeline for the room
     fn timeline() -> Future<Result<TimelineStream>>;
+
+    /// Get the invitation history for the room
+    fn invitation_history() -> Future<Result<InvitationStream>>;
 
     // the members currently in the room
     fn get_member(user_id: UserId) -> Future<Result<Member>>;

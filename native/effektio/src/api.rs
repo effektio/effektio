@@ -29,8 +29,8 @@ pub use conversation::Conversation;
 pub use effektio_core::models::{Color, Faq, News, Tag};
 pub use group::Group;
 pub use messages::{FileDescription, ImageDescription, RoomMessage};
-pub use room::{Member, Room};
-pub use stream::TimelineStream;
+pub use room::{Invitation, Member, Room};
+pub use stream::{InvitationStream, TimelineStream};
 
 #[cfg(feature = "with-mocks")]
 pub use effektio_core::mocks::*;
