@@ -25,13 +25,13 @@ class InviteInfoWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: CircleAvatar(
-              backgroundColor: avatarColor,
-            ),
+            leading: CircleAvatar(backgroundColor: avatarColor),
             title: Text(
               inviter,
-              style: AppCommonTheme.appBartitleStyle
-                  .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+              style: AppCommonTheme.appBartitleStyle.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             subtitle: RichText(
               text: TextSpan(
@@ -44,17 +44,16 @@ class InviteInfoWidget extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     text: groupName,
-                    style: AppCommonTheme.appBartitleStyle
-                        .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: AppCommonTheme.appBartitleStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-          Divider(
-            color: AppCommonTheme.dividerColor,
-            indent: 15,
-          ),
+          Divider(color: AppCommonTheme.dividerColor, indent: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -71,14 +70,14 @@ class InviteInfoWidget extends StatelessWidget {
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.accept,
-                    style: AppCommonTheme.appBartitleStyle
-                        .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: AppCommonTheme.appBartitleStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
-                width: 15,
-              ),
+              SizedBox(width: 15),
               Container(
                 width: MediaQuery.of(context).size.width * 0.48,
                 padding: const EdgeInsets.only(right: 15),
@@ -92,8 +91,10 @@ class InviteInfoWidget extends StatelessWidget {
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.decline,
-                    style: AppCommonTheme.appBartitleStyle
-                        .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: AppCommonTheme.appBartitleStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),

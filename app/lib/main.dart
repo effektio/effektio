@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:async';
-import 'package:effektio/common/store/separatedThemes.dart';
 import 'package:effektio/common/store/appTheme.dart';
+import 'package:effektio/common/store/separatedThemes.dart';
 import 'package:effektio/common/widget/AppCommon.dart';
 import 'package:effektio/common/widget/MaterialIndicator.dart';
 import 'package:effektio/common/widget/SideMenu.dart';
+import 'package:effektio/controllers/chat_controller.dart';
 import 'package:effektio/l10n/l10n.dart';
 import 'package:effektio/screens/faq/Overview.dart';
 import 'package:effektio/screens/HomeScreens/ChatList.dart';
@@ -103,6 +104,7 @@ class _EffektioHomeState extends State<EffektioHome>
   @override
   void initState() {
     _client = makeClient();
+    Get.put(ChatController());
     _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(() {
       setState(() {

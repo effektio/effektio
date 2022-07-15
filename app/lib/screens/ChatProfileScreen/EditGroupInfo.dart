@@ -3,6 +3,7 @@ import 'package:effektio/common/widget/customAvatar.dart';
 import 'package:effektio/controllers/chat_controller.dart';
 import 'package:effektio_flutter_sdk/effektio_flutter_sdk_ffi.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EditGroupInfoScreen extends StatefulWidget {
   final Conversation room;
@@ -23,7 +24,7 @@ class EditGroupInfoScreen extends StatefulWidget {
 class _EditGroupInfoState extends State<EditGroupInfoScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
-  ChatController chatController = ChatController.instance;
+  ChatController chatController = Get.find<ChatController>();
 
   @override
   void initState() {

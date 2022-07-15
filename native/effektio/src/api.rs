@@ -24,7 +24,7 @@ pub use account::Account;
 pub use auth::{
     guest_client, login_new_client, login_with_token, register_with_registration_token,
 };
-pub use client::{Client, ClientStateBuilder, CrossSigningEvent, EmojiUnit, SyncState};
+pub use client::{Client, ClientStateBuilder, CrossSigningEvent, EmojiUnit, Invitation, SyncState};
 pub use conversation::Conversation;
 pub use effektio_core::models::{Color, Faq, News, Tag};
 pub use group::Group;

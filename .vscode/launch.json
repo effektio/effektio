@@ -5,17 +5,30 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "app",
+            "name": "flutter",
             "cwd": "app",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "app (profile mode)",
+            "name": "flutter (profile mode)",
             "cwd": "app",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
+        },
+        {
+            "name": "rust",
+            "type": "lldb",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "cargo": {
+                "args": [
+                    "test",
+                    "-p",
+                    "effektio"
+                ]
+            }
         }
     ]
 }

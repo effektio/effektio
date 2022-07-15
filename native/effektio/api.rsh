@@ -1,3 +1,19 @@
+object Invitation {
+    /// get the event id of this invitation
+    fn get_event_id() -> Option<string>;
+
+    /// get the timestamp of this invitation
+    fn get_timestamp() -> Option<u64>;
+
+    /// get the room id of this invitation
+    fn get_room_id() -> string;
+
+    /// get the room name of this invitation
+    fn get_room_name() -> string;
+
+    /// get the user id of this invitation sender
+    fn get_sender() -> Option<string>;
+}
 
 /// Initialize logging
 fn init_logging(filter: Option<string>) -> Result<()>;
@@ -176,6 +192,31 @@ object Conversation {
     /// received over timeline().next()
     fn send_plain_message(text_message: string) -> Future<Result<string>>;
 
+    /// a stream of incoming member events
+    fn listen_to_member_events() -> Result<Stream<string>>;
+
+    /// invite the new user to this room
+    fn invite_user(user_id: string) -> Future<Result<bool>>;
+
+    /// get the user status on this room
+    fn room_type() -> string;
+
+    /// accept invitation about me to this room
+    fn accept_invitation() -> Future<Result<bool>>;
+
+    /// reject invitation about me to this room
+    fn reject_invitation() -> Future<Result<bool>>;
+
+    /// join this room
+    fn join() -> Future<Result<bool>>;
+
+    /// leave this room
+    fn leave() -> Future<Result<bool>>;
+
+    /// get the users that were invited to this room
+    fn get_invitees() -> Future<Result<Vec<Account>>>;
+
+    /// send the image message to this room
     fn send_image_message(uri: string, name: string, mimetype: string, size: Option<u32>, width: Option<u32>, height: Option<u32>) -> Future<Result<string>>;
 
     /// decrypted image file data
@@ -183,6 +224,7 @@ object Conversation {
     /// If this function belongs to message object, we may have to load too many message objects in ChatScreen
     fn image_binary(event_id: string) -> Future<Result<buffer<u8>>>;
 
+    /// send the file message to this room
     fn send_file_message(uri: string, name: string, mimetype: string, size: u32) -> Future<Result<string>>;
 
     /// save file in specified path
@@ -202,7 +244,7 @@ object Group {
     /// the members currently in the group
     fn active_members() -> Future<Result<Vec<Member>>>;
 
-    // the members currently in the room
+    /// the members currently in the room
     fn get_member(user: UserId) -> Future<Result<Member>>;
 }
 
@@ -220,6 +262,8 @@ object Member {
 }
 
 object Account {
+    fn user_id() -> string;
+
     /// The display_name of the account
     fn display_name() -> Future<Result<string>>;
 
@@ -293,6 +337,9 @@ object Client {
 
     /// Get the FAQs for the client
     fn faqs() -> Future<Result<Vec<Faq>>>;
+
+    /// Get the invitation list
+    fn pending_invitations() -> Vec<Invitation>;
 
     /// Accept the AnyToDeviceEvent::KeyVerificationRequest
     fn accept_verification_request(sender: string, event_id: string) -> Future<Result<bool>>;

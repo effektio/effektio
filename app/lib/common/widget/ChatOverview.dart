@@ -6,12 +6,13 @@ import 'package:effektio/common/widget/customAvatar.dart';
 import 'package:effektio/screens/HomeScreens/ChatScreen.dart';
 import 'package:effektio_flutter_sdk/effektio_flutter_sdk_ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class ChatOverview extends StatelessWidget {
   final List<Conversation> rooms;
   final String? user;
+
   const ChatOverview({
     Key? key,
     required this.rooms,
@@ -20,16 +21,43 @@ class ChatOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Iterable<Conversation> invitedRooms =
+        rooms.where((element) => element.roomType() == 'invited');
+    if (invitedRooms.isEmpty) {
+      // hide title
+      return buildListView(context);
+    }
+    // show title
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          alignment: Alignment.topLeft,
+          padding: const EdgeInsets.only(left: 18),
+          child: Text(
+            AppLocalizations.of(context)!.joinedRooms,
+            style: AppCommonTheme.appBartitleStyle.copyWith(fontSize: 16),
+          ),
+        ),
+        SizedBox(height: 10),
+        buildListView(context),
+      ],
+    );
+  }
+
+  Widget buildListView(BuildContext context) {
+    List<Conversation> joinedRooms =
+        rooms.where((element) => element.roomType() == 'joined').toList();
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: const EdgeInsets.only(top: 10),
-      itemCount: rooms.length,
+      itemCount: joinedRooms.length,
       itemBuilder: (BuildContext context, int index) {
         return Column(
           children: <Widget>[
             ChatListItem(
-              room: rooms[index],
+              room: joinedRooms[index],
               user: user,
             ),
             Divider(
@@ -74,8 +102,9 @@ class ChatListItem extends StatelessWidget {
         future: room.displayName(),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasData) {
+            String title = snapshot.requireData;
             return Text(
-              snapshot.requireData,
+              title,
               style: ChatTheme01.chatTitleStyle,
             );
           } else {

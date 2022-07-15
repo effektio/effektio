@@ -24,9 +24,6 @@ import 'package:permission_handler/permission_handler.dart';
 final mtx = Mutex(); // acquire this mutex, when updating state
 
 class ChatController extends GetxController {
-  static ChatController get instance =>
-      Get.put<ChatController>(ChatController());
-
   List<types.Message> messages = [];
   TimelineStream? _stream;
   RxBool isLoading = false.obs;
@@ -34,10 +31,15 @@ class ChatController extends GetxController {
   late final Conversation room;
   late final types.User user;
   final bool _isDesktop = !(Platform.isAndroid || Platform.isIOS);
+
   //get the timeline of room
   init(Conversation convoRoom, types.User convoUser) async {
     room = convoRoom;
     user = convoUser;
+    await _fetchTimeline();
+  }
+
+  Future<void> _fetchTimeline() async {
     isLoading.value = true;
     _stream = await room.timeline();
     // i am fetching messages from remote
@@ -63,10 +65,8 @@ class ChatController extends GetxController {
   Future<void> newEvent() async {
     await _stream!.next();
     var message = await room.latestMessage();
-    if (message.sender() != user.id) {
-      _loadMessage(message, messages);
-      update(['Chat']);
-    }
+    _loadMessage(message, messages);
+    update(['Chat']);
   }
 
   //preview message link
@@ -285,8 +285,9 @@ class ChatController extends GetxController {
     } else if (msgtype == 'm.notice') {
     } else if (msgtype == 'm.server_notice') {
     } else if (msgtype == 'm.text') {
+      String sender = message.sender();
       types.TextMessage m = types.TextMessage(
-        author: types.User(id: message.sender()),
+        author: sender == user.id ? user : types.User(id: sender),
         createdAt: message.originServerTs() * 1000,
         id: message.eventId(),
         text: message.body(),

@@ -56,13 +56,13 @@ class EffektioSdk {
     bool loggedIn = false;
     for (var token in sessions) {
       ffi.Client client = await _api.loginWithToken(appDocPath, token);
-      clients.add(client);
+      _clients.add(client);
       loggedIn = client.loggedIn();
     }
 
     if (_clients.isEmpty) {
       ffi.Client client = await _api.guestClient(appDocPath, defaultServer);
-      clients.add(client);
+      _clients.add(client);
       loggedIn = client.loggedIn();
       await _persistSessions();
     }

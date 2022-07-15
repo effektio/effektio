@@ -13,23 +13,62 @@ use matrix_sdk::{
     config::SyncSettings,
     encryption::verification::{SasVerification, Verification},
     media::{MediaFormat, MediaRequest},
+    room::Room as MatrixRoom,
     ruma::{
-        self,
         events::{
-            room::message::MessageType, AnySyncMessageLikeEvent, AnySyncRoomEvent,
+            room::message::{
+                MessageType, OriginalSyncRoomMessageEvent, TextMessageEventContent,
+            },
+            AnyStrippedStateEvent, AnySyncMessageLikeEvent, AnySyncRoomEvent,
             AnyToDeviceEvent, SyncMessageLikeEvent,
         },
-        RoomId, UserId,
+        serde::Raw,
+        OwnedUserId, RoomId, UserId,
     },
     Client as MatrixClient, LoopCtrl,
 };
 use parking_lot::{Mutex, RwLock};
-use std::sync::{
-    atomic::{AtomicBool, Ordering},
-    Arc,
+use serde_json::Value;
+use std::{
+    sync::{
+        atomic::{AtomicBool, Ordering},
+        Arc,
+    },
+    time::Duration,
 };
 
 use super::{api, Account, Conversation, Group, Room, RUNTIME};
+
+#[derive(Default, Clone, Debug)]
+pub struct Invitation {
+    event_id: Option<String>,
+    timestamp: Option<u64>,
+    room_id: String,
+    room_name: String,
+    sender: Option<String>,
+}
+
+impl Invitation {
+    pub fn get_event_id(&self) -> Option<String> {
+        self.event_id.clone()
+    }
+
+    pub fn get_timestamp(&self) -> Option<u64> {
+        self.timestamp
+    }
+
+    pub fn get_room_id(&self) -> String {
+        self.room_id.clone()
+    }
+
+    pub fn get_room_name(&self) -> String {
+        self.room_name.clone()
+    }
+
+    pub fn get_sender(&self) -> Option<String> {
+        self.sender.clone()
+    }
+}
 
 #[derive(Default, Builder, Debug)]
 pub struct ClientState {
@@ -41,6 +80,8 @@ pub struct ClientState {
     pub is_syncing: bool,
     #[builder(default)]
     pub should_stop_syncing: bool,
+    #[builder(default)]
+    pub pending_invitations: Vec<Invitation>,
 }
 
 #[derive(Clone)]
@@ -155,6 +196,38 @@ async fn devide_groups_from_common(client: MatrixClient) -> (Vec<Group>, Vec<Con
         )
         .await;
     (groups, convos)
+}
+
+// thread callback must be global function, not member function
+async fn handle_stripped_state_event(
+    event: &Raw<AnyStrippedStateEvent>,
+    user_id: &UserId,
+    room_id: &RoomId,
+    room_name: String,
+    state: &RwLock<ClientState>,
+) {
+    match event.deserialize() {
+        Ok(AnyStrippedStateEvent::RoomMember(member)) => {
+            if member.state_key == user_id.as_str() {
+                println!("event: {:?}", event);
+                println!("member: {:?}", member);
+                let v: Value = serde_json::from_str(event.json().get()).unwrap();
+                println!("event id: {}", v["event_id"]);
+                println!("timestamp: {}", v["origin_server_ts"]);
+                println!("room id: {:?}", room_id);
+                println!("sender: {:?}", member.sender);
+                println!("state key: {:?}", member.state_key);
+                state.write().pending_invitations.push(Invitation {
+                    event_id: Some(v["event_id"].as_str().unwrap().to_owned()),
+                    timestamp: v["origin_server_ts"].as_u64(),
+                    room_id: room_id.to_string(),
+                    room_name,
+                    sender: Some(member.sender.to_string()),
+                });
+            }
+        }
+        _ => {}
+    }
 }
 
 // thread callback must be global function, not member function
@@ -436,10 +509,28 @@ impl Client {
         RUNTIME.spawn(async move {
             let client = client.clone();
             let state = state.clone();
+            let user_id = client.user_id().await.expect("No User ID found");
 
+            // load cached events
+            for room in client.invited_rooms() {
+                let room_id = room.room_id();
+                println!("invited room id: {}", room_id.as_str());
+                let r = client.get_room(&room_id).unwrap();
+                let room_name = r.display_name().await.unwrap();
+                println!("invited room name: {}", room_name.to_string());
+                state.write().pending_invitations.push(Invitation {
+                    event_id: None,
+                    timestamp: None,
+                    room_id: room_id.to_string(),
+                    room_name: room_name.to_string(),
+                    sender: None,
+                });
+            }
+
+            // fetch the events that received when offline
             client
                 .clone()
-                .sync_with_callback(SyncSettings::new(), move |response| {
+                .sync_with_callback(SyncSettings::new(), |response| {
                     let client = client.clone();
                     let state = state.clone();
                     let to_device_arc = to_device_arc.clone();
@@ -496,17 +587,35 @@ impl Client {
 
                         let _ = first_synced_arc.send(true);
                         if !(*state).read().has_first_synced {
-                            (*state).write().has_first_synced = true
+                            (*state).write().has_first_synced = true;
+                            for (room_id, room) in response.rooms.invite {
+                                let r = client.get_room(&room_id).unwrap();
+                                let room_name = r.display_name().await.unwrap();
+                                for event in room.invite_state.events {
+                                    handle_stripped_state_event(&event, &user_id, &room_id, room_name.to_string(), &state);
+                                }
+                            }
                         }
                         if (*state).read().should_stop_syncing {
                             (*state).write().is_syncing = false;
-                            // the lock is unlocked here when `s` goes out of scope.
                             return LoopCtrl::Break;
                         } else if !(*state).read().is_syncing {
                             (*state).write().is_syncing = true;
                         }
-                        // the lock is unlocked here when `s` goes out of scope.
                         LoopCtrl::Continue
+                    }
+                })
+                .await;
+
+            // monitor current events
+            client
+                .clone()
+                .register_event_handler(|ev: OriginalSyncRoomMessageEvent, room: MatrixRoom| async move {
+                    if let MatrixRoom::Joined(room) = room {
+                        let msg_body = match ev.content.msgtype {
+                            MessageType::Text(TextMessageEventContent { body, .. }) => body,
+                            _ => return,
+                        };
                     }
                 })
                 .await;
@@ -576,7 +685,7 @@ impl Client {
     //     }).await?
     // }
 
-    pub async fn user_id(&self) -> Result<ruma::OwnedUserId> {
+    pub async fn user_id(&self) -> Result<OwnedUserId> {
         let l = self.client.clone();
         RUNTIME
             .spawn(async move {
@@ -603,7 +712,8 @@ impl Client {
     }
 
     pub async fn account(&self) -> Result<Account> {
-        Ok(Account::new(self.client.account()))
+        let user_id = self.client.user_id().await.unwrap();
+        Ok(Account::new(self.client.account(), user_id.as_str().to_owned()))
     }
 
     pub async fn display_name(&self) -> Result<String> {
@@ -632,6 +742,10 @@ impl Client {
 
     pub async fn avatar(&self) -> Result<api::FfiBuffer<u8>> {
         self.account().await?.avatar().await
+    }
+
+    pub fn pending_invitations(&self) -> Vec<Invitation> {
+        self.state.read().pending_invitations.clone()
     }
 
     pub async fn accept_verification_request(
