@@ -11,9 +11,11 @@ publish = false
 path = "../effektio"
 default-features = false
 features = ["with-mocks"]
+
 [dependencies]
 anyhow = "1"
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-zenv = "0.8.0"
+env_logger = "0.9"
+futures = "0.3.17"
+log = "0.4"
 tempfile = "3.3.0"
-env_logger = "0.9.0"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }

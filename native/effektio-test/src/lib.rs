@@ -1,4 +1,6 @@
 #[cfg(test)]
 mod auth;
 #[cfg(test)]
-mod news;
+mod emoji_verification;
+// #[cfg(test)]
+// mod news;

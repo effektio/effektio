@@ -2695,7 +2695,7 @@ class Api {
     return tmp7;
   }
 
-  bool? __clientAcceptVerificationRequestFuturePoll(
+  bool? __clientVerifiedDeviceFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2709,7 +2709,7 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientAcceptVerificationRequestFuturePoll(
+    final tmp6 = _clientVerifiedDeviceFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2737,7 +2737,7 @@ class Api {
     return tmp7;
   }
 
-  bool? __clientAcceptVerificationStartFuturePoll(
+  bool? __emojiVerificationEventAcceptVerificationRequestFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2751,7 +2751,7 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientAcceptVerificationStartFuturePoll(
+    final tmp6 = _emojiVerificationEventAcceptVerificationRequestFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2779,7 +2779,7 @@ class Api {
     return tmp7;
   }
 
-  FfiListEmojiUnit? __clientGetVerificationEmojiFuturePoll(
+  bool? __emojiVerificationEventCancelVerificationRequestFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2793,7 +2793,302 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientGetVerificationEmojiFuturePoll(
+    final tmp6 = _emojiVerificationEventCancelVerificationRequestFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __emojiVerificationEventAcceptVerificationRequestWithMethodsFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 =
+        _emojiVerificationEventAcceptVerificationRequestWithMethodsFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __emojiVerificationEventStartSasVerificationFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _emojiVerificationEventStartSasVerificationFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __emojiVerificationEventAcceptSasVerificationFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _emojiVerificationEventAcceptSasVerificationFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __emojiVerificationEventCancelSasVerificationFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _emojiVerificationEventCancelSasVerificationFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __emojiVerificationEventSendVerificationKeyFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _emojiVerificationEventSendVerificationKeyFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __emojiVerificationEventCancelVerificationKeyFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _emojiVerificationEventCancelVerificationKeyFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  FfiListEmojiUnit? __emojiVerificationEventGetVerificationEmojiFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _emojiVerificationEventGetVerificationEmojiFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2825,7 +3120,7 @@ class Api {
     return tmp7;
   }
 
-  bool? __clientConfirmVerificationKeyFuturePoll(
+  bool? __emojiVerificationEventConfirmSasVerificationFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2839,7 +3134,7 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientConfirmVerificationKeyFuturePoll(
+    final tmp6 = _emojiVerificationEventConfirmSasVerificationFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2867,7 +3162,7 @@ class Api {
     return tmp7;
   }
 
-  bool? __clientMismatchVerificationKeyFuturePoll(
+  bool? __emojiVerificationEventMismatchSasVerificationFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2881,7 +3176,7 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientMismatchVerificationKeyFuturePoll(
+    final tmp6 = _emojiVerificationEventMismatchSasVerificationFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2909,7 +3204,7 @@ class Api {
     return tmp7;
   }
 
-  bool? __clientCancelVerificationKeyFuturePoll(
+  bool? __emojiVerificationEventReviewVerificationMacFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2923,7 +3218,7 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientCancelVerificationKeyFuturePoll(
+    final tmp6 = _emojiVerificationEventReviewVerificationMacFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2951,7 +3246,7 @@ class Api {
     return tmp7;
   }
 
-  bool? __clientReviewVerificationMacFuturePoll(
+  FfiListDevice? __devicesChangedEventGetDevicesFuturePoll(
     int boxed,
     int postCobject,
     int port,
@@ -2965,7 +3260,53 @@ class Api {
     tmp1 = tmp0;
     tmp3 = tmp2;
     tmp5 = tmp4;
-    final tmp6 = _clientReviewVerificationMacFuturePoll(
+    final tmp6 = _devicesChangedEventGetDevicesFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final ffi.Pointer<ffi.Void> tmp13_0 = ffi.Pointer.fromAddress(tmp13);
+    final tmp13_1 = _Box(this, tmp13_0, "drop_box_FfiListDevice");
+    tmp13_1._finalizer = this._registerFinalizer(tmp13_1);
+    final tmp14 = FfiListDevice._(this, tmp13_1);
+    final tmp7 = tmp14;
+    return tmp7;
+  }
+
+  bool? __devicesChangedEventRequestVerificationToUserFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _devicesChangedEventRequestVerificationToUserFuturePoll(
       tmp1,
       tmp3,
       tmp5,
@@ -2993,7 +3334,181 @@ class Api {
     return tmp7;
   }
 
-  CrossSigningEvent? __syncStateGetToDeviceRxStreamPoll(
+  bool? __devicesChangedEventRequestVerificationToDeviceFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _devicesChangedEventRequestVerificationToDeviceFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __devicesChangedEventRequestVerificationToUserWithMethodsFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 =
+        _devicesChangedEventRequestVerificationToUserWithMethodsFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  bool? __devicesChangedEventRequestVerificationToDeviceWithMethodsFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 =
+        _devicesChangedEventRequestVerificationToDeviceWithMethodsFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final tmp7 = tmp13 > 0;
+    return tmp7;
+  }
+
+  FfiListDevice? __devicesLeftEventGetDevicesFuturePoll(
+    int boxed,
+    int postCobject,
+    int port,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    final tmp6 = _devicesLeftEventGetDevicesFuturePoll(
+      tmp1,
+      tmp3,
+      tmp5,
+    );
+    final tmp8 = tmp6.arg0;
+    final tmp9 = tmp6.arg1;
+    final tmp10 = tmp6.arg2;
+    final tmp11 = tmp6.arg3;
+    final tmp12 = tmp6.arg4;
+    final tmp13 = tmp6.arg5;
+    if (tmp8 == 0) {
+      return null;
+    }
+    if (tmp9 == 0) {
+      final ffi.Pointer<ffi.Uint8> tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+      final tmp9_0 = utf8.decode(tmp10_0.asTypedList(tmp11));
+      if (tmp11 > 0) {
+        final ffi.Pointer<ffi.Void> tmp10_0;
+        tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+        this.__deallocate(tmp10_0, tmp12, 1);
+      }
+      throw tmp9_0;
+    }
+    final ffi.Pointer<ffi.Void> tmp13_0 = ffi.Pointer.fromAddress(tmp13);
+    final tmp13_1 = _Box(this, tmp13_0, "drop_box_FfiListDevice");
+    tmp13_1._finalizer = this._registerFinalizer(tmp13_1);
+    final tmp14 = FfiListDevice._(this, tmp13_1);
+    final tmp7 = tmp14;
+    return tmp7;
+  }
+
+  bool? __syncStateGetFirstSyncedRxStreamPoll(
     int boxed,
     int postCobject,
     int port,
@@ -3011,7 +3526,7 @@ class Api {
     tmp3 = tmp2;
     tmp5 = tmp4;
     tmp7 = tmp6;
-    final tmp8 = _syncStateGetToDeviceRxStreamPoll(
+    final tmp8 = _syncStateGetFirstSyncedRxStreamPoll(
       tmp1,
       tmp3,
       tmp5,
@@ -3022,14 +3537,11 @@ class Api {
     if (tmp10 == 0) {
       return null;
     }
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 = _Box(this, tmp11_0, "drop_box_CrossSigningEvent");
-    tmp11_1._finalizer = this._registerFinalizer(tmp11_1);
-    final tmp9 = CrossSigningEvent._(this, tmp11_1);
+    final tmp9 = tmp11 > 0;
     return tmp9;
   }
 
-  CrossSigningEvent? __syncStateGetSyncMsgLikeRxStreamPoll(
+  EmojiVerificationEvent? __syncStateGetEmojiVerificationEventRxStreamPoll(
     int boxed,
     int postCobject,
     int port,
@@ -3047,7 +3559,7 @@ class Api {
     tmp3 = tmp2;
     tmp5 = tmp4;
     tmp7 = tmp6;
-    final tmp8 = _syncStateGetSyncMsgLikeRxStreamPoll(
+    final tmp8 = _syncStateGetEmojiVerificationEventRxStreamPoll(
       tmp1,
       tmp3,
       tmp5,
@@ -3059,9 +3571,81 @@ class Api {
       return null;
     }
     final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 = _Box(this, tmp11_0, "drop_box_CrossSigningEvent");
+    final tmp11_1 = _Box(this, tmp11_0, "drop_box_EmojiVerificationEvent");
     tmp11_1._finalizer = this._registerFinalizer(tmp11_1);
-    final tmp9 = CrossSigningEvent._(this, tmp11_1);
+    final tmp9 = EmojiVerificationEvent._(this, tmp11_1);
+    return tmp9;
+  }
+
+  DevicesChangedEvent? __syncStateGetDevicesChangedEventRxStreamPoll(
+    int boxed,
+    int postCobject,
+    int port,
+    int done,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    final tmp6 = done;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    var tmp7 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    tmp7 = tmp6;
+    final tmp8 = _syncStateGetDevicesChangedEventRxStreamPoll(
+      tmp1,
+      tmp3,
+      tmp5,
+      tmp7,
+    );
+    final tmp10 = tmp8.arg0;
+    final tmp11 = tmp8.arg1;
+    if (tmp10 == 0) {
+      return null;
+    }
+    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
+    final tmp11_1 = _Box(this, tmp11_0, "drop_box_DevicesChangedEvent");
+    tmp11_1._finalizer = this._registerFinalizer(tmp11_1);
+    final tmp9 = DevicesChangedEvent._(this, tmp11_1);
+    return tmp9;
+  }
+
+  DevicesLeftEvent? __syncStateGetDevicesLeftEventRxStreamPoll(
+    int boxed,
+    int postCobject,
+    int port,
+    int done,
+  ) {
+    final tmp0 = boxed;
+    final tmp2 = postCobject;
+    final tmp4 = port;
+    final tmp6 = done;
+    var tmp1 = 0;
+    var tmp3 = 0;
+    var tmp5 = 0;
+    var tmp7 = 0;
+    tmp1 = tmp0;
+    tmp3 = tmp2;
+    tmp5 = tmp4;
+    tmp7 = tmp6;
+    final tmp8 = _syncStateGetDevicesLeftEventRxStreamPoll(
+      tmp1,
+      tmp3,
+      tmp5,
+      tmp7,
+    );
+    final tmp10 = tmp8.arg0;
+    final tmp11 = tmp8.arg1;
+    if (tmp10 == 0) {
+      return null;
+    }
+    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
+    final tmp11_1 = _Box(this, tmp11_0, "drop_box_DevicesLeftEvent");
+    tmp11_1._finalizer = this._registerFinalizer(tmp11_1);
+    final tmp9 = DevicesLeftEvent._(this, tmp11_1);
     return tmp9;
   }
 
@@ -3907,25 +4491,48 @@ class Api {
     int,
     int,
   )>();
-  late final _syncStateGetToDeviceRxPtr = _lookup<
+  late final _syncStateGetFirstSyncedRxPtr = _lookup<
       ffi.NativeFunction<
-          _SyncStateGetToDeviceRxReturn Function(
+          _SyncStateGetFirstSyncedRxReturn Function(
     ffi.Int64,
-  )>>("__SyncState_get_to_device_rx");
+  )>>("__SyncState_get_first_synced_rx");
 
-  late final _syncStateGetToDeviceRx = _syncStateGetToDeviceRxPtr.asFunction<
-      _SyncStateGetToDeviceRxReturn Function(
+  late final _syncStateGetFirstSyncedRx =
+      _syncStateGetFirstSyncedRxPtr.asFunction<
+          _SyncStateGetFirstSyncedRxReturn Function(
     int,
   )>();
-  late final _syncStateGetSyncMsgLikeRxPtr = _lookup<
+  late final _syncStateGetEmojiVerificationEventRxPtr = _lookup<
       ffi.NativeFunction<
-          _SyncStateGetSyncMsgLikeRxReturn Function(
+          _SyncStateGetEmojiVerificationEventRxReturn Function(
     ffi.Int64,
-  )>>("__SyncState_get_sync_msg_like_rx");
+  )>>("__SyncState_get_emoji_verification_event_rx");
 
-  late final _syncStateGetSyncMsgLikeRx =
-      _syncStateGetSyncMsgLikeRxPtr.asFunction<
-          _SyncStateGetSyncMsgLikeRxReturn Function(
+  late final _syncStateGetEmojiVerificationEventRx =
+      _syncStateGetEmojiVerificationEventRxPtr.asFunction<
+          _SyncStateGetEmojiVerificationEventRxReturn Function(
+    int,
+  )>();
+  late final _syncStateGetDevicesChangedEventRxPtr = _lookup<
+      ffi.NativeFunction<
+          _SyncStateGetDevicesChangedEventRxReturn Function(
+    ffi.Int64,
+  )>>("__SyncState_get_devices_changed_event_rx");
+
+  late final _syncStateGetDevicesChangedEventRx =
+      _syncStateGetDevicesChangedEventRxPtr.asFunction<
+          _SyncStateGetDevicesChangedEventRxReturn Function(
+    int,
+  )>();
+  late final _syncStateGetDevicesLeftEventRxPtr = _lookup<
+      ffi.NativeFunction<
+          _SyncStateGetDevicesLeftEventRxReturn Function(
+    ffi.Int64,
+  )>>("__SyncState_get_devices_left_event_rx");
+
+  late final _syncStateGetDevicesLeftEventRx =
+      _syncStateGetDevicesLeftEventRxPtr.asFunction<
+          _SyncStateGetDevicesLeftEventRxReturn Function(
     int,
   )>();
   late final _clientStartSyncPtr = _lookup<
@@ -4094,198 +4701,188 @@ class Api {
       int Function(
     int,
   )>();
-  late final _clientAcceptVerificationRequestPtr = _lookup<
+  late final _clientVerifiedDevicePtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Uint64,
     ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_accept_verification_request");
+  )>>("__Client_verified_device");
 
-  late final _clientAcceptVerificationRequest =
-      _clientAcceptVerificationRequestPtr.asFunction<
-          int Function(
-    int,
-    int,
-    int,
+  late final _clientVerifiedDevice = _clientVerifiedDevicePtr.asFunction<
+      int Function(
     int,
     int,
     int,
     int,
   )>();
-  late final _clientAcceptVerificationStartPtr = _lookup<
+  late final _emojiVerificationEventGetEventNamePtr = _lookup<
+      ffi.NativeFunction<
+          _EmojiVerificationEventGetEventNameReturn Function(
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_get_event_name");
+
+  late final _emojiVerificationEventGetEventName =
+      _emojiVerificationEventGetEventNamePtr.asFunction<
+          _EmojiVerificationEventGetEventNameReturn Function(
+    int,
+  )>();
+  late final _emojiVerificationEventGetSenderPtr = _lookup<
+      ffi.NativeFunction<
+          _EmojiVerificationEventGetSenderReturn Function(
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_get_sender");
+
+  late final _emojiVerificationEventGetSender =
+      _emojiVerificationEventGetSenderPtr.asFunction<
+          _EmojiVerificationEventGetSenderReturn Function(
+    int,
+  )>();
+  late final _emojiVerificationEventAcceptVerificationRequestPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_accept_verification_start");
+  )>>("__EmojiVerificationEvent_accept_verification_request");
 
-  late final _clientAcceptVerificationStart =
-      _clientAcceptVerificationStartPtr.asFunction<
+  late final _emojiVerificationEventAcceptVerificationRequest =
+      _emojiVerificationEventAcceptVerificationRequestPtr.asFunction<
           int Function(
     int,
-    int,
-    int,
-    int,
-    int,
-    int,
-    int,
   )>();
-  late final _clientGetVerificationEmojiPtr = _lookup<
+  late final _emojiVerificationEventCancelVerificationRequestPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_get_verification_emoji");
+  )>>("__EmojiVerificationEvent_cancel_verification_request");
 
-  late final _clientGetVerificationEmoji =
-      _clientGetVerificationEmojiPtr.asFunction<
+  late final _emojiVerificationEventCancelVerificationRequest =
+      _emojiVerificationEventCancelVerificationRequestPtr.asFunction<
+          int Function(
+    int,
+  )>();
+  late final _emojiVerificationEventAcceptVerificationRequestWithMethodsPtr =
+      _lookup<
+          ffi.NativeFunction<
+              ffi.Int64 Function(
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_accept_verification_request_with_methods");
+
+  late final _emojiVerificationEventAcceptVerificationRequestWithMethods =
+      _emojiVerificationEventAcceptVerificationRequestWithMethodsPtr.asFunction<
           int Function(
     int,
     int,
-    int,
-    int,
-    int,
-    int,
-    int,
   )>();
-  late final _clientConfirmVerificationKeyPtr = _lookup<
+  late final _emojiVerificationEventStartSasVerificationPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_confirm_verification_key");
+  )>>("__EmojiVerificationEvent_start_sas_verification");
 
-  late final _clientConfirmVerificationKey =
-      _clientConfirmVerificationKeyPtr.asFunction<
+  late final _emojiVerificationEventStartSasVerification =
+      _emojiVerificationEventStartSasVerificationPtr.asFunction<
           int Function(
     int,
-    int,
-    int,
-    int,
-    int,
-    int,
+  )>();
+  late final _emojiVerificationEventWasTriggeredFromThisDevicePtr = _lookup<
+      ffi.NativeFunction<
+          _EmojiVerificationEventWasTriggeredFromThisDeviceReturn Function(
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_was_triggered_from_this_device");
+
+  late final _emojiVerificationEventWasTriggeredFromThisDevice =
+      _emojiVerificationEventWasTriggeredFromThisDevicePtr.asFunction<
+          _EmojiVerificationEventWasTriggeredFromThisDeviceReturn Function(
     int,
   )>();
-  late final _clientMismatchVerificationKeyPtr = _lookup<
+  late final _emojiVerificationEventAcceptSasVerificationPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_mismatch_verification_key");
+  )>>("__EmojiVerificationEvent_accept_sas_verification");
 
-  late final _clientMismatchVerificationKey =
-      _clientMismatchVerificationKeyPtr.asFunction<
+  late final _emojiVerificationEventAcceptSasVerification =
+      _emojiVerificationEventAcceptSasVerificationPtr.asFunction<
           int Function(
     int,
-    int,
-    int,
-    int,
-    int,
-    int,
-    int,
   )>();
-  late final _clientCancelVerificationKeyPtr = _lookup<
+  late final _emojiVerificationEventCancelSasVerificationPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_cancel_verification_key");
+  )>>("__EmojiVerificationEvent_cancel_sas_verification");
 
-  late final _clientCancelVerificationKey =
-      _clientCancelVerificationKeyPtr.asFunction<
+  late final _emojiVerificationEventCancelSasVerification =
+      _emojiVerificationEventCancelSasVerificationPtr.asFunction<
           int Function(
     int,
-    int,
-    int,
-    int,
-    int,
-    int,
-    int,
   )>();
-  late final _clientReviewVerificationMacPtr = _lookup<
+  late final _emojiVerificationEventSendVerificationKeyPtr = _lookup<
       ffi.NativeFunction<
           ffi.Int64 Function(
     ffi.Int64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-    ffi.Int64,
-    ffi.Uint64,
-    ffi.Uint64,
-  )>>("__Client_review_verification_mac");
+  )>>("__EmojiVerificationEvent_send_verification_key");
 
-  late final _clientReviewVerificationMac =
-      _clientReviewVerificationMacPtr.asFunction<
+  late final _emojiVerificationEventSendVerificationKey =
+      _emojiVerificationEventSendVerificationKeyPtr.asFunction<
           int Function(
     int,
-    int,
-    int,
-    int,
-    int,
-    int,
+  )>();
+  late final _emojiVerificationEventCancelVerificationKeyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int64 Function(
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_cancel_verification_key");
+
+  late final _emojiVerificationEventCancelVerificationKey =
+      _emojiVerificationEventCancelVerificationKeyPtr.asFunction<
+          int Function(
     int,
   )>();
-  late final _crossSigningEventGetEventNamePtr = _lookup<
+  late final _emojiVerificationEventGetVerificationEmojiPtr = _lookup<
       ffi.NativeFunction<
-          _CrossSigningEventGetEventNameReturn Function(
+          ffi.Int64 Function(
     ffi.Int64,
-  )>>("__CrossSigningEvent_get_event_name");
+  )>>("__EmojiVerificationEvent_get_verification_emoji");
 
-  late final _crossSigningEventGetEventName =
-      _crossSigningEventGetEventNamePtr.asFunction<
-          _CrossSigningEventGetEventNameReturn Function(
+  late final _emojiVerificationEventGetVerificationEmoji =
+      _emojiVerificationEventGetVerificationEmojiPtr.asFunction<
+          int Function(
     int,
   )>();
-  late final _crossSigningEventGetEventIdPtr = _lookup<
+  late final _emojiVerificationEventConfirmSasVerificationPtr = _lookup<
       ffi.NativeFunction<
-          _CrossSigningEventGetEventIdReturn Function(
+          ffi.Int64 Function(
     ffi.Int64,
-  )>>("__CrossSigningEvent_get_event_id");
+  )>>("__EmojiVerificationEvent_confirm_sas_verification");
 
-  late final _crossSigningEventGetEventId =
-      _crossSigningEventGetEventIdPtr.asFunction<
-          _CrossSigningEventGetEventIdReturn Function(
+  late final _emojiVerificationEventConfirmSasVerification =
+      _emojiVerificationEventConfirmSasVerificationPtr.asFunction<
+          int Function(
     int,
   )>();
-  late final _crossSigningEventGetSenderPtr = _lookup<
+  late final _emojiVerificationEventMismatchSasVerificationPtr = _lookup<
       ffi.NativeFunction<
-          _CrossSigningEventGetSenderReturn Function(
+          ffi.Int64 Function(
     ffi.Int64,
-  )>>("__CrossSigningEvent_get_sender");
+  )>>("__EmojiVerificationEvent_mismatch_sas_verification");
 
-  late final _crossSigningEventGetSender =
-      _crossSigningEventGetSenderPtr.asFunction<
-          _CrossSigningEventGetSenderReturn Function(
+  late final _emojiVerificationEventMismatchSasVerification =
+      _emojiVerificationEventMismatchSasVerificationPtr.asFunction<
+          int Function(
+    int,
+  )>();
+  late final _emojiVerificationEventReviewVerificationMacPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int64 Function(
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_review_verification_mac");
+
+  late final _emojiVerificationEventReviewVerificationMac =
+      _emojiVerificationEventReviewVerificationMacPtr.asFunction<
+          int Function(
     int,
   )>();
   late final _emojiUnitGetSymbolPtr = _lookup<
@@ -4306,6 +4903,144 @@ class Api {
 
   late final _emojiUnitGetDescription = _emojiUnitGetDescriptionPtr.asFunction<
       _EmojiUnitGetDescriptionReturn Function(
+    int,
+  )>();
+  late final _devicesChangedEventGetDevicesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int64 Function(
+    ffi.Int64,
+    ffi.Uint8,
+  )>>("__DevicesChangedEvent_get_devices");
+
+  late final _devicesChangedEventGetDevices =
+      _devicesChangedEventGetDevicesPtr.asFunction<
+          int Function(
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToUserPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int64 Function(
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_user");
+
+  late final _devicesChangedEventRequestVerificationToUser =
+      _devicesChangedEventRequestVerificationToUserPtr.asFunction<
+          int Function(
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToDevicePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int64 Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Uint64,
+    ffi.Uint64,
+  )>>("__DevicesChangedEvent_request_verification_to_device");
+
+  late final _devicesChangedEventRequestVerificationToDevice =
+      _devicesChangedEventRequestVerificationToDevicePtr.asFunction<
+          int Function(
+    int,
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToUserWithMethodsPtr =
+      _lookup<
+          ffi.NativeFunction<
+              ffi.Int64 Function(
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_user_with_methods");
+
+  late final _devicesChangedEventRequestVerificationToUserWithMethods =
+      _devicesChangedEventRequestVerificationToUserWithMethodsPtr.asFunction<
+          int Function(
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToDeviceWithMethodsPtr =
+      _lookup<
+          ffi.NativeFunction<
+              ffi.Int64 Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Uint64,
+    ffi.Uint64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_device_with_methods");
+
+  late final _devicesChangedEventRequestVerificationToDeviceWithMethods =
+      _devicesChangedEventRequestVerificationToDeviceWithMethodsPtr.asFunction<
+          int Function(
+    int,
+    int,
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesLeftEventGetDevicesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int64 Function(
+    ffi.Int64,
+    ffi.Uint8,
+  )>>("__DevicesLeftEvent_get_devices");
+
+  late final _devicesLeftEventGetDevices =
+      _devicesLeftEventGetDevicesPtr.asFunction<
+          int Function(
+    int,
+    int,
+  )>();
+  late final _deviceWasVerifiedPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint8 Function(
+    ffi.Int64,
+  )>>("__Device_was_verified");
+
+  late final _deviceWasVerified = _deviceWasVerifiedPtr.asFunction<
+      int Function(
+    int,
+  )>();
+  late final _deviceWasDeletedPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Uint8 Function(
+    ffi.Int64,
+  )>>("__Device_was_deleted");
+
+  late final _deviceWasDeleted = _deviceWasDeletedPtr.asFunction<
+      int Function(
+    int,
+  )>();
+  late final _deviceGetUserIdPtr = _lookup<
+      ffi.NativeFunction<
+          _DeviceGetUserIdReturn Function(
+    ffi.Int64,
+  )>>("__Device_get_user_id");
+
+  late final _deviceGetUserId = _deviceGetUserIdPtr.asFunction<
+      _DeviceGetUserIdReturn Function(
+    int,
+  )>();
+  late final _deviceGetDeviceIdPtr = _lookup<
+      ffi.NativeFunction<
+          _DeviceGetDeviceIdReturn Function(
+    ffi.Int64,
+  )>>("__Device_get_device_id");
+
+  late final _deviceGetDeviceId = _deviceGetDeviceIdPtr.asFunction<
+      _DeviceGetDeviceIdReturn Function(
+    int,
+  )>();
+  late final _deviceGetDisplayNamePtr = _lookup<
+      ffi.NativeFunction<
+          _DeviceGetDisplayNameReturn Function(
+    ffi.Int64,
+  )>>("__Device_get_display_name");
+
+  late final _deviceGetDisplayName = _deviceGetDisplayNamePtr.asFunction<
+      _DeviceGetDisplayNameReturn Function(
     int,
   )>();
   late final _loginNewClientFuturePollPtr = _lookup<
@@ -4899,140 +5634,392 @@ class Api {
     int,
     int,
   )>();
-  late final _clientAcceptVerificationRequestFuturePollPtr = _lookup<
+  late final _clientVerifiedDeviceFuturePollPtr = _lookup<
       ffi.NativeFunction<
-          _ClientAcceptVerificationRequestFuturePollReturn Function(
+          _ClientVerifiedDeviceFuturePollReturn Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_accept_verification_request_future_poll");
+  )>>("__Client_verified_device_future_poll");
 
-  late final _clientAcceptVerificationRequestFuturePoll =
-      _clientAcceptVerificationRequestFuturePollPtr.asFunction<
-          _ClientAcceptVerificationRequestFuturePollReturn Function(
+  late final _clientVerifiedDeviceFuturePoll =
+      _clientVerifiedDeviceFuturePollPtr.asFunction<
+          _ClientVerifiedDeviceFuturePollReturn Function(
     int,
     int,
     int,
   )>();
-  late final _clientAcceptVerificationStartFuturePollPtr = _lookup<
-      ffi.NativeFunction<
-          _ClientAcceptVerificationStartFuturePollReturn Function(
+  late final _emojiVerificationEventAcceptVerificationRequestFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventAcceptVerificationRequestFuturePollReturn
+                  Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_accept_verification_start_future_poll");
+  )>>("__EmojiVerificationEvent_accept_verification_request_future_poll");
 
-  late final _clientAcceptVerificationStartFuturePoll =
-      _clientAcceptVerificationStartFuturePollPtr.asFunction<
-          _ClientAcceptVerificationStartFuturePollReturn Function(
+  late final _emojiVerificationEventAcceptVerificationRequestFuturePoll =
+      _emojiVerificationEventAcceptVerificationRequestFuturePollPtr.asFunction<
+          _EmojiVerificationEventAcceptVerificationRequestFuturePollReturn
+              Function(
     int,
     int,
     int,
   )>();
-  late final _clientGetVerificationEmojiFuturePollPtr = _lookup<
-      ffi.NativeFunction<
-          _ClientGetVerificationEmojiFuturePollReturn Function(
+  late final _emojiVerificationEventCancelVerificationRequestFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventCancelVerificationRequestFuturePollReturn
+                  Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_get_verification_emoji_future_poll");
+  )>>("__EmojiVerificationEvent_cancel_verification_request_future_poll");
 
-  late final _clientGetVerificationEmojiFuturePoll =
-      _clientGetVerificationEmojiFuturePollPtr.asFunction<
-          _ClientGetVerificationEmojiFuturePollReturn Function(
+  late final _emojiVerificationEventCancelVerificationRequestFuturePoll =
+      _emojiVerificationEventCancelVerificationRequestFuturePollPtr.asFunction<
+          _EmojiVerificationEventCancelVerificationRequestFuturePollReturn
+              Function(
     int,
     int,
     int,
   )>();
-  late final _clientConfirmVerificationKeyFuturePollPtr = _lookup<
-      ffi.NativeFunction<
-          _ClientConfirmVerificationKeyFuturePollReturn Function(
+  late final _emojiVerificationEventAcceptVerificationRequestWithMethodsFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventAcceptVerificationRequestWithMethodsFuturePollReturn
+                  Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_confirm_verification_key_future_poll");
+  )>>("__EmojiVerificationEvent_accept_verification_request_with_methods_future_poll");
 
-  late final _clientConfirmVerificationKeyFuturePoll =
-      _clientConfirmVerificationKeyFuturePollPtr.asFunction<
-          _ClientConfirmVerificationKeyFuturePollReturn Function(
+  late final _emojiVerificationEventAcceptVerificationRequestWithMethodsFuturePoll =
+      _emojiVerificationEventAcceptVerificationRequestWithMethodsFuturePollPtr
+          .asFunction<
+              _EmojiVerificationEventAcceptVerificationRequestWithMethodsFuturePollReturn
+                  Function(
     int,
     int,
     int,
   )>();
-  late final _clientMismatchVerificationKeyFuturePollPtr = _lookup<
+  late final _emojiVerificationEventStartSasVerificationFuturePollPtr = _lookup<
       ffi.NativeFunction<
-          _ClientMismatchVerificationKeyFuturePollReturn Function(
+          _EmojiVerificationEventStartSasVerificationFuturePollReturn Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_mismatch_verification_key_future_poll");
+  )>>("__EmojiVerificationEvent_start_sas_verification_future_poll");
 
-  late final _clientMismatchVerificationKeyFuturePoll =
-      _clientMismatchVerificationKeyFuturePollPtr.asFunction<
-          _ClientMismatchVerificationKeyFuturePollReturn Function(
+  late final _emojiVerificationEventStartSasVerificationFuturePoll =
+      _emojiVerificationEventStartSasVerificationFuturePollPtr.asFunction<
+          _EmojiVerificationEventStartSasVerificationFuturePollReturn Function(
     int,
     int,
     int,
   )>();
-  late final _clientCancelVerificationKeyFuturePollPtr = _lookup<
-      ffi.NativeFunction<
-          _ClientCancelVerificationKeyFuturePollReturn Function(
+  late final _emojiVerificationEventAcceptSasVerificationFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventAcceptSasVerificationFuturePollReturn
+                  Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_cancel_verification_key_future_poll");
+  )>>("__EmojiVerificationEvent_accept_sas_verification_future_poll");
 
-  late final _clientCancelVerificationKeyFuturePoll =
-      _clientCancelVerificationKeyFuturePollPtr.asFunction<
-          _ClientCancelVerificationKeyFuturePollReturn Function(
+  late final _emojiVerificationEventAcceptSasVerificationFuturePoll =
+      _emojiVerificationEventAcceptSasVerificationFuturePollPtr.asFunction<
+          _EmojiVerificationEventAcceptSasVerificationFuturePollReturn Function(
     int,
     int,
     int,
   )>();
-  late final _clientReviewVerificationMacFuturePollPtr = _lookup<
-      ffi.NativeFunction<
-          _ClientReviewVerificationMacFuturePollReturn Function(
+  late final _emojiVerificationEventCancelSasVerificationFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventCancelSasVerificationFuturePollReturn
+                  Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__Client_review_verification_mac_future_poll");
+  )>>("__EmojiVerificationEvent_cancel_sas_verification_future_poll");
 
-  late final _clientReviewVerificationMacFuturePoll =
-      _clientReviewVerificationMacFuturePollPtr.asFunction<
-          _ClientReviewVerificationMacFuturePollReturn Function(
+  late final _emojiVerificationEventCancelSasVerificationFuturePoll =
+      _emojiVerificationEventCancelSasVerificationFuturePollPtr.asFunction<
+          _EmojiVerificationEventCancelSasVerificationFuturePollReturn Function(
     int,
     int,
     int,
   )>();
-  late final _syncStateGetToDeviceRxStreamPollPtr = _lookup<
+  late final _emojiVerificationEventSendVerificationKeyFuturePollPtr = _lookup<
       ffi.NativeFunction<
-          _SyncStateGetToDeviceRxStreamPollReturn Function(
+          _EmojiVerificationEventSendVerificationKeyFuturePollReturn Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-    ffi.Int64,
-  )>>("__SyncState_get_to_device_rx_stream_poll");
+  )>>("__EmojiVerificationEvent_send_verification_key_future_poll");
 
-  late final _syncStateGetToDeviceRxStreamPoll =
-      _syncStateGetToDeviceRxStreamPollPtr.asFunction<
-          _SyncStateGetToDeviceRxStreamPollReturn Function(
+  late final _emojiVerificationEventSendVerificationKeyFuturePoll =
+      _emojiVerificationEventSendVerificationKeyFuturePollPtr.asFunction<
+          _EmojiVerificationEventSendVerificationKeyFuturePollReturn Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _emojiVerificationEventCancelVerificationKeyFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventCancelVerificationKeyFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_cancel_verification_key_future_poll");
+
+  late final _emojiVerificationEventCancelVerificationKeyFuturePoll =
+      _emojiVerificationEventCancelVerificationKeyFuturePollPtr.asFunction<
+          _EmojiVerificationEventCancelVerificationKeyFuturePollReturn Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _emojiVerificationEventGetVerificationEmojiFuturePollPtr = _lookup<
+      ffi.NativeFunction<
+          _EmojiVerificationEventGetVerificationEmojiFuturePollReturn Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_get_verification_emoji_future_poll");
+
+  late final _emojiVerificationEventGetVerificationEmojiFuturePoll =
+      _emojiVerificationEventGetVerificationEmojiFuturePollPtr.asFunction<
+          _EmojiVerificationEventGetVerificationEmojiFuturePollReturn Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _emojiVerificationEventConfirmSasVerificationFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventConfirmSasVerificationFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_confirm_sas_verification_future_poll");
+
+  late final _emojiVerificationEventConfirmSasVerificationFuturePoll =
+      _emojiVerificationEventConfirmSasVerificationFuturePollPtr.asFunction<
+          _EmojiVerificationEventConfirmSasVerificationFuturePollReturn
+              Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _emojiVerificationEventMismatchSasVerificationFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventMismatchSasVerificationFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_mismatch_sas_verification_future_poll");
+
+  late final _emojiVerificationEventMismatchSasVerificationFuturePoll =
+      _emojiVerificationEventMismatchSasVerificationFuturePollPtr.asFunction<
+          _EmojiVerificationEventMismatchSasVerificationFuturePollReturn
+              Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _emojiVerificationEventReviewVerificationMacFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _EmojiVerificationEventReviewVerificationMacFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__EmojiVerificationEvent_review_verification_mac_future_poll");
+
+  late final _emojiVerificationEventReviewVerificationMacFuturePoll =
+      _emojiVerificationEventReviewVerificationMacFuturePollPtr.asFunction<
+          _EmojiVerificationEventReviewVerificationMacFuturePollReturn Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventGetDevicesFuturePollPtr = _lookup<
+      ffi.NativeFunction<
+          _DevicesChangedEventGetDevicesFuturePollReturn Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_get_devices_future_poll");
+
+  late final _devicesChangedEventGetDevicesFuturePoll =
+      _devicesChangedEventGetDevicesFuturePollPtr.asFunction<
+          _DevicesChangedEventGetDevicesFuturePollReturn Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToUserFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _DevicesChangedEventRequestVerificationToUserFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_user_future_poll");
+
+  late final _devicesChangedEventRequestVerificationToUserFuturePoll =
+      _devicesChangedEventRequestVerificationToUserFuturePollPtr.asFunction<
+          _DevicesChangedEventRequestVerificationToUserFuturePollReturn
+              Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToDeviceFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _DevicesChangedEventRequestVerificationToDeviceFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_device_future_poll");
+
+  late final _devicesChangedEventRequestVerificationToDeviceFuturePoll =
+      _devicesChangedEventRequestVerificationToDeviceFuturePollPtr.asFunction<
+          _DevicesChangedEventRequestVerificationToDeviceFuturePollReturn
+              Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToUserWithMethodsFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _DevicesChangedEventRequestVerificationToUserWithMethodsFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_user_with_methods_future_poll");
+
+  late final _devicesChangedEventRequestVerificationToUserWithMethodsFuturePoll =
+      _devicesChangedEventRequestVerificationToUserWithMethodsFuturePollPtr
+          .asFunction<
+              _DevicesChangedEventRequestVerificationToUserWithMethodsFuturePollReturn
+                  Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesChangedEventRequestVerificationToDeviceWithMethodsFuturePollPtr =
+      _lookup<
+          ffi.NativeFunction<
+              _DevicesChangedEventRequestVerificationToDeviceWithMethodsFuturePollReturn
+                  Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesChangedEvent_request_verification_to_device_with_methods_future_poll");
+
+  late final _devicesChangedEventRequestVerificationToDeviceWithMethodsFuturePoll =
+      _devicesChangedEventRequestVerificationToDeviceWithMethodsFuturePollPtr
+          .asFunction<
+              _DevicesChangedEventRequestVerificationToDeviceWithMethodsFuturePollReturn
+                  Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _devicesLeftEventGetDevicesFuturePollPtr = _lookup<
+      ffi.NativeFunction<
+          _DevicesLeftEventGetDevicesFuturePollReturn Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__DevicesLeftEvent_get_devices_future_poll");
+
+  late final _devicesLeftEventGetDevicesFuturePoll =
+      _devicesLeftEventGetDevicesFuturePollPtr.asFunction<
+          _DevicesLeftEventGetDevicesFuturePollReturn Function(
+    int,
+    int,
+    int,
+  )>();
+  late final _syncStateGetFirstSyncedRxStreamPollPtr = _lookup<
+      ffi.NativeFunction<
+          _SyncStateGetFirstSyncedRxStreamPollReturn Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__SyncState_get_first_synced_rx_stream_poll");
+
+  late final _syncStateGetFirstSyncedRxStreamPoll =
+      _syncStateGetFirstSyncedRxStreamPollPtr.asFunction<
+          _SyncStateGetFirstSyncedRxStreamPollReturn Function(
     int,
     int,
     int,
     int,
   )>();
-  late final _syncStateGetSyncMsgLikeRxStreamPollPtr = _lookup<
+  late final _syncStateGetEmojiVerificationEventRxStreamPollPtr = _lookup<
       ffi.NativeFunction<
-          _SyncStateGetSyncMsgLikeRxStreamPollReturn Function(
+          _SyncStateGetEmojiVerificationEventRxStreamPollReturn Function(
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
     ffi.Int64,
-  )>>("__SyncState_get_sync_msg_like_rx_stream_poll");
+  )>>("__SyncState_get_emoji_verification_event_rx_stream_poll");
 
-  late final _syncStateGetSyncMsgLikeRxStreamPoll =
-      _syncStateGetSyncMsgLikeRxStreamPollPtr.asFunction<
-          _SyncStateGetSyncMsgLikeRxStreamPollReturn Function(
+  late final _syncStateGetEmojiVerificationEventRxStreamPoll =
+      _syncStateGetEmojiVerificationEventRxStreamPollPtr.asFunction<
+          _SyncStateGetEmojiVerificationEventRxStreamPollReturn Function(
+    int,
+    int,
+    int,
+    int,
+  )>();
+  late final _syncStateGetDevicesChangedEventRxStreamPollPtr = _lookup<
+      ffi.NativeFunction<
+          _SyncStateGetDevicesChangedEventRxStreamPollReturn Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__SyncState_get_devices_changed_event_rx_stream_poll");
+
+  late final _syncStateGetDevicesChangedEventRxStreamPoll =
+      _syncStateGetDevicesChangedEventRxStreamPollPtr.asFunction<
+          _SyncStateGetDevicesChangedEventRxStreamPollReturn Function(
+    int,
+    int,
+    int,
+    int,
+  )>();
+  late final _syncStateGetDevicesLeftEventRxStreamPollPtr = _lookup<
+      ffi.NativeFunction<
+          _SyncStateGetDevicesLeftEventRxStreamPollReturn Function(
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+    ffi.Int64,
+  )>>("__SyncState_get_devices_left_event_rx_stream_poll");
+
+  late final _syncStateGetDevicesLeftEventRxStreamPoll =
+      _syncStateGetDevicesLeftEventRxStreamPollPtr.asFunction<
+          _SyncStateGetDevicesLeftEventRxStreamPollReturn Function(
     int,
     int,
     int,
@@ -5087,6 +6074,55 @@ class Api {
 
   late final _ffiListConversationInsert =
       _ffiListConversationInsertPtr.asFunction<void Function(int, int, int)>();
+  FfiListDevice createFfiListDevice() {
+    final ffi.Pointer<ffi.Void> list_ptr =
+        ffi.Pointer.fromAddress(_ffiListDeviceCreate());
+    final list_box = _Box(this, list_ptr, "drop_box_FfiListDevice");
+    return FfiListDevice._(this, list_box);
+  }
+
+  late final _ffiListDeviceCreatePtr =
+      _lookup<ffi.NativeFunction<ffi.IntPtr Function()>>(
+          "__FfiListDeviceCreate");
+
+  late final _ffiListDeviceCreate =
+      _ffiListDeviceCreatePtr.asFunction<int Function()>();
+
+  late final _ffiListDeviceLenPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function(ffi.IntPtr)>>(
+          "__FfiListDeviceLen");
+
+  late final _ffiListDeviceLen =
+      _ffiListDeviceLenPtr.asFunction<int Function(int)>();
+
+  late final _ffiListDeviceElementAtPtr =
+      _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.IntPtr, ffi.Uint32)>>(
+          "__FfiListDeviceElementAt");
+
+  late final _ffiListDeviceElementAt =
+      _ffiListDeviceElementAtPtr.asFunction<int Function(int, int)>();
+
+  late final _ffiListDeviceRemovePtr =
+      _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.IntPtr, ffi.Uint32)>>(
+          "__FfiListDeviceRemove");
+
+  late final _ffiListDeviceRemove =
+      _ffiListDeviceRemovePtr.asFunction<int Function(int, int)>();
+
+  late final _ffiListDeviceAddPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.IntPtr, ffi.IntPtr)>>(
+          "__FfiListDeviceAdd");
+
+  late final _ffiListDeviceAdd =
+      _ffiListDeviceAddPtr.asFunction<void Function(int, int)>();
+
+  late final _ffiListDeviceInsertPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.IntPtr, ffi.Uint32, ffi.IntPtr)>>("__FfiListDeviceInsert");
+
+  late final _ffiListDeviceInsert =
+      _ffiListDeviceInsertPtr.asFunction<void Function(int, int, int)>();
   FfiListEmojiUnit createFfiListEmojiUnit() {
     final ffi.Pointer<ffi.Void> list_ptr =
         ffi.Pointer.fromAddress(_ffiListEmojiUnitCreate());
@@ -5183,6 +6219,55 @@ class Api {
 
   late final _ffiListFaqInsert =
       _ffiListFaqInsertPtr.asFunction<void Function(int, int, int)>();
+  FfiListFfiString createFfiListFfiString() {
+    final ffi.Pointer<ffi.Void> list_ptr =
+        ffi.Pointer.fromAddress(_ffiListFfiStringCreate());
+    final list_box = _Box(this, list_ptr, "drop_box_FfiListFfiString");
+    return FfiListFfiString._(this, list_box);
+  }
+
+  late final _ffiListFfiStringCreatePtr =
+      _lookup<ffi.NativeFunction<ffi.IntPtr Function()>>(
+          "__FfiListFfiStringCreate");
+
+  late final _ffiListFfiStringCreate =
+      _ffiListFfiStringCreatePtr.asFunction<int Function()>();
+
+  late final _ffiListFfiStringLenPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function(ffi.IntPtr)>>(
+          "__FfiListFfiStringLen");
+
+  late final _ffiListFfiStringLen =
+      _ffiListFfiStringLenPtr.asFunction<int Function(int)>();
+
+  late final _ffiListFfiStringElementAtPtr =
+      _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.IntPtr, ffi.Uint32)>>(
+          "__FfiListFfiStringElementAt");
+
+  late final _ffiListFfiStringElementAt =
+      _ffiListFfiStringElementAtPtr.asFunction<int Function(int, int)>();
+
+  late final _ffiListFfiStringRemovePtr =
+      _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.IntPtr, ffi.Uint32)>>(
+          "__FfiListFfiStringRemove");
+
+  late final _ffiListFfiStringRemove =
+      _ffiListFfiStringRemovePtr.asFunction<int Function(int, int)>();
+
+  late final _ffiListFfiStringAddPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.IntPtr, ffi.IntPtr)>>(
+          "__FfiListFfiStringAdd");
+
+  late final _ffiListFfiStringAdd =
+      _ffiListFfiStringAddPtr.asFunction<void Function(int, int)>();
+
+  late final _ffiListFfiStringInsertPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.IntPtr, ffi.Uint32, ffi.IntPtr)>>("__FfiListFfiStringInsert");
+
+  late final _ffiListFfiStringInsert =
+      _ffiListFfiStringInsertPtr.asFunction<void Function(int, int, int)>();
   FfiListGroup createFfiListGroup() {
     final ffi.Pointer<ffi.Void> list_ptr =
         ffi.Pointer.fromAddress(_ffiListGroupCreate());
@@ -6935,11 +8020,11 @@ class SyncState {
 
   SyncState._(this._api, this._box);
 
-  /// Get event handler of AnyToDeviceEvent
-  Stream<CrossSigningEvent>? getToDeviceRx() {
+  /// Get event handler of first synchronization on every launch
+  Stream<bool>? getFirstSyncedRx() {
     var tmp0 = 0;
     tmp0 = _box.borrow();
-    final tmp1 = _api._syncStateGetToDeviceRx(
+    final tmp1 = _api._syncStateGetFirstSyncedRx(
       tmp0,
     );
     final tmp3 = tmp1.arg0;
@@ -6949,17 +8034,60 @@ class SyncState {
     }
     final ffi.Pointer<ffi.Void> tmp4_0 = ffi.Pointer.fromAddress(tmp4);
     final tmp4_1 =
-        _Box(_api, tmp4_0, "__SyncState_get_to_device_rx_stream_drop");
+        _Box(_api, tmp4_0, "__SyncState_get_first_synced_rx_stream_drop");
     tmp4_1._finalizer = _api._registerFinalizer(tmp4_1);
-    final tmp2 = _nativeStream(tmp4_1, _api.__syncStateGetToDeviceRxStreamPoll);
+    final tmp2 =
+        _nativeStream(tmp4_1, _api.__syncStateGetFirstSyncedRxStreamPoll);
     return tmp2;
   }
 
-  /// Get event handler of AnySyncMessageLikeEvent
-  Stream<CrossSigningEvent>? getSyncMsgLikeRx() {
+  /// Get event handler of emoji verification
+  Stream<EmojiVerificationEvent>? getEmojiVerificationEventRx() {
     var tmp0 = 0;
     tmp0 = _box.borrow();
-    final tmp1 = _api._syncStateGetSyncMsgLikeRx(
+    final tmp1 = _api._syncStateGetEmojiVerificationEventRx(
+      tmp0,
+    );
+    final tmp3 = tmp1.arg0;
+    final tmp4 = tmp1.arg1;
+    if (tmp3 == 0) {
+      return null;
+    }
+    final ffi.Pointer<ffi.Void> tmp4_0 = ffi.Pointer.fromAddress(tmp4);
+    final tmp4_1 = _Box(_api, tmp4_0,
+        "__SyncState_get_emoji_verification_event_rx_stream_drop");
+    tmp4_1._finalizer = _api._registerFinalizer(tmp4_1);
+    final tmp2 = _nativeStream(
+        tmp4_1, _api.__syncStateGetEmojiVerificationEventRxStreamPoll);
+    return tmp2;
+  }
+
+  /// Get event handler of devices changed
+  Stream<DevicesChangedEvent>? getDevicesChangedEventRx() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._syncStateGetDevicesChangedEventRx(
+      tmp0,
+    );
+    final tmp3 = tmp1.arg0;
+    final tmp4 = tmp1.arg1;
+    if (tmp3 == 0) {
+      return null;
+    }
+    final ffi.Pointer<ffi.Void> tmp4_0 = ffi.Pointer.fromAddress(tmp4);
+    final tmp4_1 = _Box(
+        _api, tmp4_0, "__SyncState_get_devices_changed_event_rx_stream_drop");
+    tmp4_1._finalizer = _api._registerFinalizer(tmp4_1);
+    final tmp2 = _nativeStream(
+        tmp4_1, _api.__syncStateGetDevicesChangedEventRxStreamPoll);
+    return tmp2;
+  }
+
+  /// Get event handler of devices left
+  Stream<DevicesLeftEvent>? getDevicesLeftEventRx() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._syncStateGetDevicesLeftEventRx(
       tmp0,
     );
     final tmp3 = tmp1.arg0;
@@ -6969,10 +8097,10 @@ class SyncState {
     }
     final ffi.Pointer<ffi.Void> tmp4_0 = ffi.Pointer.fromAddress(tmp4);
     final tmp4_1 =
-        _Box(_api, tmp4_0, "__SyncState_get_sync_msg_like_rx_stream_drop");
+        _Box(_api, tmp4_0, "__SyncState_get_devices_left_event_rx_stream_drop");
     tmp4_1._finalizer = _api._registerFinalizer(tmp4_1);
     final tmp2 =
-        _nativeStream(tmp4_1, _api.__syncStateGetSyncMsgLikeRxStreamPoll);
+        _nativeStream(tmp4_1, _api.__syncStateGetDevicesLeftEventRxStreamPoll);
     return tmp2;
   }
 
@@ -7236,20 +8364,15 @@ class Client {
     return tmp2;
   }
 
-  /// Accept the AnyToDeviceEvent::KeyVerificationRequest
-  Future<bool> acceptVerificationRequest(
-    String sender,
-    String eventId,
+  /// Whether the user already verified the device
+  Future<bool> verifiedDevice(
+    String devId,
   ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
+    final tmp1 = devId;
     var tmp0 = 0;
     var tmp2 = 0;
     var tmp3 = 0;
     var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
     tmp0 = _box.borrow();
     final tmp1_0 = utf8.encode(tmp1);
     tmp3 = tmp1_0.length;
@@ -7258,317 +8381,18 @@ class Client {
     tmp2_1.setAll(0, tmp1_0);
     tmp2 = tmp2_0.address;
     tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientAcceptVerificationRequest(
+    final tmp5 = _api._clientVerifiedDevice(
       tmp0,
       tmp2,
       tmp3,
       tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
     );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_accept_verification_request_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 = _nativeFuture(
-        tmp11_1, _api.__clientAcceptVerificationRequestFuturePoll);
-    return tmp10;
-  }
-
-  /// Accept the AnyToDeviceEvent::KeyVerificationStart
-  Future<bool> acceptVerificationStart(
-    String sender,
-    String eventId,
-  ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
-    var tmp0 = 0;
-    var tmp2 = 0;
-    var tmp3 = 0;
-    var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
-    tmp0 = _box.borrow();
-    final tmp1_0 = utf8.encode(tmp1);
-    tmp3 = tmp1_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
-    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
-    tmp2_1.setAll(0, tmp1_0);
-    tmp2 = tmp2_0.address;
-    tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientAcceptVerificationStart(
-      tmp0,
-      tmp2,
-      tmp3,
-      tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
-    );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_accept_verification_start_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 =
-        _nativeFuture(tmp11_1, _api.__clientAcceptVerificationStartFuturePoll);
-    return tmp10;
-  }
-
-  Future<FfiListEmojiUnit> getVerificationEmoji(
-    String sender,
-    String eventId,
-  ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
-    var tmp0 = 0;
-    var tmp2 = 0;
-    var tmp3 = 0;
-    var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
-    tmp0 = _box.borrow();
-    final tmp1_0 = utf8.encode(tmp1);
-    tmp3 = tmp1_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
-    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
-    tmp2_1.setAll(0, tmp1_0);
-    tmp2 = tmp2_0.address;
-    tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientGetVerificationEmoji(
-      tmp0,
-      tmp2,
-      tmp3,
-      tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
-    );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_get_verification_emoji_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 =
-        _nativeFuture(tmp11_1, _api.__clientGetVerificationEmojiFuturePoll);
-    return tmp10;
-  }
-
-  /// Reply Correct to the AnyToDeviceEvent::KeyVerificationKey
-  Future<bool> confirmVerificationKey(
-    String sender,
-    String eventId,
-  ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
-    var tmp0 = 0;
-    var tmp2 = 0;
-    var tmp3 = 0;
-    var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
-    tmp0 = _box.borrow();
-    final tmp1_0 = utf8.encode(tmp1);
-    tmp3 = tmp1_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
-    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
-    tmp2_1.setAll(0, tmp1_0);
-    tmp2 = tmp2_0.address;
-    tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientConfirmVerificationKey(
-      tmp0,
-      tmp2,
-      tmp3,
-      tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
-    );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_confirm_verification_key_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 =
-        _nativeFuture(tmp11_1, _api.__clientConfirmVerificationKeyFuturePoll);
-    return tmp10;
-  }
-
-  /// Reply Wrong to the AnyToDeviceEvent::KeyVerificationKey
-  Future<bool> mismatchVerificationKey(
-    String sender,
-    String eventId,
-  ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
-    var tmp0 = 0;
-    var tmp2 = 0;
-    var tmp3 = 0;
-    var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
-    tmp0 = _box.borrow();
-    final tmp1_0 = utf8.encode(tmp1);
-    tmp3 = tmp1_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
-    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
-    tmp2_1.setAll(0, tmp1_0);
-    tmp2 = tmp2_0.address;
-    tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientMismatchVerificationKey(
-      tmp0,
-      tmp2,
-      tmp3,
-      tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
-    );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_mismatch_verification_key_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 =
-        _nativeFuture(tmp11_1, _api.__clientMismatchVerificationKeyFuturePoll);
-    return tmp10;
-  }
-
-  /// Cancel the AnyToDeviceEvent::KeyVerificationKey
-  Future<bool> cancelVerificationKey(
-    String sender,
-    String eventId,
-  ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
-    var tmp0 = 0;
-    var tmp2 = 0;
-    var tmp3 = 0;
-    var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
-    tmp0 = _box.borrow();
-    final tmp1_0 = utf8.encode(tmp1);
-    tmp3 = tmp1_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
-    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
-    tmp2_1.setAll(0, tmp1_0);
-    tmp2 = tmp2_0.address;
-    tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientCancelVerificationKey(
-      tmp0,
-      tmp2,
-      tmp3,
-      tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
-    );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_cancel_verification_key_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 =
-        _nativeFuture(tmp11_1, _api.__clientCancelVerificationKeyFuturePoll);
-    return tmp10;
-  }
-
-  /// Review the AnyToDeviceEvent::KeyVerificationMac
-  Future<bool> reviewVerificationMac(
-    String sender,
-    String eventId,
-  ) {
-    final tmp1 = sender;
-    final tmp5 = eventId;
-    var tmp0 = 0;
-    var tmp2 = 0;
-    var tmp3 = 0;
-    var tmp4 = 0;
-    var tmp6 = 0;
-    var tmp7 = 0;
-    var tmp8 = 0;
-    tmp0 = _box.borrow();
-    final tmp1_0 = utf8.encode(tmp1);
-    tmp3 = tmp1_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
-    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
-    tmp2_1.setAll(0, tmp1_0);
-    tmp2 = tmp2_0.address;
-    tmp4 = tmp3;
-    final tmp5_0 = utf8.encode(tmp5);
-    tmp7 = tmp5_0.length;
-    final ffi.Pointer<ffi.Uint8> tmp6_0 = _api.__allocate(tmp7 * 1, 1);
-    final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
-    tmp6_1.setAll(0, tmp5_0);
-    tmp6 = tmp6_0.address;
-    tmp8 = tmp7;
-    final tmp9 = _api._clientReviewVerificationMac(
-      tmp0,
-      tmp2,
-      tmp3,
-      tmp4,
-      tmp6,
-      tmp7,
-      tmp8,
-    );
-    final tmp11 = tmp9;
-    final ffi.Pointer<ffi.Void> tmp11_0 = ffi.Pointer.fromAddress(tmp11);
-    final tmp11_1 =
-        _Box(_api, tmp11_0, "__Client_review_verification_mac_future_drop");
-    tmp11_1._finalizer = _api._registerFinalizer(tmp11_1);
-    final tmp10 =
-        _nativeFuture(tmp11_1, _api.__clientReviewVerificationMacFuturePoll);
-    return tmp10;
+    final tmp7 = tmp5;
+    final ffi.Pointer<ffi.Void> tmp7_0 = ffi.Pointer.fromAddress(tmp7);
+    final tmp7_1 = _Box(_api, tmp7_0, "__Client_verified_device_future_drop");
+    tmp7_1._finalizer = _api._registerFinalizer(tmp7_1);
+    final tmp6 = _nativeFuture(tmp7_1, _api.__clientVerifiedDeviceFuturePoll);
+    return tmp6;
   }
 
   /// Manually drops the object and unregisters the FinalizableHandle.
@@ -7578,37 +8402,17 @@ class Client {
 }
 
 /// Deliver emoji verification event from rust to flutter
-class CrossSigningEvent {
+class EmojiVerificationEvent {
   final Api _api;
   final _Box _box;
 
-  CrossSigningEvent._(this._api, this._box);
+  EmojiVerificationEvent._(this._api, this._box);
 
   /// Get event name
   String getEventName() {
     var tmp0 = 0;
     tmp0 = _box.borrow();
-    final tmp1 = _api._crossSigningEventGetEventName(
-      tmp0,
-    );
-    final tmp3 = tmp1.arg0;
-    final tmp4 = tmp1.arg1;
-    final tmp5 = tmp1.arg2;
-    final ffi.Pointer<ffi.Uint8> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
-    final tmp2 = utf8.decode(tmp3_0.asTypedList(tmp4));
-    if (tmp5 > 0) {
-      final ffi.Pointer<ffi.Void> tmp3_0;
-      tmp3_0 = ffi.Pointer.fromAddress(tmp3);
-      _api.__deallocate(tmp3_0, tmp5 * 1, 1);
-    }
-    return tmp2;
-  }
-
-  /// Get transaction id or flow id
-  String getEventId() {
-    var tmp0 = 0;
-    tmp0 = _box.borrow();
-    final tmp1 = _api._crossSigningEventGetEventId(
+    final tmp1 = _api._emojiVerificationEventGetEventName(
       tmp0,
     );
     final tmp3 = tmp1.arg0;
@@ -7628,7 +8432,7 @@ class CrossSigningEvent {
   String getSender() {
     var tmp0 = 0;
     tmp0 = _box.borrow();
-    final tmp1 = _api._crossSigningEventGetSender(
+    final tmp1 = _api._emojiVerificationEventGetSender(
       tmp0,
     );
     final tmp3 = tmp1.arg0;
@@ -7641,6 +8445,233 @@ class CrossSigningEvent {
       tmp3_0 = ffi.Pointer.fromAddress(tmp3);
       _api.__deallocate(tmp3_0, tmp5 * 1, 1);
     }
+    return tmp2;
+  }
+
+  /// Bob accepts the verification request from Alice
+  Future<bool> acceptVerificationRequest() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventAcceptVerificationRequest(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_accept_verification_request_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(tmp3_1,
+        _api.__emojiVerificationEventAcceptVerificationRequestFuturePoll);
+    return tmp2;
+  }
+
+  /// Bob cancels the verification request from Alice
+  Future<bool> cancelVerificationRequest() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventCancelVerificationRequest(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_cancel_verification_request_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(tmp3_1,
+        _api.__emojiVerificationEventCancelVerificationRequestFuturePoll);
+    return tmp2;
+  }
+
+  /// Bob accepts the verification request from Alice with specified methods
+  Future<bool> acceptVerificationRequestWithMethods(
+    FfiListFfiString methods,
+  ) {
+    final tmp1 = methods;
+    var tmp0 = 0;
+    var tmp2 = 0;
+    tmp0 = _box.borrow();
+    tmp2 = tmp1._box.move();
+    final tmp3 =
+        _api._emojiVerificationEventAcceptVerificationRequestWithMethods(
+      tmp0,
+      tmp2,
+    );
+    final tmp5 = tmp3;
+    final ffi.Pointer<ffi.Void> tmp5_0 = ffi.Pointer.fromAddress(tmp5);
+    final tmp5_1 = _Box(_api, tmp5_0,
+        "__EmojiVerificationEvent_accept_verification_request_with_methods_future_drop");
+    tmp5_1._finalizer = _api._registerFinalizer(tmp5_1);
+    final tmp4 = _nativeFuture(tmp5_1,
+        _api.__emojiVerificationEventAcceptVerificationRequestWithMethodsFuturePoll);
+    return tmp4;
+  }
+
+  /// Alice starts the SAS verification
+  Future<bool> startSasVerification() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventStartSasVerification(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_start_sas_verification_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventStartSasVerificationFuturePoll);
+    return tmp2;
+  }
+
+  /// Whether verification request was launched from this device
+  bool? wasTriggeredFromThisDevice() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventWasTriggeredFromThisDevice(
+      tmp0,
+    );
+    final tmp3 = tmp1.arg0;
+    final tmp4 = tmp1.arg1;
+    if (tmp3 == 0) {
+      return null;
+    }
+    final tmp2 = tmp4 > 0;
+    return tmp2;
+  }
+
+  /// Bob accepts the SAS verification
+  Future<bool> acceptSasVerification() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventAcceptSasVerification(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_accept_sas_verification_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventAcceptSasVerificationFuturePoll);
+    return tmp2;
+  }
+
+  /// Bob cancels the SAS verification
+  Future<bool> cancelSasVerification() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventCancelSasVerification(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_cancel_sas_verification_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventCancelSasVerificationFuturePoll);
+    return tmp2;
+  }
+
+  /// Alice sends the verification key to Bob and vice versa
+  Future<bool> sendVerificationKey() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventSendVerificationKey(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_send_verification_key_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventSendVerificationKeyFuturePoll);
+    return tmp2;
+  }
+
+  /// Alice cancels the verification key from Bob and vice versa
+  Future<bool> cancelVerificationKey() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventCancelVerificationKey(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_cancel_verification_key_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventCancelVerificationKeyFuturePoll);
+    return tmp2;
+  }
+
+  /// Alice gets the verification emoji from Bob and vice versa
+  Future<FfiListEmojiUnit> getVerificationEmoji() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventGetVerificationEmoji(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_get_verification_emoji_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventGetVerificationEmojiFuturePoll);
+    return tmp2;
+  }
+
+  /// Alice says to Bob that SAS verification matches and vice versa
+  Future<bool> confirmSasVerification() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventConfirmSasVerification(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_confirm_sas_verification_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventConfirmSasVerificationFuturePoll);
+    return tmp2;
+  }
+
+  /// Alice says to Bob that SAS verification doesn't match and vice versa
+  Future<bool> mismatchSasVerification() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventMismatchSasVerification(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_mismatch_sas_verification_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventMismatchSasVerificationFuturePoll);
+    return tmp2;
+  }
+
+  /// Alice and Bob reviews the AnyToDeviceEvent::KeyVerificationMac
+  Future<bool> reviewVerificationMac() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._emojiVerificationEventReviewVerificationMac(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__EmojiVerificationEvent_review_verification_mac_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__emojiVerificationEventReviewVerificationMacFuturePoll);
     return tmp2;
   }
 
@@ -7685,6 +8716,291 @@ class EmojiUnit {
       final ffi.Pointer<ffi.Void> tmp3_0;
       tmp3_0 = ffi.Pointer.fromAddress(tmp3);
       _api.__deallocate(tmp3_0, tmp5 * 1, 1);
+    }
+    return tmp2;
+  }
+
+  /// Manually drops the object and unregisters the FinalizableHandle.
+  void drop() {
+    _box.drop();
+  }
+}
+
+/// Deliver devices changed event from rust to flutter
+class DevicesChangedEvent {
+  final Api _api;
+  final _Box _box;
+
+  DevicesChangedEvent._(this._api, this._box);
+
+  /// Get the device list, excluding verified ones
+  Future<FfiListDevice> getDevices(
+    bool verified,
+  ) {
+    final tmp1 = verified;
+    var tmp0 = 0;
+    var tmp2 = 0;
+    tmp0 = _box.borrow();
+    tmp2 = tmp1 ? 1 : 0;
+    final tmp3 = _api._devicesChangedEventGetDevices(
+      tmp0,
+      tmp2,
+    );
+    final tmp5 = tmp3;
+    final ffi.Pointer<ffi.Void> tmp5_0 = ffi.Pointer.fromAddress(tmp5);
+    final tmp5_1 =
+        _Box(_api, tmp5_0, "__DevicesChangedEvent_get_devices_future_drop");
+    tmp5_1._finalizer = _api._registerFinalizer(tmp5_1);
+    final tmp4 =
+        _nativeFuture(tmp5_1, _api.__devicesChangedEventGetDevicesFuturePoll);
+    return tmp4;
+  }
+
+  /// Request verification to any devices of user
+  Future<bool> requestVerificationToUser() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._devicesChangedEventRequestVerificationToUser(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final ffi.Pointer<ffi.Void> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp3_1 = _Box(_api, tmp3_0,
+        "__DevicesChangedEvent_request_verification_to_user_future_drop");
+    tmp3_1._finalizer = _api._registerFinalizer(tmp3_1);
+    final tmp2 = _nativeFuture(
+        tmp3_1, _api.__devicesChangedEventRequestVerificationToUserFuturePoll);
+    return tmp2;
+  }
+
+  /// Request verification to specific device
+  Future<bool> requestVerificationToDevice(
+    String devId,
+  ) {
+    final tmp1 = devId;
+    var tmp0 = 0;
+    var tmp2 = 0;
+    var tmp3 = 0;
+    var tmp4 = 0;
+    tmp0 = _box.borrow();
+    final tmp1_0 = utf8.encode(tmp1);
+    tmp3 = tmp1_0.length;
+    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
+    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
+    tmp2_1.setAll(0, tmp1_0);
+    tmp2 = tmp2_0.address;
+    tmp4 = tmp3;
+    final tmp5 = _api._devicesChangedEventRequestVerificationToDevice(
+      tmp0,
+      tmp2,
+      tmp3,
+      tmp4,
+    );
+    final tmp7 = tmp5;
+    final ffi.Pointer<ffi.Void> tmp7_0 = ffi.Pointer.fromAddress(tmp7);
+    final tmp7_1 = _Box(_api, tmp7_0,
+        "__DevicesChangedEvent_request_verification_to_device_future_drop");
+    tmp7_1._finalizer = _api._registerFinalizer(tmp7_1);
+    final tmp6 = _nativeFuture(tmp7_1,
+        _api.__devicesChangedEventRequestVerificationToDeviceFuturePoll);
+    return tmp6;
+  }
+
+  /// Request verification to any devices of user with methods
+  Future<bool> requestVerificationToUserWithMethods(
+    FfiListFfiString methods,
+  ) {
+    final tmp1 = methods;
+    var tmp0 = 0;
+    var tmp2 = 0;
+    tmp0 = _box.borrow();
+    tmp2 = tmp1._box.move();
+    final tmp3 = _api._devicesChangedEventRequestVerificationToUserWithMethods(
+      tmp0,
+      tmp2,
+    );
+    final tmp5 = tmp3;
+    final ffi.Pointer<ffi.Void> tmp5_0 = ffi.Pointer.fromAddress(tmp5);
+    final tmp5_1 = _Box(_api, tmp5_0,
+        "__DevicesChangedEvent_request_verification_to_user_with_methods_future_drop");
+    tmp5_1._finalizer = _api._registerFinalizer(tmp5_1);
+    final tmp4 = _nativeFuture(tmp5_1,
+        _api.__devicesChangedEventRequestVerificationToUserWithMethodsFuturePoll);
+    return tmp4;
+  }
+
+  /// Request verification to specific device with methods
+  Future<bool> requestVerificationToDeviceWithMethods(
+    String devId,
+    FfiListFfiString methods,
+  ) {
+    final tmp1 = devId;
+    final tmp5 = methods;
+    var tmp0 = 0;
+    var tmp2 = 0;
+    var tmp3 = 0;
+    var tmp4 = 0;
+    var tmp6 = 0;
+    tmp0 = _box.borrow();
+    final tmp1_0 = utf8.encode(tmp1);
+    tmp3 = tmp1_0.length;
+    final ffi.Pointer<ffi.Uint8> tmp2_0 = _api.__allocate(tmp3 * 1, 1);
+    final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
+    tmp2_1.setAll(0, tmp1_0);
+    tmp2 = tmp2_0.address;
+    tmp4 = tmp3;
+    tmp6 = tmp5._box.move();
+    final tmp7 =
+        _api._devicesChangedEventRequestVerificationToDeviceWithMethods(
+      tmp0,
+      tmp2,
+      tmp3,
+      tmp4,
+      tmp6,
+    );
+    final tmp9 = tmp7;
+    final ffi.Pointer<ffi.Void> tmp9_0 = ffi.Pointer.fromAddress(tmp9);
+    final tmp9_1 = _Box(_api, tmp9_0,
+        "__DevicesChangedEvent_request_verification_to_device_with_methods_future_drop");
+    tmp9_1._finalizer = _api._registerFinalizer(tmp9_1);
+    final tmp8 = _nativeFuture(tmp9_1,
+        _api.__devicesChangedEventRequestVerificationToDeviceWithMethodsFuturePoll);
+    return tmp8;
+  }
+
+  /// Manually drops the object and unregisters the FinalizableHandle.
+  void drop() {
+    _box.drop();
+  }
+}
+
+/// Deliver devices left event from rust to flutter
+class DevicesLeftEvent {
+  final Api _api;
+  final _Box _box;
+
+  DevicesLeftEvent._(this._api, this._box);
+
+  /// Get the device list, including deleted ones
+  Future<FfiListDevice> getDevices(
+    bool deleted,
+  ) {
+    final tmp1 = deleted;
+    var tmp0 = 0;
+    var tmp2 = 0;
+    tmp0 = _box.borrow();
+    tmp2 = tmp1 ? 1 : 0;
+    final tmp3 = _api._devicesLeftEventGetDevices(
+      tmp0,
+      tmp2,
+    );
+    final tmp5 = tmp3;
+    final ffi.Pointer<ffi.Void> tmp5_0 = ffi.Pointer.fromAddress(tmp5);
+    final tmp5_1 =
+        _Box(_api, tmp5_0, "__DevicesLeftEvent_get_devices_future_drop");
+    tmp5_1._finalizer = _api._registerFinalizer(tmp5_1);
+    final tmp4 =
+        _nativeFuture(tmp5_1, _api.__devicesLeftEventGetDevicesFuturePoll);
+    return tmp4;
+  }
+
+  /// Manually drops the object and unregisters the FinalizableHandle.
+  void drop() {
+    _box.drop();
+  }
+}
+
+/// Provide various device infos
+class Device {
+  final Api _api;
+  final _Box _box;
+
+  Device._(this._api, this._box);
+
+  /// whether this device was verified
+  bool wasVerified() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._deviceWasVerified(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final tmp2 = tmp3 > 0;
+    return tmp2;
+  }
+
+  /// whether this device was deleted
+  bool wasDeleted() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._deviceWasDeleted(
+      tmp0,
+    );
+    final tmp3 = tmp1;
+    final tmp2 = tmp3 > 0;
+    return tmp2;
+  }
+
+  /// get the id of this device user
+  String getUserId() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._deviceGetUserId(
+      tmp0,
+    );
+    final tmp3 = tmp1.arg0;
+    final tmp4 = tmp1.arg1;
+    final tmp5 = tmp1.arg2;
+    final ffi.Pointer<ffi.Uint8> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp2 = utf8.decode(tmp3_0.asTypedList(tmp4));
+    if (tmp5 > 0) {
+      final ffi.Pointer<ffi.Void> tmp3_0;
+      tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+      _api.__deallocate(tmp3_0, tmp5 * 1, 1);
+    }
+    return tmp2;
+  }
+
+  /// get the id of this device
+  String getDeviceId() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._deviceGetDeviceId(
+      tmp0,
+    );
+    final tmp3 = tmp1.arg0;
+    final tmp4 = tmp1.arg1;
+    final tmp5 = tmp1.arg2;
+    final ffi.Pointer<ffi.Uint8> tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+    final tmp2 = utf8.decode(tmp3_0.asTypedList(tmp4));
+    if (tmp5 > 0) {
+      final ffi.Pointer<ffi.Void> tmp3_0;
+      tmp3_0 = ffi.Pointer.fromAddress(tmp3);
+      _api.__deallocate(tmp3_0, tmp5 * 1, 1);
+    }
+    return tmp2;
+  }
+
+  /// get the display name of this device
+  String? getDisplayName() {
+    var tmp0 = 0;
+    tmp0 = _box.borrow();
+    final tmp1 = _api._deviceGetDisplayName(
+      tmp0,
+    );
+    final tmp3 = tmp1.arg0;
+    final tmp4 = tmp1.arg1;
+    final tmp5 = tmp1.arg2;
+    final tmp6 = tmp1.arg3;
+    if (tmp3 == 0) {
+      return null;
+    }
+    final ffi.Pointer<ffi.Uint8> tmp4_0 = ffi.Pointer.fromAddress(tmp4);
+    final tmp2 = utf8.decode(tmp4_0.asTypedList(tmp5));
+    if (tmp6 > 0) {
+      final ffi.Pointer<ffi.Void> tmp4_0;
+      tmp4_0 = ffi.Pointer.fromAddress(tmp4);
+      _api.__deallocate(tmp4_0, tmp6 * 1, 1);
     }
     return tmp2;
   }
@@ -7934,21 +9250,35 @@ class _MemberDisplayNameReturn extends ffi.Struct {
   external int arg3;
 }
 
-class _SyncStateGetToDeviceRxReturn extends ffi.Struct {
+class _SyncStateGetFirstSyncedRxReturn extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Int64()
   external int arg1;
 }
 
-class _SyncStateGetSyncMsgLikeRxReturn extends ffi.Struct {
+class _SyncStateGetEmojiVerificationEventRxReturn extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Int64()
   external int arg1;
 }
 
-class _CrossSigningEventGetEventNameReturn extends ffi.Struct {
+class _SyncStateGetDevicesChangedEventRxReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Int64()
+  external int arg1;
+}
+
+class _SyncStateGetDevicesLeftEventRxReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Int64()
+  external int arg1;
+}
+
+class _EmojiVerificationEventGetEventNameReturn extends ffi.Struct {
   @ffi.Int64()
   external int arg0;
   @ffi.Uint64()
@@ -7957,7 +9287,7 @@ class _CrossSigningEventGetEventNameReturn extends ffi.Struct {
   external int arg2;
 }
 
-class _CrossSigningEventGetEventIdReturn extends ffi.Struct {
+class _EmojiVerificationEventGetSenderReturn extends ffi.Struct {
   @ffi.Int64()
   external int arg0;
   @ffi.Uint64()
@@ -7966,13 +9296,12 @@ class _CrossSigningEventGetEventIdReturn extends ffi.Struct {
   external int arg2;
 }
 
-class _CrossSigningEventGetSenderReturn extends ffi.Struct {
-  @ffi.Int64()
+class _EmojiVerificationEventWasTriggeredFromThisDeviceReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
   external int arg0;
-  @ffi.Uint64()
+  @ffi.Uint8()
   external int arg1;
-  @ffi.Uint64()
-  external int arg2;
 }
 
 class _EmojiUnitGetDescriptionReturn extends ffi.Struct {
@@ -7982,6 +9311,35 @@ class _EmojiUnitGetDescriptionReturn extends ffi.Struct {
   external int arg1;
   @ffi.Uint64()
   external int arg2;
+}
+
+class _DeviceGetUserIdReturn extends ffi.Struct {
+  @ffi.Int64()
+  external int arg0;
+  @ffi.Uint64()
+  external int arg1;
+  @ffi.Uint64()
+  external int arg2;
+}
+
+class _DeviceGetDeviceIdReturn extends ffi.Struct {
+  @ffi.Int64()
+  external int arg0;
+  @ffi.Uint64()
+  external int arg1;
+  @ffi.Uint64()
+  external int arg2;
+}
+
+class _DeviceGetDisplayNameReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Int64()
+  external int arg1;
+  @ffi.Uint64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
 }
 
 class _LoginNewClientFuturePollReturn extends ffi.Struct {
@@ -8628,7 +9986,7 @@ class _ClientFaqsFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _ClientAcceptVerificationRequestFuturePollReturn extends ffi.Struct {
+class _ClientVerifiedDeviceFuturePollReturn extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Uint8()
@@ -8643,7 +10001,8 @@ class _ClientAcceptVerificationRequestFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _ClientAcceptVerificationStartFuturePollReturn extends ffi.Struct {
+class _EmojiVerificationEventAcceptVerificationRequestFuturePollReturn
+    extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Uint8()
@@ -8658,22 +10017,8 @@ class _ClientAcceptVerificationStartFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _ClientGetVerificationEmojiFuturePollReturn extends ffi.Struct {
-  @ffi.Uint8()
-  external int arg0;
-  @ffi.Uint8()
-  external int arg1;
-  @ffi.Int64()
-  external int arg2;
-  @ffi.Uint64()
-  external int arg3;
-  @ffi.Uint64()
-  external int arg4;
-  @ffi.Int64()
-  external int arg5;
-}
-
-class _ClientConfirmVerificationKeyFuturePollReturn extends ffi.Struct {
+class _EmojiVerificationEventCancelVerificationRequestFuturePollReturn
+    extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Uint8()
@@ -8688,7 +10033,8 @@ class _ClientConfirmVerificationKeyFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _ClientMismatchVerificationKeyFuturePollReturn extends ffi.Struct {
+class _EmojiVerificationEventAcceptVerificationRequestWithMethodsFuturePollReturn
+    extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Uint8()
@@ -8703,7 +10049,8 @@ class _ClientMismatchVerificationKeyFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _ClientCancelVerificationKeyFuturePollReturn extends ffi.Struct {
+class _EmojiVerificationEventStartSasVerificationFuturePollReturn
+    extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Uint8()
@@ -8718,7 +10065,8 @@ class _ClientCancelVerificationKeyFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _ClientReviewVerificationMacFuturePollReturn extends ffi.Struct {
+class _EmojiVerificationEventAcceptSasVerificationFuturePollReturn
+    extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Uint8()
@@ -8733,14 +10081,234 @@ class _ClientReviewVerificationMacFuturePollReturn extends ffi.Struct {
   external int arg5;
 }
 
-class _SyncStateGetToDeviceRxStreamPollReturn extends ffi.Struct {
+class _EmojiVerificationEventCancelSasVerificationFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _EmojiVerificationEventSendVerificationKeyFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _EmojiVerificationEventCancelVerificationKeyFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _EmojiVerificationEventGetVerificationEmojiFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Int64()
+  external int arg5;
+}
+
+class _EmojiVerificationEventConfirmSasVerificationFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _EmojiVerificationEventMismatchSasVerificationFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _EmojiVerificationEventReviewVerificationMacFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _DevicesChangedEventGetDevicesFuturePollReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Int64()
+  external int arg5;
+}
+
+class _DevicesChangedEventRequestVerificationToUserFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _DevicesChangedEventRequestVerificationToDeviceFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _DevicesChangedEventRequestVerificationToUserWithMethodsFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _DevicesChangedEventRequestVerificationToDeviceWithMethodsFuturePollReturn
+    extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Uint8()
+  external int arg5;
+}
+
+class _DevicesLeftEventGetDevicesFuturePollReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+  @ffi.Int64()
+  external int arg2;
+  @ffi.Uint64()
+  external int arg3;
+  @ffi.Uint64()
+  external int arg4;
+  @ffi.Int64()
+  external int arg5;
+}
+
+class _SyncStateGetFirstSyncedRxStreamPollReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Uint8()
+  external int arg1;
+}
+
+class _SyncStateGetEmojiVerificationEventRxStreamPollReturn extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Int64()
   external int arg1;
 }
 
-class _SyncStateGetSyncMsgLikeRxStreamPollReturn extends ffi.Struct {
+class _SyncStateGetDevicesChangedEventRxStreamPollReturn extends ffi.Struct {
+  @ffi.Uint8()
+  external int arg0;
+  @ffi.Int64()
+  external int arg1;
+}
+
+class _SyncStateGetDevicesLeftEventRxStreamPollReturn extends ffi.Struct {
   @ffi.Uint8()
   external int arg0;
   @ffi.Int64()
@@ -8800,6 +10368,65 @@ class FfiListConversation extends Iterable<Conversation>
   void insert(int index, Conversation element) {
     _api._ffiListConversationInsert(
         _box.borrow(), index, element._box.borrow());
+    element._box.move();
+  }
+
+  void drop() {
+    _box.drop();
+  }
+}
+
+class FfiListDevice extends Iterable<Device> implements CustomIterable<Device> {
+  final Api _api;
+  final _Box _box;
+
+  FfiListDevice._(this._api, this._box);
+
+  @override
+  Iterator<Device> get iterator => CustomIterator(this);
+
+  @override
+  int get length {
+    return _api._ffiListDeviceLen(_box.borrow());
+  }
+
+  ///List object owns the elements, and objects returned by this method hold onto the list object ensuring the pointed to element isn/t dropped.
+  @override
+  Device elementAt(int index) {
+    final address = _api._ffiListDeviceElementAt(_box.borrow(), index);
+    final reference = _Box(
+      _api,
+      ffi.Pointer.fromAddress(address),
+      "drop_box_Leak",
+      context: this,
+    );
+    return Device._(_api, reference);
+  }
+
+  Device operator [](int index) {
+    return elementAt(index);
+  }
+
+  /// Moves the element out of this list and returns it
+  Device remove(int index) {
+    final address = _api._ffiListDeviceRemove(_box.borrow(), index);
+    final reference =
+        _Box(_api, ffi.Pointer.fromAddress(address), "drop_box_Device");
+    reference._finalizer = _api._registerFinalizer(reference);
+    return Device._(_api, reference);
+  }
+
+  ///The inserted element is moved into the list and must not be used again
+  ///Although you can use the "elementAt" method to get a reference to the added element
+  void add(Device element) {
+    _api._ffiListDeviceAdd(_box.borrow(), element._box.borrow());
+    element._box.move();
+  }
+
+  ///The inserted element is moved into the list and must not be used again
+  ///Although you can use the "elementAt" method to get a reference to the added element
+  void insert(int index, Device element) {
+    _api._ffiListDeviceInsert(_box.borrow(), index, element._box.borrow());
     element._box.move();
   }
 
@@ -8919,6 +10546,66 @@ class FfiListFaq extends Iterable<Faq> implements CustomIterable<Faq> {
   ///Although you can use the "elementAt" method to get a reference to the added element
   void insert(int index, Faq element) {
     _api._ffiListFaqInsert(_box.borrow(), index, element._box.borrow());
+    element._box.move();
+  }
+
+  void drop() {
+    _box.drop();
+  }
+}
+
+class FfiListFfiString extends Iterable<FfiString>
+    implements CustomIterable<FfiString> {
+  final Api _api;
+  final _Box _box;
+
+  FfiListFfiString._(this._api, this._box);
+
+  @override
+  Iterator<FfiString> get iterator => CustomIterator(this);
+
+  @override
+  int get length {
+    return _api._ffiListFfiStringLen(_box.borrow());
+  }
+
+  ///List object owns the elements, and objects returned by this method hold onto the list object ensuring the pointed to element isn/t dropped.
+  @override
+  FfiString elementAt(int index) {
+    final address = _api._ffiListFfiStringElementAt(_box.borrow(), index);
+    final reference = _Box(
+      _api,
+      ffi.Pointer.fromAddress(address),
+      "drop_box_Leak",
+      context: this,
+    );
+    return FfiString._(_api, reference);
+  }
+
+  FfiString operator [](int index) {
+    return elementAt(index);
+  }
+
+  /// Moves the element out of this list and returns it
+  FfiString remove(int index) {
+    final address = _api._ffiListFfiStringRemove(_box.borrow(), index);
+    final reference =
+        _Box(_api, ffi.Pointer.fromAddress(address), "drop_box_FfiString");
+    reference._finalizer = _api._registerFinalizer(reference);
+    return FfiString._(_api, reference);
+  }
+
+  ///The inserted element is moved into the list and must not be used again
+  ///Although you can use the "elementAt" method to get a reference to the added element
+  void add(FfiString element) {
+    _api._ffiListFfiStringAdd(_box.borrow(), element._box.borrow());
+    element._box.move();
+  }
+
+  ///The inserted element is moved into the list and must not be used again
+  ///Although you can use the "elementAt" method to get a reference to the added element
+  void insert(int index, FfiString element) {
+    _api._ffiListFfiStringInsert(_box.borrow(), index, element._box.borrow());
     element._box.move();
   }
 

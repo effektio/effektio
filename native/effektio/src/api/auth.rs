@@ -1,4 +1,4 @@
-use super::{Client, ClientStateBuilder, CrossSigningEvent, SyncState, RUNTIME};
+use super::{Client, ClientStateBuilder, RUNTIME};
 use crate::platform;
 use anyhow::{bail, Context, Result};
 use assign::assign;

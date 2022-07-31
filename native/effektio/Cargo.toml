@@ -42,7 +42,6 @@ url = "2.2.2"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-zenv = "0.8.0"
 
 [dependencies.effektio-core]
 path = "../core"
@@ -51,12 +50,12 @@ path = "../core"
 git = "https://github.com/matrix-org/matrix-rust-sdk/"
 default-features = false
 features = [
-    "e2e-encryption",
-    "rustls-tls",
-#    "qrcode",
-    "sled",
     "anyhow",
+    "e2e-encryption",
     "experimental-timeline",
+#   "qrcode",
+    "rustls-tls",
+    "sled",
 ]
 
 #   ----   WASM
@@ -67,7 +66,7 @@ wasm-bindgen-futures = "0.4.28"
 #   ----  ANDROID
 [target.'cfg(target_os = "android")'.dependencies]
 tracing-android = "0.2"
-android_logger = "0.10.1"
+android_logger = "0.11"
 tokio = { version = "1", features = ["rt-multi-thread", "parking_lot"] }
 
 [lib]

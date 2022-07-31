@@ -4,10 +4,10 @@ use lazy_static::lazy_static;
 pub use ruma;
 use tokio::runtime;
 
-use crate::platform;
+use crate::{events, platform};
 
 lazy_static! {
-    static ref RUNTIME: runtime::Runtime =
+    pub static ref RUNTIME: runtime::Runtime =
         runtime::Runtime::new().expect("Can't start Tokio runtime");
 }
 
@@ -25,9 +25,12 @@ pub use account::Account;
 pub use auth::{
     guest_client, login_new_client, login_with_token, register_with_registration_token,
 };
-pub use client::{Client, ClientStateBuilder, CrossSigningEvent, EmojiUnit, SyncState};
+pub use client::{Client, ClientStateBuilder, SyncState};
 pub use conversation::Conversation;
 pub use effektio_core::models::{Color, Faq, News, Tag};
+pub use events::{
+    Device, DevicesChangedEvent, DevicesLeftEvent, EmojiUnit, EmojiVerificationEvent,
+};
 pub use group::{CreateGroupSettings, CreateGroupSettingsBuilder, Group};
 pub use messages::{FileDescription, ImageDescription, RoomMessage};
 pub use room::{Member, Room};

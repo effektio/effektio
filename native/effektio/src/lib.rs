@@ -6,6 +6,7 @@
 pub use matrix_sdk;
 
 pub mod api;
+pub mod events;
 pub mod platform;
 
 #[rustfmt::skip]
