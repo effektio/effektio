@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["RoomKeyContent","The `m.room_key` event content."]],"struct":[["MegolmV1AesSha2Content","The `m.megolm.v1.aes-sha2` variant of the `m.room_key` content."],["UnknownRoomKey","An unknown and unsupported `m.room_key` algorithm."]],"type":[["RoomKeyEvent","The `m.room_key` to-device event."]]};

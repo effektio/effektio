@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["redact_event","`PUT /_matrix/client/*/rooms/{roomId}/redact/{eventId}/{txnId}`"]]};

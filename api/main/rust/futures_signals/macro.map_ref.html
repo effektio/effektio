@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The `map_ref` macro can be used to combine multiple `Signal`s together:"><meta name="keywords" content="rust, rustlang, rust-lang, map_ref"><title>map_ref in futures_signals - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../futures_signals/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../futures_signals/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><div class="sidebar-elems"><h2 class="location"><a href="index.html">In futures_signals</a></h2></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../futures_signals/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Macro <a href="index.html">futures_signals</a>::<wbr><a class="macro" href="#">map_ref</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/futures_signals/signal/macros.rs.html#406-408">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><div class="example-wrap"><pre class="rust macro"><code><span class="macro">macro_rules!</span> <span class="ident">map_ref</span> {
+    ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">input</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; { ... };
+}</code></pre></div>
+</div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The <code>map_ref</code> macro can be used to <em>combine</em> multiple <code>Signal</code>s together:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">mutable1</span> <span class="op">=</span> <span class="ident">Mutable::new</span>(<span class="number">1</span>);
+<span class="kw">let</span> <span class="ident">mutable2</span> <span class="op">=</span> <span class="ident">Mutable::new</span>(<span class="number">2</span>);
+
+<span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span> {
+    <span class="kw">let</span> <span class="ident">value1</span> <span class="op">=</span> <span class="ident">mutable1</span>.<span class="ident">signal</span>(),
+    <span class="kw">let</span> <span class="ident">value2</span> <span class="op">=</span> <span class="ident">mutable2</span>.<span class="ident">signal</span>() =&gt;
+    <span class="kw-2">*</span><span class="ident">value1</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">value2</span>
+};</code></pre></div>
+<p>In the above example, <code>map_ref</code> takes two input Signals: <code>mutable1.signal()</code> and <code>mutable2.signal()</code>,
+and it returns an output Signal.</p>
+<p>When the output Signal is spawned:</p>
+<ol>
+<li>
+<p>It takes the current value of <code>mutable1.signal()</code> and puts it into the <code>value1</code> variable.</p>
+</li>
+<li>
+<p>It takes the current value of <code>mutable2.signal()</code> and puts it into the <code>value2</code> variable.</p>
+</li>
+<li>
+<p>Then it runs the <code>*value1 + *value2</code> code, and puts the result of that code into the output Signal.</p>
+</li>
+<li>
+<p>Whenever <code>mutable1.signal()</code> or <code>mutable2.signal()</code> changes it repeats the above steps.</p>
+</li>
+</ol>
+<p>So the end result is that <code>output</code> always contains the value of <code>mutable1 + mutable2</code>.</p>
+<p>So in the above example, <code>output</code> will have the value <code>3</code> (because it’s <code>1 + 2</code>).</p>
+<p>But let’s say that <code>mutable1</code> changes…</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">mutable1</span>.<span class="ident">set</span>(<span class="number">5</span>);</code></pre></div>
+<p>…then <code>output</code> will now have the value <code>7</code> (because it’s <code>5 + 2</code>). And then if <code>mutable2</code> changes…</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">mutable2</span>.<span class="ident">set</span>(<span class="number">10</span>);</code></pre></div>
+<p>…then <code>output</code> will now have the value <code>15</code> (because it’s <code>5 + 10</code>).</p>
+<p>If multiple input Signals change at the same time, then it will only update once:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">mutable1</span>.<span class="ident">set</span>(<span class="number">15</span>);
+<span class="ident">mutable2</span>.<span class="ident">set</span>(<span class="number">20</span>);</code></pre></div>
+<p>In the above example, <code>output</code> will now have the value <code>35</code> (because it’s <code>15 + 20</code>), and it only
+updates once (<em><strong>not</strong></em> once per input Signal).</p>
+<hr />
+<p>There is also a shorthand syntax:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span>(<span class="ident">signal1</span>, <span class="ident">signal2</span> =&gt; <span class="kw-2">*</span><span class="ident">signal1</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">signal2</span>);</code></pre></div>
+<p>The above code is exactly the same as this:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span> {
+    <span class="kw">let</span> <span class="ident">signal1</span> <span class="op">=</span> <span class="ident">signal1</span>,
+    <span class="kw">let</span> <span class="ident">signal2</span> <span class="op">=</span> <span class="ident">signal2</span> =&gt;
+    <span class="kw-2">*</span><span class="ident">signal1</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">signal2</span>
+};</code></pre></div>
+<p>This only works if the input Signals are variables. If you want to use expressions for the input
+Signals then you must either assign them to variables first, or you must use the longer syntax.</p>
+<p>In addition, it’s possible to use pattern matching with the longer syntax:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span> {
+    <span class="kw">let</span> (<span class="ident">t1</span>, <span class="ident">t2</span>) <span class="op">=</span> <span class="ident">signal1</span>,
+    <span class="kw">let</span> <span class="ident">SomeStruct</span> { <span class="ident">foo</span> } <span class="op">=</span> <span class="ident">signal2</span> =&gt;
+    <span class="comment">// ...</span>
+};</code></pre></div>
+<p>It’s also possible to combine more than two Signals:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span> {
+    <span class="kw">let</span> <span class="ident">value1</span> <span class="op">=</span> <span class="ident">mutable1</span>.<span class="ident">signal</span>(),
+    <span class="kw">let</span> <span class="ident">value2</span> <span class="op">=</span> <span class="ident">mutable2</span>.<span class="ident">signal</span>(),
+    <span class="kw">let</span> <span class="ident">value3</span> <span class="op">=</span> <span class="ident">mutable3</span>.<span class="ident">signal</span>() =&gt;
+    <span class="kw-2">*</span><span class="ident">value1</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">value2</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">value3</span>
+};</code></pre></div>
+<p>You can combine an <em>infinite</em> number of Signals, there is no limit.</p>
+<p>However, keep in mind that each input Signal has a small performance cost.
+The cost is very small, but it grows linearly with the number of input Signals.</p>
+<p>You shouldn’t normally worry about it, just don’t put thousands of input Signals
+into a <code>map_ref</code> (this basically <em>never</em> happens in practice).</p>
+<hr />
+<p>You might be wondering why it’s called <code>map_ref</code>: that’s because <code>value1</code> and <code>value2</code> are <em>immutable <code>&amp;</code> references</em>
+to the current values of the input Signals. That’s also why you need to use <code>*value1</code> and <code>*value2</code> to dereference them.</p>
+<p>Why does it use references? Let’s say one of the input Signals changes but the other ones haven’t changed. In that situation
+it needs to use the old values for the Signals that didn’t change. But because that situation might happen multiple times,
+it needs to retain ownership of the values, so it can only give out references.</p>
+<p>Rather than giving out references, it could instead have been designed so it always
+<a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>clone</code></a>s the values, but that’s expensive
+(and it means that it only works with types that implement <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>).</p>
+<p>Because <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>clone</code></a> only requires an immutable
+reference, it’s easy to call <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>clone</code></a> yourself
+when you need to:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span> {
+    <span class="kw">let</span> <span class="ident">value1</span> <span class="op">=</span> <span class="ident">mutable1</span>.<span class="ident">signal</span>(),
+    <span class="kw">let</span> <span class="ident">value2</span> <span class="op">=</span> <span class="ident">mutable2</span>.<span class="ident">signal</span>() =&gt;
+    <span class="ident">value1</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">value2</span>.<span class="ident">clone</span>()
+};</code></pre></div>
+<p>So because it gives references, you can now manually call <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html#tymethod.clone"><code>clone</code></a>
+(or any other <code>&amp;self</code> method) <em>only</em> when you need to. This improves performance.</p>
+<h2 id="performance"><a href="#performance">Performance</a></h2>
+<p>If you use 1 or 2 input Signals it is <em><strong>extremely</strong></em> fast, and everything is stack allocated.</p>
+<p>If you use 3+ input Signals, it will do a heap allocation for each input Signal.
+However, this heap allocation only happens once, when the <code>map_ref</code> is created.
+It does <em>not</em> do any heap allocation while polling. So it’s still <em><strong>very</strong></em> fast.</p>
+<p>In addition, if you use 3+ input Signals, there is a <em>very</em> small additional performance
+cost on every poll, and this additional cost scales linearly with the number of input
+Signals.</p>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="futures_signals" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

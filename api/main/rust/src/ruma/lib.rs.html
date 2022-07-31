@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/git/checkouts/ruma-5201e73f5f917c77/9615591/crates/ruma/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" href="https://www.ruma.io/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ruma/index.html"><div class="logo-container"><img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../ruma/index.html"><div class="logo-container">
+                    <img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ruma/index.html">
+                        <img src="https://www.ruma.io/images/logo.png" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_favicon_url</span> <span class="op">=</span> <span class="string">&quot;https://www.ruma.io/favicon.ico&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">doc</span>(<span class="ident">html_logo_url</span> <span class="op">=</span> <span class="string">&quot;https://www.ruma.io/images/logo.png&quot;</span>)]</span>
+<span class="doccomment">//! Types and traits for working with the [Matrix](https://matrix.org) protocol.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! This crate re-exports things from all of the other ruma crates so you don&#39;t</span>
+<span class="doccomment">//! have to manually keep all the versions in sync.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Which crates are re-exported can be configured through cargo features.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! &gt; ⚠ Some details might be missing because rustdoc has trouble with re-exports so you may need</span>
+<span class="doccomment">//! &gt; to refer to other crates&#39; documentations.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! &gt; 🛈 For internal consistency, ruma uses American spelling for variable names. Actual values may</span>
+<span class="doccomment">//! &gt; differ, as the matrix specification has a mix of British and American English.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # API features</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Depending on which parts of Matrix are relevant to you, activate the following features:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `appservice-api` -- Application Service API.</span>
+<span class="doccomment">//! * `client-api` -- Client-Server API.</span>
+<span class="doccomment">//! * `federation-api` -- Server-Server (Federation) API.</span>
+<span class="doccomment">//! * `identity-service-api` -- Identity Service API.</span>
+<span class="doccomment">//! * `push-gateway-api` -- Push Gateway API.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! These features have `client`- and `server`-optimized variants that are enabled respectively</span>
+<span class="doccomment">//! with the `-c` and `-s` suffixes. For example:</span>
+<span class="doccomment">//!   * `client-api-c` -- The Client-Server API optimized for the client side.</span>
+<span class="doccomment">//!   * `client-api-s` -- The Client-Server API optimized for the server side.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Compatibility feature</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `compat` increases compatibility with other parts of the Matrix ecosystem, at the expense of</span>
+<span class="doccomment">//!   deviating from the specification.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Convenience features</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! These features are only useful if you want to use a method that requires it:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `rand`</span>
+<span class="doccomment">//! * `markdown`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Unstable features</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! By using these features, you opt out of all semver guarantees Ruma otherwise provides:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `unstable-exhaustive-types` -- Most types in Ruma are marked as non-exhaustive to avoid</span>
+<span class="doccomment">//!   breaking changes when new fields are added in the specification. This feature compiles all</span>
+<span class="doccomment">//!   types as exhaustive.</span>
+<span class="doccomment">//! * `unstable-mscXXXX`, where `XXXX` is the MSC number -- Upcoming Matrix features that may be</span>
+<span class="doccomment">//!   subject to change or removal.</span>
+<span class="doccomment">//! * `unstable-pre-spec` -- Undocumented Matrix features that may be subject to change or removal.</span>
+<span class="doccomment">//! * `unstable-sanitize` -- Convenience methods for spec-compliant HTML sanitization that have not</span>
+<span class="doccomment">//!   been thoroughly tested.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Common features</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! These submodules are usually activated by the API features when needed:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `api`</span>
+<span class="doccomment">//! * `events`</span>
+<span class="doccomment">//! * `signatures`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # `ruma-client` features</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The `client` feature activates [`ruma::client`][client], and `client-ext-client-api` activates</span>
+<span class="doccomment">//! `ruma-client`s `client-api` feature. All other `client-*` features activate the same feature</span>
+<span class="doccomment">//! without the `client-` prefix on `ruma-client`. See the crate&#39;s documentation for the effect of</span>
+<span class="doccomment">//! these features.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! If you are viewing this on `docs.rs`, you can have a look at the feature dependencies by</span>
+<span class="doccomment">//! clicking **Feature flags** in the toolbar at the top.</span>
+
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">feature</span>(<span class="ident">doc_cfg</span>, <span class="ident">doc_auto_cfg</span>))]</span>
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_client</span> <span class="kw">as</span> <span class="ident">client</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;events&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_common::events</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;signatures&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_signatures</span> <span class="kw">as</span> <span class="ident">signatures</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;state-res&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_state_res</span> <span class="kw">as</span> <span class="ident">state_res</span>;
+
+<span class="doccomment">/// (De)serializable types for various [Matrix APIs][apis] requests and responses and abstractions</span>
+<span class="doccomment">/// for them.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [apis]: https://spec.matrix.org/v1.2/#matrix-apis</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;api&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">api</span> {
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_common::api</span>::<span class="kw-2">*</span>;
+
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ruma-appservice-api&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">docsrs</span>,
+        <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">any</span>(
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;appservice-api&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;appservice-api-c&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;appservice-api-s&quot;</span>
+        )))
+    )]</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_appservice_api</span> <span class="kw">as</span> <span class="ident">appservice</span>;
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ruma-client-api&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">docsrs</span>,
+        <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">any</span>(
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client-api&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client-api-c&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client-api-s&quot;</span>
+        )))
+    )]</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_client_api</span> <span class="kw">as</span> <span class="ident">client</span>;
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ruma-federation-api&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">docsrs</span>,
+        <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">any</span>(
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;federation-api&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;federation-api-c&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;federation-api-s&quot;</span>
+        )))
+    )]</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_federation_api</span> <span class="kw">as</span> <span class="ident">federation</span>;
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ruma-identity-service-api&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">docsrs</span>,
+        <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">any</span>(
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;identity-service-api&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;identity-service-api-c&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;identity-service-api-s&quot;</span>
+        )))
+    )]</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_identity_service_api</span> <span class="kw">as</span> <span class="ident">identity_service</span>;
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ruma-push-gateway-api&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">docsrs</span>,
+        <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">any</span>(
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;push-gateway-api&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;push-gateway-api-c&quot;</span>,
+            <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;push-gateway-api-s&quot;</span>
+        )))
+    )]</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_push_gateway_api</span> <span class="kw">as</span> <span class="ident">push_gateway</span>;
+}
+
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">assign::assign</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">js_int</span>::{<span class="ident">int</span>, <span class="ident">uint</span>, <span class="ident">Int</span>, <span class="ident">UInt</span>};
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client-ext-client-api&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_client::Client</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_common</span>::{
+    <span class="ident">authentication</span>, <span class="ident">device_id</span>, <span class="ident">device_key_id</span>, <span class="ident">directory</span>, <span class="ident">encryption</span>, <span class="ident">event_id</span>, <span class="ident">exports</span>, <span class="ident">matrix_uri</span>,
+    <span class="ident">mxc_uri</span>, <span class="ident">power_levels</span>, <span class="ident">presence</span>, <span class="ident">push</span>, <span class="ident">receipt</span>, <span class="ident">room</span>, <span class="ident">room_alias_id</span>, <span class="ident">room_id</span>, <span class="ident">room_version_id</span>,
+    <span class="ident">serde</span>, <span class="ident">server_name</span>, <span class="ident">server_signing_key_id</span>, <span class="ident">thirdparty</span>, <span class="ident">to_device</span>, <span class="ident">user_id</span>, <span class="ident">ClientSecret</span>,
+    <span class="ident">DeviceId</span>, <span class="ident">DeviceKeyAlgorithm</span>, <span class="ident">DeviceKeyId</span>, <span class="ident">DeviceSignatures</span>, <span class="ident">DeviceSigningKeyId</span>,
+    <span class="ident">EntitySignatures</span>, <span class="ident">EventEncryptionAlgorithm</span>, <span class="ident">EventId</span>, <span class="ident">IdParseError</span>, <span class="ident">KeyId</span>, <span class="ident">KeyName</span>, <span class="ident">MatrixToUri</span>,
+    <span class="ident">MatrixUri</span>, <span class="ident">MilliSecondsSinceUnixEpoch</span>, <span class="ident">MxcUri</span>, <span class="ident">OwnedClientSecret</span>, <span class="ident">OwnedDeviceId</span>,
+    <span class="ident">OwnedDeviceKeyId</span>, <span class="ident">OwnedDeviceSigningKeyId</span>, <span class="ident">OwnedEventId</span>, <span class="ident">OwnedKeyId</span>, <span class="ident">OwnedKeyName</span>, <span class="ident">OwnedMxcUri</span>,
+    <span class="ident">OwnedRoomAliasId</span>, <span class="ident">OwnedRoomId</span>, <span class="ident">OwnedRoomOrAliasId</span>, <span class="ident">OwnedServerName</span>, <span class="ident">OwnedServerSigningKeyId</span>,
+    <span class="ident">OwnedSessionId</span>, <span class="ident">OwnedSigningKeyId</span>, <span class="ident">OwnedTransactionId</span>, <span class="ident">OwnedUserId</span>, <span class="ident">PrivOwnedStr</span>, <span class="ident">RoomAliasId</span>,
+    <span class="ident">RoomId</span>, <span class="ident">RoomOrAliasId</span>, <span class="ident">RoomVersionId</span>, <span class="ident">SecondsSinceUnixEpoch</span>, <span class="ident">ServerName</span>, <span class="ident">ServerSignatures</span>,
+    <span class="ident">ServerSigningKeyId</span>, <span class="ident">SessionId</span>, <span class="ident">Signatures</span>, <span class="ident">SigningKeyAlgorithm</span>, <span class="ident">TransactionId</span>, <span class="ident">UserId</span>,
+};
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;canonical-json&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ruma_common</span>::{
+    <span class="ident">canonical_json</span>, <span class="ident">CanonicalJsonError</span>, <span class="ident">CanonicalJsonObject</span>, <span class="ident">CanonicalJsonValue</span>,
+};
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ruma" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

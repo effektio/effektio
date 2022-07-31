@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Behaves the same as quote! while quoting into an existing token stream with `&lt;target&gt; =&gt; &lt;quoted&gt;`."><meta name="keywords" content="rust, rustlang, rust-lang, quote_in"><title>quote_in in genco::prelude - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../genco/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../genco/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><div class="sidebar-elems"><h2 class="location"><a href="index.html">In genco::prelude</a></h2></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../genco/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Macro <a href="../index.html">genco</a>::<wbr><a href="index.html">prelude</a>::<wbr><a class="macro" href="#">quote_in</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/genco_macros/lib.rs.html#777">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><pre class="rust macro"><code>quote_in!() { /* proc-macro */ }</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Behaves the same as <a href="macro.quote.html">quote!</a> while quoting into an existing token stream
+with <code>&lt;target&gt; =&gt; &lt;quoted&gt;</code>.</p>
+<p>This macro takes a destination stream followed by an <code>=&gt;</code> and the tokens to
+extend that stream with.</p>
+<p>Note that the <code>&lt;target&gt;</code> arguments must be borrowable. So a mutable
+reference like <code>&amp;mut rust::Tokens</code> will have to be dereferenced when used
+with this macro.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">rust::Tokens::new</span>();
+<span class="macro">quote_in!</span>(<span class="ident">tokens</span> =&gt; <span class="ident">hello</span> <span class="ident">world</span>);
+
+<span class="kw">fn</span> <span class="ident">generate_into</span>(<span class="ident">tokens</span>: <span class="kw-2">&amp;mut</span> <span class="ident">rust::Tokens</span>) {
+    <span class="macro">quote_in!</span> { <span class="kw-2">*</span><span class="ident">tokens</span> =&gt;
+        <span class="ident">hello</span>...
+        <span class="macro">world!</span>
+    };
+}</code></pre></div>
+<h2 id="example"><a href="#example">Example</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">rust::Tokens::new</span>();
+
+<span class="macro">quote_in!</span> { <span class="ident">tokens</span> =&gt;
+    <span class="kw">fn</span> <span class="ident">foo</span>() -&gt; <span class="ident">u32</span> {
+        <span class="number">42</span>
+    }
+}</code></pre></div>
+<h2 id="use-with-scopes"><a href="#use-with-scopes">Use with scopes</a></h2>
+<p><a href="macro.quote_in.html">quote_in!</a> can be used inside of a <a href="macro.quote.html">quote!</a> through <a href="macro.quote.html#scopes">a scope</a>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">fn</span> <span class="ident">foo</span>(<span class="ident">v</span>: <span class="ident">bool</span>) -&gt; <span class="ident">u32</span> {
+        #(<span class="kw-2">ref</span> <span class="ident">out</span> {
+            <span class="macro">quote_in!</span> { <span class="kw-2">*</span><span class="ident">out</span> =&gt;
+                <span class="kw">if</span> <span class="ident">v</span> {
+                    <span class="number">1</span>
+                } <span class="kw">else</span> {
+                    <span class="number">0</span>
+                }
+            }
+        })
+    }
+};</code></pre></div>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="genco" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

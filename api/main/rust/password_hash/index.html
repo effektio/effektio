@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="RustCrypto: Password Hashing Traits"><meta name="keywords" content="rust, rustlang, rust-lang, password_hash"><title>password_hash - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../password_hash/index.html"><div class="logo-container"><img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../password_hash/index.html"><div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate password_hash</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.4.2</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../password_hash/index.html">
+                        <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">password_hash</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/password_hash/lib.rs.html#1-392">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="rustcrypto-password-hashing-traits"><a href="#rustcrypto-password-hashing-traits">RustCrypto: Password Hashing Traits</a></h2>
+<p><a href="https://crates.io/crates/password-hash"><img src="https://buildstats.info/crate/password-hash" alt="crate" /></a>
+<a href="https://docs.rs/password-hash/"><img src="https://docs.rs/password-hash/badge.svg" alt="Docs" /></a>
+<a href="https://github.com/RustCrypto/traits/actions?query=workflow:password-hash"><img src="https://github.com/RustCrypto/traits/workflows/password-hash/badge.svg?branch=master&amp;event=push" alt="Build Status" /></a>
+<img src="https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg" alt="Apache2/MIT licensed" />
+<img src="https://img.shields.io/badge/rustc-1.57+-blue.svg" alt="Rust Version" />
+<a href="https://rustcrypto.zulipchat.com/#narrow/stream/260046-password-hashes"><img src="https://img.shields.io/badge/zulip-join_chat-blue.svg" alt="Project Chat" /></a></p>
+<p>Traits which describe the functionality of <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#Password_verification">password hashing algorithms</a>.</p>
+<p><a href="https://docs.rs/password-hash/">Documentation</a></p>
+<h3 id="about"><a href="#about">About</a></h3>
+<p>Provides a <code>no_std</code>-friendly implementation of the
+<a href="https://github.com/P-H-C/phc-string-format/blob/master/phc-sf-spec.md">Password Hashing Competition (PHC) string format specification</a>
+(a well-defined subset of the <a href="https://passlib.readthedocs.io/en/stable/modular_crypt_format.html">Modular Crypt Format a.k.a. MCF</a>) which
+works in conjunction with the traits this crate defines.</p>
+<h3 id="supported-crates"><a href="#supported-crates">Supported Crates</a></h3>
+<p>See <a href="https://github.com/RustCrypto/password-hashes">RustCrypto/password-hashes</a> for algorithm implementations which use
+this crate for interoperability:</p>
+<ul>
+<li><a href="https://docs.rs/argon2"><code>argon2</code></a> - Argon2 memory hard key derivation function</li>
+<li><a href="https://docs.rs/pbkdf2"><code>pbkdf2</code></a> - Password-Based Key Derivation Function v2</li>
+<li><a href="https://docs.rs/scrypt"><code>scrypt</code></a> - scrypt key derivation function</li>
+</ul>
+<h3 id="minimum-supported-rust-version"><a href="#minimum-supported-rust-version">Minimum Supported Rust Version</a></h3>
+<p>Rust <strong>1.57</strong> or higher.</p>
+<p>Minimum supported Rust version may be changed in the future, but it will be
+accompanied by a minor version bump.</p>
+<h3 id="semver-policy"><a href="#semver-policy">SemVer Policy</a></h3>
+<ul>
+<li>All on-by-default features of this library are covered by SemVer</li>
+<li>MSRV is considered exempt from SemVer as noted above</li>
+</ul>
+<h3 id="license"><a href="#license">License</a></h3>
+<p>Licensed under either of:</p>
+<ul>
+<li><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></li>
+<li><a href="https://opensource.org/licenses/MIT">MIT license</a></li>
+</ul>
+<p>at your option.</p>
+<h4 id="contribution"><a href="#contribution">Contribution</a></h4>
+<p>Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.</p>
+<h2 id="usage"><a href="#usage">Usage</a></h2>
+<p>This crate represents password hashes using the <a href="struct.PasswordHash.html" title="PasswordHash"><code>PasswordHash</code></a> type, which
+represents a parsed “PHC string” with the following format:</p>
+<div class="example-wrap"><pre class="language-text"><code>$&lt;id&gt;[$v=&lt;version&gt;][$&lt;param&gt;=&lt;value&gt;(,&lt;param&gt;=&lt;value&gt;)*][$&lt;salt&gt;[$&lt;hash&gt;]]</code></pre></div>
+<p>For more information, please see the documentation for <a href="struct.PasswordHash.html" title="PasswordHash"><code>PasswordHash</code></a>.</p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.rand_core"><code>pub use <a class="mod" href="../rand_core/index.html" title="mod rand_core">rand_core</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.Error"><code>pub use crate::errors::<a class="enum" href="errors/enum.Error.html" title="enum password_hash::errors::Error">Error</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.Result"><code>pub use crate::errors::<a class="type" href="errors/type.Result.html" title="type password_hash::errors::Result">Result</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="errors/index.html" title="password_hash::errors mod">errors</a></div><div class="item-right docblock-short"><p>Error types.</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Ident.html" title="password_hash::Ident struct">Ident</a></div><div class="item-right docblock-short"><p>Algorithm or parameter identifier.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Output.html" title="password_hash::Output struct">Output</a></div><div class="item-right docblock-short"><p>Output from password hashing functions, i.e. the “hash” or “digest”
+as raw bytes.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ParamsString.html" title="password_hash::ParamsString struct">ParamsString</a></div><div class="item-right docblock-short"><p>Algorithm parameter string.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PasswordHash.html" title="password_hash::PasswordHash struct">PasswordHash</a></div><div class="item-right docblock-short"><p>Password hash.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Salt.html" title="password_hash::Salt struct">Salt</a></div><div class="item-right docblock-short"><p>Salt string.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SaltString.html" title="password_hash::SaltString struct">SaltString</a></div><div class="item-right docblock-short"><p>Owned stack-allocated equivalent of <a href="struct.Salt.html" title="Salt"><code>Salt</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Value.html" title="password_hash::Value struct">Value</a></div><div class="item-right docblock-short"><p>Algorithm parameter value string.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Encoding.html" title="password_hash::Encoding enum">Encoding</a></div><div class="item-right docblock-short"><p>Base64 encoding variants.</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.McfHasher.html" title="password_hash::McfHasher trait">McfHasher</a></div><div class="item-right docblock-short"><p>Trait for password hashing algorithms which support the legacy
+<a href="https://passlib.readthedocs.io/en/stable/modular_crypt_format.html">Modular Crypt Format (MCF)</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.PasswordHasher.html" title="password_hash::PasswordHasher trait">PasswordHasher</a></div><div class="item-right docblock-short"><p>Trait for password hashing functions.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.PasswordVerifier.html" title="password_hash::PasswordVerifier trait">PasswordVerifier</a></div><div class="item-right docblock-short"><p>Trait for password verification.</p>
+</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Decimal.html" title="password_hash::Decimal type">Decimal</a></div><div class="item-right docblock-short"><p>Type used to represent decimal (i.e. integer) values.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="password_hash" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

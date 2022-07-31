@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Mutate a struct value in a declarative style."><meta name="keywords" content="rust, rustlang, rust-lang, assign"><title>assign in assign - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../assign/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../assign/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><div class="sidebar-elems"><h2 class="location"><a href="index.html">In assign</a></h2></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../assign/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Macro <a href="index.html">assign</a>::<wbr><a class="macro" href="#">assign</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/assign/lib.rs.html#115-129">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><div class="example-wrap"><pre class="rust macro"><code><span class="macro">macro_rules!</span> <span class="ident">assign</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">initial_value</span>:<span class="ident">expr</span>, {
+        $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">ident</span> $( : <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">expr</span> )<span class="question-mark">?</span> ),<span class="op">+</span> $(,)<span class="question-mark">?</span>
+    }) =&gt; { ... };
+    (@<span class="ident">assign</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">item</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">ident</span> : <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">expr</span>) =&gt; { ... };
+    (@<span class="ident">assign</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">item</span>:<span class="ident">ident</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">field</span>:<span class="ident">ident</span>) =&gt; { ... };
+}</code></pre></div>
+</div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Mutate a struct value in a declarative style.</p>
+<h2 id="basic-usage"><a href="#basic-usage">Basic usage</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="kw">struct</span> <span class="ident">SomeStruct</span> {
+    <span class="ident">a</span>: <span class="ident">u32</span>,
+    <span class="ident">b</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>,
+    <span class="ident">c</span>: <span class="ident">String</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">SomeStruct</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
+        <span class="comment">// ...</span>
+    }
+}
+
+<span class="kw">let</span> <span class="ident">instance1</span> <span class="op">=</span> <span class="macro">assign!</span>(<span class="ident">SomeStruct::new</span>(), {
+    <span class="ident">a</span>: <span class="number">2</span>,
+    <span class="ident">c</span>: <span class="string">&quot;new&quot;</span>.<span class="ident">into</span>(),
+});
+
+<span class="comment">// The same thing using mutation explicitly.</span>
+<span class="comment">// This is what the above expands to.</span>
+<span class="kw">let</span> <span class="ident">instance2</span> <span class="op">=</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">item</span> <span class="op">=</span> <span class="ident">SomeStruct::new</span>();
+    <span class="ident">item</span>.<span class="ident">a</span> <span class="op">=</span> <span class="number">2</span>;
+    <span class="ident">item</span>.<span class="ident">c</span> <span class="op">=</span> <span class="string">&quot;new&quot;</span>.<span class="ident">into</span>();
+    <span class="ident">item</span>
+};
+
+<span class="comment">// The same thing using struct update syntax (does not work for</span>
+<span class="comment">// non-exhaustive structs defined in external crates).</span>
+<span class="kw">let</span> <span class="ident">instance3</span> <span class="op">=</span> <span class="ident">SomeStruct</span> {
+    <span class="ident">a</span>: <span class="number">2</span>,
+    <span class="ident">c</span>: <span class="string">&quot;new&quot;</span>.<span class="ident">into</span>(),
+    ..<span class="ident">SomeStruct::new</span>()
+};
+
+<span class="macro">assert_eq!</span>(<span class="ident">instance1</span>, <span class="ident">instance2</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">instance1</span>, <span class="ident">instance3</span>);</code></pre></div>
+<h2 id="slightly-more-realistic-example"><a href="#slightly-more-realistic-example">Slightly more realistic example</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// in awesome_cli_lib</span>
+<span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
+<span class="kw">struct</span> <span class="ident">ArgOptions</span> {
+    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">short</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">long</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">help</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">required</span>: <span class="ident">bool</span>,
+    <span class="kw">pub</span> <span class="ident">takes_value</span>: <span class="ident">bool</span>,
+    <span class="kw">pub</span> <span class="ident">multiple</span>: <span class="ident">bool</span>,
+    <span class="kw">pub</span> <span class="ident">default_value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">ArgOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
+        <span class="comment">// ...</span>
+    }
+}
+
+<span class="comment">// your crate</span>
+<span class="kw">use</span> <span class="ident">assign::assign</span>;
+
+<span class="kw">let</span> <span class="ident">arg</span> <span class="op">=</span> <span class="ident">Arg::new</span>(<span class="macro">assign!</span>(<span class="ident">ArgOptions::new</span>(<span class="string">&quot;version&quot;</span>.<span class="ident">into</span>()), {
+    <span class="ident">short</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;V&quot;</span>.<span class="ident">into</span>()),
+    <span class="ident">long</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;version&quot;</span>.<span class="ident">into</span>()),
+    <span class="ident">help</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;prints the version and quits.&quot;</span>.<span class="ident">into</span>()),
+}));</code></pre></div>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="assign" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

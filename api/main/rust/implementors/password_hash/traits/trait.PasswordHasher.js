@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["pbkdf2"] = [{"text":"impl <a class=\"trait\" href=\"password_hash/traits/trait.PasswordHasher.html\" title=\"trait password_hash::traits::PasswordHasher\">PasswordHasher</a> for <a class=\"struct\" href=\"pbkdf2/struct.Pbkdf2.html\" title=\"struct pbkdf2::Pbkdf2\">Pbkdf2</a>","synthetic":false,"types":["pbkdf2::simple::Pbkdf2"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

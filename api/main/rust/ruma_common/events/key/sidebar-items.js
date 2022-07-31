@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["verification","Modules for events in the `m.key.verification` namespace."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["SecretEncryptionAlgorithm","An algorithm and its properties, used to encrypt a secret."]],"struct":[["PassPhrase","A passphrase from which a key is to be derived."],["SecretStorageKeyEventContent","A key description encrypted using a specified algorithm."]],"type":[["SecretStorageKeyEvent","An `m.secret_storage.key.*` event."]]};

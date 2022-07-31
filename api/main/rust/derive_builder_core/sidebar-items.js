@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["builder_for_struct","Derive a builder for a struct"]]};

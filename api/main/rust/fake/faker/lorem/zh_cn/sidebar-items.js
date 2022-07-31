@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["Paragraph",""],["Paragraphs",""],["Sentence",""],["Sentences",""],["Word",""],["Words",""]]};

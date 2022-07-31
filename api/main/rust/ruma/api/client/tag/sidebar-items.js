@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["create_tag","`PUT /_matrix/client/*/user/{userId}/rooms/{roomId}/tags/{tag}`"],["delete_tag","`DELETE /_matrix/client/*/user/{userId}/rooms/{roomId}/tags/{tag}`"],["get_tags","`GET /_matrix/client/*/user/{userId}/rooms/{roomId}/tags`"]]};

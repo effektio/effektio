@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["opt_ms","De-/serialization functions for `Option<std::time::Duration>` objects represented as milliseconds."],["secs","De-/serialization functions for `Option<std::time::Duration>` objects represented as milliseconds."]]};

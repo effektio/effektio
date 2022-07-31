@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["init","Initializes the panic hook with the default settings."]],"struct":[["Config","Configures the panic hook, ending with initialization."]]};

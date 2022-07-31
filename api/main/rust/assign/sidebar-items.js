@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":[["assign","Mutate a struct value in a declarative style."]]};

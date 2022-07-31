@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["MediaFormat","The requested format of a media file."]],"struct":[["MediaRequest","A request for media data."],["MediaThumbnailSize","The requested size of a media thumbnail."]],"trait":[["MediaEventContent","Trait for media event content."],["UniqueKey","A trait to uniquely identify values of the same type."]]};

@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="An implementation of the Olm double ratchet."><meta name="keywords" content="rust, rustlang, rust-lang, olm"><title>vodozemac::olm - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../vodozemac/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../vodozemac/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Module olm</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../vodozemac/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Module <a href="../index.html">vodozemac</a>::<wbr><a class="mod" href="#">olm</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/vodozemac/olm/mod.rs.html#16-111">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>An implementation of the Olm double ratchet.</p>
+<h3 id="overview"><a href="#overview">Overview</a></h3>
+<p>The core component of the crate is the <code>Account</code>, representing a single Olm
+participant. An Olm <code>Account</code> consists of a collection of key pairs, though
+often documentation will shorten this to just “keys”. These are:</p>
+<ol>
+<li>An Ed25519 <em>signing key pair</em> representing the stable cryptographic
+identity of the participant (the participant’s “fingerprint”).</li>
+<li>A Curve25519 <em>sender key pair</em> (also sometimes called the <em>identity key
+pair</em>, somewhat confusingly).</li>
+<li>A number of one-time key pairs.</li>
+<li>A current and previous (if any) “fallback” key pair.</li>
+</ol>
+<p>While the key in 1 is used for signing but not encryption, the keys in 2-4
+participate in a triple Diffie-Hellman key exchange (3DH) with another Olm
+participant, thereby establishing an Olm session on each side of the
+communication channel. Ultimately, this session is used for deriving the
+concrete encryption keys for a particular message.</p>
+<p>Olm sessions are represented by the <code>Session</code> struct. Such a session is
+created by calling <code>Account::create_outbound_session</code> on one of the
+participating accounts, passing it the Curve25519 sender key and one
+Curve25519 one-time key of the other side. The protocol is asynchronous, so
+the participant can start sending messages to the other side even before the
+other side has created a session, producing so-called pre-key messages (see
+<code>PreKeyMessage</code>).</p>
+<p>Once the other participant receives such a pre-key message, they can create
+their own matching session by calling <code>Account::create_inbound_session</code> and
+passing it the pre-key message they received and the Curve25519 sender key
+of the other side. This completes the establishment of the Olm communication
+channel.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">anyhow::Result</span>;
+<span class="kw">use</span> <span class="ident">vodozemac::olm</span>::{<span class="ident">Account</span>, <span class="ident">OlmMessage</span>, <span class="ident">InboundCreationResult</span>};
+
+<span class="kw">fn</span> <span class="ident">main</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">alice</span> <span class="op">=</span> <span class="ident">Account::new</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bob</span> <span class="op">=</span> <span class="ident">Account::new</span>();
+
+    <span class="ident">bob</span>.<span class="ident">generate_one_time_keys</span>(<span class="number">1</span>);
+    <span class="kw">let</span> <span class="ident">bob_otk</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">bob</span>.<span class="ident">one_time_keys</span>().<span class="ident">values</span>().<span class="ident">next</span>().<span class="ident">unwrap</span>();
+
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">alice_session</span> <span class="op">=</span> <span class="ident">alice</span>
+        .<span class="ident">create_outbound_session</span>(<span class="ident">bob</span>.<span class="ident">curve25519_key</span>(), <span class="ident">bob_otk</span>);
+
+    <span class="ident">bob</span>.<span class="ident">mark_keys_as_published</span>();
+
+    <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="string">&quot;Keep it between us, OK?&quot;</span>;
+    <span class="kw">let</span> <span class="ident">alice_msg</span> <span class="op">=</span> <span class="ident">alice_session</span>.<span class="ident">encrypt</span>(<span class="ident">message</span>);
+
+    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">OlmMessage::PreKey</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">alice_msg</span>.<span class="ident">clone</span>() {
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">bob</span>.<span class="ident">create_inbound_session</span>(<span class="ident">alice</span>.<span class="ident">curve25519_key</span>(), <span class="kw-2">&amp;</span><span class="ident">m</span>)<span class="question-mark">?</span>;
+
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bob_session</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">session</span>;
+        <span class="kw">let</span> <span class="ident">what_bob_received</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">plaintext</span>;
+
+        <span class="macro">assert_eq!</span>(<span class="ident">alice_session</span>.<span class="ident">session_id</span>(), <span class="ident">bob_session</span>.<span class="ident">session_id</span>());
+
+        <span class="macro">assert_eq!</span>(<span class="ident">message</span>.<span class="ident">as_bytes</span>(), <span class="ident">what_bob_received</span>);
+
+        <span class="kw">let</span> <span class="ident">bob_reply</span> <span class="op">=</span> <span class="string">&quot;Yes. Take this, it&#39;s dangerous out there!&quot;</span>;
+        <span class="kw">let</span> <span class="ident">bob_encrypted_reply</span> <span class="op">=</span> <span class="ident">bob_session</span>.<span class="ident">encrypt</span>(<span class="ident">bob_reply</span>).<span class="ident">into</span>();
+
+        <span class="kw">let</span> <span class="ident">what_alice_received</span> <span class="op">=</span> <span class="ident">alice_session</span>
+            .<span class="ident">decrypt</span>(<span class="kw-2">&amp;</span><span class="ident">bob_encrypted_reply</span>)<span class="question-mark">?</span>;
+        <span class="macro">assert_eq!</span>(<span class="ident">what_alice_received</span>, <span class="ident">bob_reply</span>.<span class="ident">as_bytes</span>());
+    }
+
+    <span class="prelude-val">Ok</span>(())
+}</code></pre></div>
+<h3 id="sending-messages"><a href="#sending-messages">Sending messages</a></h3>
+<p>To encrypt a message, just call <code>Session::encrypt(msg_content)</code>. This will
+either produce an <code>OlmMessage::PreKey(..)</code> or <code>OlmMessage::Normal(..)</code>
+depending on whether the session is fully established. A session is fully
+established once you receive (and decrypt) at least one message from the
+other side.</p>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Account.html" title="vodozemac::olm::Account struct">Account</a></div><div class="item-right docblock-short"><p>An Olm account manages all cryptographic keys used on a device.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.AccountPickle.html" title="vodozemac::olm::AccountPickle struct">AccountPickle</a></div><div class="item-right docblock-short"><p>A format suitable for serialization which implements <a href="../../serde/ser/trait.Serialize.html" title="serde::Serialize"><code>serde::Serialize</code></a>
+and <a href="../../serde/de/trait.Deserialize.html" title="serde::Deserialize"><code>serde::Deserialize</code></a>. Obtainable by calling <a href="struct.Account.html#method.pickle" title="Account::pickle"><code>Account::pickle</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.IdentityKeys.html" title="vodozemac::olm::IdentityKeys struct">IdentityKeys</a></div><div class="item-right docblock-short"><p>Struct holding the two public identity keys of an <a href="struct.Account.html" title="Account"><code>Account</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.InboundCreationResult.html" title="vodozemac::olm::InboundCreationResult struct">InboundCreationResult</a></div><div class="item-right docblock-short"><p>Return type for the creation of inbound <a href="struct.Session.html" title="Session"><code>Session</code></a> objects.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Message.html" title="vodozemac::olm::Message struct">Message</a></div><div class="item-right docblock-short"><p>An encrypted Olm message.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PreKeyMessage.html" title="vodozemac::olm::PreKeyMessage struct">PreKeyMessage</a></div><div class="item-right docblock-short"><p>An encrypted Olm pre-key message.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RatchetPublicKey.html" title="vodozemac::olm::RatchetPublicKey struct">RatchetPublicKey</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Session.html" title="vodozemac::olm::Session struct">Session</a></div><div class="item-right docblock-short"><p>An Olm session represents one end of an encrypted communication channel
+between two participants.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SessionKeys.html" title="vodozemac::olm::SessionKeys struct">SessionKeys</a></div><div class="item-right docblock-short"><p>The set of keys that were used to establish the Olm Session,</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SessionPickle.html" title="vodozemac::olm::SessionPickle struct">SessionPickle</a></div><div class="item-right docblock-short"><p>A format suitable for serialization which implements <a href="../../serde/ser/trait.Serialize.html" title="serde::Serialize"><code>serde::Serialize</code></a>
+and <a href="../../serde/de/trait.Deserialize.html" title="serde::Deserialize"><code>serde::Deserialize</code></a>. Obtainable by calling <a href="struct.Session.html#method.pickle" title="Session::pickle"><code>Session::pickle</code></a>.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DecryptionError.html" title="vodozemac::olm::DecryptionError enum">DecryptionError</a></div><div class="item-right docblock-short"><p>Error type for Olm-based decryption failuers.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.MessageType.html" title="vodozemac::olm::MessageType enum">MessageType</a></div><div class="item-right docblock-short"><p>An enum over the two supported message types.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OlmMessage.html" title="vodozemac::olm::OlmMessage enum">OlmMessage</a></div><div class="item-right docblock-short"><p>Enum over the different Olm message types.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SessionCreationError.html" title="vodozemac::olm::SessionCreationError enum">SessionCreationError</a></div><div class="item-right docblock-short"><p>Error describing failure modes when creating a Olm Session from an incoming
+Olm message.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="vodozemac" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

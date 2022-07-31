@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":[["quote","Whitespace sensitive quasi-quoting."],["quote_fn","Convenience macro for constructing a FormatInto implementation in-place."],["quote_in","Behaves the same as quote! while quoting into an existing token stream with `<target> => <quoted>`."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["DeviceStore","In-memory store holding the devices of users."],["GroupSessionStore","In-memory store that holds inbound group sessions."],["SessionStore","In-memory store for Olm Sessions."]]};

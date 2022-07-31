@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["default_power_level","Used to default power levels to 50 during deserialization."]],"struct":[["NotificationPowerLevels","The power level requirements for specific notification types."]]};

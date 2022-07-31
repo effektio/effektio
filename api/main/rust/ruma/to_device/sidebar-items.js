@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["DeviceIdOrAllDevices","Represents one or all of a user’s devices."]]};

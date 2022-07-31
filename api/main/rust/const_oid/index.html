@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="RustCrypto: Object Identifiers (OIDs)"><meta name="keywords" content="rust, rustlang, rust-lang, const_oid"><title>const_oid - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../const_oid/index.html"><div class="logo-container"><img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../const_oid/index.html"><div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate const_oid</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.7.1</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../const_oid/index.html">
+                        <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">const_oid</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/const_oid/lib.rs.html#1-247">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="rustcrypto-object-identifiers-oids"><a href="#rustcrypto-object-identifiers-oids">RustCrypto: Object Identifiers (OIDs)</a></h2>
+<p><a href="https://crates.io/crates/const-oid"><img src="https://img.shields.io/crates/v/const-oid.svg" alt="crate" /></a>
+<a href="https://docs.rs/const-oid/"><img src="https://docs.rs/const-oid/badge.svg" alt="Docs" /></a>
+<a href="https://github.com/RustCrypto/formats/actions"><img src="https://github.com/RustCrypto/formats/workflows/const-oid/badge.svg?branch=master&amp;event=push" alt="Build Status" /></a>
+<img src="https://img.shields.io/badge/license-Apache2.0/MIT-blue.svg" alt="Apache2/MIT licensed" />
+<img src="https://img.shields.io/badge/rustc-1.56+-blue.svg" alt="Rust Version" />
+<a href="https://rustcrypto.zulipchat.com/#narrow/stream/300570-formats"><img src="https://img.shields.io/badge/zulip-join_chat-blue.svg" alt="Project Chat" /></a></p>
+<p>Const-friendly implementation of the ISO/IEC Object Identifier (OID) standard
+as defined in ITU <a href="https://www.itu.int/rec/T-REC-X.660">X.660</a>, with support for BER/DER encoding/decoding as well
+as heapless <code>no_std</code> (i.e. embedded) environments.</p>
+<p><a href="https://docs.rs/const-oid/">Documentation</a></p>
+<h3 id="about-oids"><a href="#about-oids">About OIDs</a></h3>
+<p>Object Identifiers, a.k.a. OIDs, are an International Telecommunications
+Union (ITU) and ISO/IEC standard for naming any object, concept, or “thing”
+with a globally unambiguous persistent name.</p>
+<p>The ITU’s <a href="https://www.itu.int/rec/T-REC-X.660">X.660</a> standard provides the OID specification. Every OID is part of
+a hierarchical namespace which begins with a <em>root OID</em>, which is either the
+ITU’s root OID (0), the ISO’s root OID (1), or the joint ISO/ITU root OID (2).</p>
+<p>The following is an example of an OID, in this case identifying the
+<code>rsaEncryption</code> algorithm:</p>
+<div class="example-wrap"><pre class="language-text"><code>1.2.840.113549.1.1.1</code></pre></div>
+<p>For more information, see: <a href="https://en.wikipedia.org/wiki/Object_identifier">https://en.wikipedia.org/wiki/Object_identifier</a></p>
+<h3 id="implementation"><a href="#implementation">Implementation</a></h3>
+<p>This library supports parsing OIDs in const contexts, e.g.:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">const_oid::ObjectIdentifier</span>;
+
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MY_OID</span>: <span class="ident">ObjectIdentifier</span> <span class="op">=</span> <span class="ident">ObjectIdentifier::new</span>(<span class="string">&quot;1.2.840.113549.1.1.1&quot;</span>);</code></pre></div>
+<p>The OID parser is implemented entirely in terms of <code>const fn</code> and without the
+use of proc macros.</p>
+<p>Additionally, it also includes a <code>const fn</code> OID serializer, and stores the OIDs
+parsed from const contexts encoded using the BER/DER serialization
+(sans header).</p>
+<p>This allows <code>ObjectIdentifier</code> to impl <code>AsRef&lt;[u8]&gt;</code> which can be used to
+obtain the BER/DER serialization of an OID, even one declared <code>const</code>.</p>
+<p>Additionally, it impls <code>FromStr</code> and <code>TryFrom&lt;&amp;[u8]&gt;</code> and functions just as
+well as a runtime OID library.</p>
+<h3 id="minimum-supported-rust-version"><a href="#minimum-supported-rust-version">Minimum Supported Rust Version</a></h3>
+<p>This crate requires <strong>Rust 1.56</strong> at a minimum.</p>
+<p>We may change the MSRV in the future, but it will be accompanied by a minor
+version bump.</p>
+<h3 id="license"><a href="#license">License</a></h3>
+<p>Licensed under either of:</p>
+<ul>
+<li><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></li>
+<li><a href="http://opensource.org/licenses/MIT">MIT license</a></li>
+</ul>
+<p>at your option.</p>
+<h4 id="contribution"><a href="#contribution">Contribution</a></h4>
+<p>Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.</p>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Arcs.html" title="const_oid::Arcs struct">Arcs</a></div><div class="item-right docblock-short"><p><a href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="Iterator"><code>Iterator</code></a> over arcs (a.k.a. nodes) in an <a href="struct.ObjectIdentifier.html" title="ObjectIdentifier"><code>ObjectIdentifier</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Error.html" title="const_oid::Error struct">Error</a></div><div class="item-right docblock-short"><p>Error type</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ObjectIdentifier.html" title="const_oid::ObjectIdentifier struct">ObjectIdentifier</a></div><div class="item-right docblock-short"><p>Object identifier (OID).</p>
+</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Arc.html" title="const_oid::Arc type">Arc</a></div><div class="item-right docblock-short"><p>Type used to represent an “arc” (i.e. integer identifier value).</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Result.html" title="const_oid::Result type">Result</a></div><div class="item-right docblock-short"><p>Result type</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="const_oid" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

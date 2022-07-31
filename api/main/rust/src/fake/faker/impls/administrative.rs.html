@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/fake-2.5.0/src/faker/impls/administrative.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>administrative.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../fake/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../fake/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../fake/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::faker::administrative::raw</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::locales::FR_FR</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Dummy</span>, <span class="ident">Fake</span>};
+<span class="kw">use</span> <span class="ident">rand::seq::SliceRandom</span>;
+<span class="kw">use</span> <span class="ident">rand::Rng</span>;
+
+<span class="comment">// ref https://fr.wikipedia.org/wiki/Num%C3%A9rotation_des_d%C3%A9partements_fran%C3%A7ais</span>
+<span class="kw">const</span> <span class="ident">FR_FR_DEPARTMENTS</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+    <span class="string">&quot;01&quot;</span>, <span class="string">&quot;02&quot;</span>, <span class="string">&quot;03&quot;</span>, <span class="string">&quot;04&quot;</span>, <span class="string">&quot;05&quot;</span>, <span class="string">&quot;06&quot;</span>, <span class="string">&quot;07&quot;</span>, <span class="string">&quot;08&quot;</span>, <span class="string">&quot;09&quot;</span>, <span class="string">&quot;11&quot;</span>, <span class="string">&quot;12&quot;</span>, <span class="string">&quot;13&quot;</span>, <span class="string">&quot;14&quot;</span>, <span class="string">&quot;15&quot;</span>, <span class="string">&quot;16&quot;</span>, <span class="string">&quot;17&quot;</span>,
+    <span class="string">&quot;18&quot;</span>, <span class="string">&quot;19&quot;</span>, <span class="string">&quot;2A&quot;</span>, <span class="string">&quot;2B&quot;</span>, <span class="string">&quot;21&quot;</span>, <span class="string">&quot;22&quot;</span>, <span class="string">&quot;23&quot;</span>, <span class="string">&quot;24&quot;</span>, <span class="string">&quot;25&quot;</span>, <span class="string">&quot;26&quot;</span>, <span class="string">&quot;27&quot;</span>, <span class="string">&quot;28&quot;</span>, <span class="string">&quot;29&quot;</span>, <span class="string">&quot;31&quot;</span>, <span class="string">&quot;32&quot;</span>, <span class="string">&quot;33&quot;</span>,
+    <span class="string">&quot;34&quot;</span>, <span class="string">&quot;35&quot;</span>, <span class="string">&quot;36&quot;</span>, <span class="string">&quot;37&quot;</span>, <span class="string">&quot;38&quot;</span>, <span class="string">&quot;39&quot;</span>, <span class="string">&quot;41&quot;</span>, <span class="string">&quot;42&quot;</span>, <span class="string">&quot;43&quot;</span>, <span class="string">&quot;44&quot;</span>, <span class="string">&quot;45&quot;</span>, <span class="string">&quot;46&quot;</span>, <span class="string">&quot;47&quot;</span>, <span class="string">&quot;48&quot;</span>, <span class="string">&quot;49&quot;</span>, <span class="string">&quot;51&quot;</span>,
+    <span class="string">&quot;52&quot;</span>, <span class="string">&quot;53&quot;</span>, <span class="string">&quot;54&quot;</span>, <span class="string">&quot;55&quot;</span>, <span class="string">&quot;56&quot;</span>, <span class="string">&quot;57&quot;</span>, <span class="string">&quot;58&quot;</span>, <span class="string">&quot;59&quot;</span>, <span class="string">&quot;61&quot;</span>, <span class="string">&quot;62&quot;</span>, <span class="string">&quot;63&quot;</span>, <span class="string">&quot;64&quot;</span>, <span class="string">&quot;65&quot;</span>, <span class="string">&quot;66&quot;</span>, <span class="string">&quot;67&quot;</span>, <span class="string">&quot;68&quot;</span>,
+    <span class="string">&quot;69&quot;</span>, <span class="string">&quot;71&quot;</span>, <span class="string">&quot;72&quot;</span>, <span class="string">&quot;73&quot;</span>, <span class="string">&quot;74&quot;</span>, <span class="string">&quot;75&quot;</span>, <span class="string">&quot;76&quot;</span>, <span class="string">&quot;77&quot;</span>, <span class="string">&quot;78&quot;</span>, <span class="string">&quot;79&quot;</span>, <span class="string">&quot;81&quot;</span>, <span class="string">&quot;82&quot;</span>, <span class="string">&quot;83&quot;</span>, <span class="string">&quot;84&quot;</span>, <span class="string">&quot;85&quot;</span>, <span class="string">&quot;86&quot;</span>,
+    <span class="string">&quot;87&quot;</span>, <span class="string">&quot;88&quot;</span>, <span class="string">&quot;89&quot;</span>, <span class="string">&quot;91&quot;</span>, <span class="string">&quot;92&quot;</span>, <span class="string">&quot;93&quot;</span>, <span class="string">&quot;94&quot;</span>, <span class="string">&quot;95&quot;</span>, <span class="string">&quot;971&quot;</span>, <span class="string">&quot;972&quot;</span>, <span class="string">&quot;973&quot;</span>, <span class="string">&quot;974&quot;</span>, <span class="string">&quot;975&quot;</span>, <span class="string">&quot;976&quot;</span>,
+    <span class="string">&quot;977&quot;</span>, <span class="string">&quot;978&quot;</span>, <span class="string">&quot;984&quot;</span>, <span class="string">&quot;986&quot;</span>, <span class="string">&quot;987&quot;</span>, <span class="string">&quot;988&quot;</span>, <span class="string">&quot;989&quot;</span>,
+];
+
+<span class="kw">impl</span> <span class="ident">Dummy</span><span class="op">&lt;</span><span class="ident">HealthInsuranceCode</span><span class="op">&lt;</span><span class="ident">FR_FR</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">dummy_with_rng</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Rng</span> <span class="op">+</span> <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">HealthInsuranceCode</span><span class="op">&lt;</span><span class="ident">FR_FR</span><span class="op">&gt;</span>, <span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>) -&gt; <span class="self">Self</span> {
+        <span class="comment">// ref https://www.previssima.fr/lexique/numero-de-securite-sociale-a-13-chiffres.html</span>
+        <span class="comment">// and test on http://marlot.org/util/calcul-de-la-cle-nir.php</span>
+        <span class="kw">let</span> <span class="ident">sex</span>: <span class="ident">u8</span> <span class="op">=</span> (<span class="number">1</span>..<span class="number">3</span>).<span class="ident">fake_with_rng</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">rng</span>);
+        <span class="kw">let</span> <span class="ident">birth_year</span>: <span class="ident">u8</span> <span class="op">=</span> (<span class="number">0</span>..<span class="number">99</span>).<span class="ident">fake_with_rng</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">rng</span>);
+        <span class="kw">let</span> <span class="ident">birth_month</span>: <span class="ident">u8</span> <span class="op">=</span> (<span class="number">1</span>..<span class="number">13</span>).<span class="ident">fake_with_rng</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">rng</span>);
+        <span class="kw">let</span> <span class="ident">department</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">FR_FR_DEPARTMENTS</span>.<span class="ident">choose</span>(<span class="ident">rng</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">town_code</span>: <span class="ident">u16</span> <span class="op">=</span> (<span class="number">0</span>..<span class="number">999</span>).<span class="ident">fake_with_rng</span>::<span class="op">&lt;</span><span class="ident">u16</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">rng</span>);
+        <span class="kw">let</span> <span class="ident">order_code</span>: <span class="ident">u16</span> <span class="op">=</span> (<span class="number">0</span>..<span class="number">999</span>).<span class="ident">fake_with_rng</span>::<span class="op">&lt;</span><span class="ident">u16</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">rng</span>);
+        <span class="kw">let</span> <span class="ident">department_code</span>: <span class="ident">u16</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">department</span> {
+            <span class="string">&quot;2A&quot;</span> =&gt; {
+                <span class="number">19</span>
+            }
+            <span class="string">&quot;2B&quot;</span> =&gt; {
+                <span class="number">18</span>
+            }
+            <span class="kw">_</span> =&gt; {
+                <span class="ident">department</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>()
+            }
+        };
+        <span class="kw">let</span> <span class="ident">number</span> <span class="op">=</span> <span class="macro">format!</span>(
+            <span class="string">&quot;{}{:02}{:02}{}{:03}{:03}&quot;</span>,
+            <span class="ident">sex</span>, <span class="ident">birth_year</span>, <span class="ident">birth_month</span>, <span class="ident">department_code</span>, <span class="ident">town_code</span>, <span class="ident">order_code</span>
+        )
+        .<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>()
+        .<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="number">97</span> <span class="op">-</span> (<span class="ident">number</span> <span class="op">%</span> <span class="number">97</span>);
+        <span class="macro">format!</span>(
+            <span class="string">&quot;{} {:02} {:02} {} {:03} {:03} {}&quot;</span>,
+            <span class="ident">sex</span>, <span class="ident">birth_year</span>, <span class="ident">birth_month</span>, <span class="ident">department</span>, <span class="ident">town_code</span>, <span class="ident">order_code</span>, <span class="ident">key</span>
+        )
+    }
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="fake" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

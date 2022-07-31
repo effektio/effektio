@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["DirPath",""],["FileExtension",""],["FileName",""],["FilePath",""],["MimeType",""],["Semver",""],["SemverStable",""],["SemverUnstable",""]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["BuildingNumber",""],["CityName",""],["CityPrefix",""],["CitySuffix",""],["CountryCode",""],["CountryName",""],["Geohash",""],["Latitude",""],["Longitude",""],["PostCode",""],["SecondaryAddress",""],["SecondaryAddressType",""],["StateAbbr",""],["StateName",""],["StreetName",""],["StreetSuffix",""],["TimeZone",""],["ZipCode",""]]};

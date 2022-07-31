@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["remove_plain_reply_fallback","Remove the rich reply fallback of the given plain text string."]]};

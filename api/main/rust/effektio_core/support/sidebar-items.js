@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["RestoreToken","Extensive Restore Token for Effektio Sessions"]]};

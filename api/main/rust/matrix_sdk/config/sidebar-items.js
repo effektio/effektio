@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["RequestConfig","Configuration for requests the `Client` makes."],["StoreConfig","Configuration for the state store and, when `encryption` is enabled, for the crypto store."],["SyncSettings","Settings for a sync call."]]};

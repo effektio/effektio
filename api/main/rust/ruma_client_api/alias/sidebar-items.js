@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["create_alias","`PUT /_matrix/client/*/directory/room/{roomAlias}`"],["delete_alias","`DELETE /_matrix/client/*/directory/room/{roomAlias}`"],["get_alias","`GET /_matrix/client/*/directory/room/{roomAlias}`"]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Error","Error type for the `StoreCipher` operations."]],"struct":[["EncryptedValue","Encrypted value, ready for storage, as created by the [`StoreCipher::encrypt_value_data()`]"],["StoreCipher","An encryption key that can be used to encrypt data for key/value stores."]]};

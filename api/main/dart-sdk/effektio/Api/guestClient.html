@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the guestClient method from the Api class, for the Dart programming language.">
+  <title>guestClient method - Api class - effektio library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">effektio_flutter_sdk</a></li>
+    <li><a href="../../effektio/effektio-library.html">effektio</a></li>
+    <li><a href="../../effektio/Api-class.html">Api</a></li>
+    <li class="self-crumb">guestClient method</li>
+  </ol>
+  <div class="self-name">guestClient</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">guestClient</span> method 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../effektio/Client-class.html">Client</a></span>&gt;</span></span>
+<span class="name ">guestClient</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="guestClient-param-basepath"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">basepath</span>, </span></li>
+<li><span class="parameter" id="guestClient-param-homeserver"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">homeserver</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Create a new client anonymous client connecting to the homeserver</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;Client&gt; guestClient(
+  String basepath,
+  String homeserver,
+) {
+  final tmp0 = basepath;
+  final tmp4 = homeserver;
+  var tmp1 = 0;
+  var tmp2 = 0;
+  var tmp3 = 0;
+  var tmp5 = 0;
+  var tmp6 = 0;
+  var tmp7 = 0;
+  final tmp0_0 = utf8.encode(tmp0);
+  tmp2 = tmp0_0.length;
+  final ffi.Pointer&lt;ffi.Uint8&gt; tmp1_0 = this.__allocate(tmp2 * 1, 1);
+  final Uint8List tmp1_1 = tmp1_0.asTypedList(tmp2);
+  tmp1_1.setAll(0, tmp0_0);
+  tmp1 = tmp1_0.address;
+  tmp3 = tmp2;
+  final tmp4_0 = utf8.encode(tmp4);
+  tmp6 = tmp4_0.length;
+  final ffi.Pointer&lt;ffi.Uint8&gt; tmp5_0 = this.__allocate(tmp6 * 1, 1);
+  final Uint8List tmp5_1 = tmp5_0.asTypedList(tmp6);
+  tmp5_1.setAll(0, tmp4_0);
+  tmp5 = tmp5_0.address;
+  tmp7 = tmp6;
+  final tmp8 = _guestClient(
+    tmp1,
+    tmp2,
+    tmp3,
+    tmp5,
+    tmp6,
+    tmp7,
+  );
+  final tmp10 = tmp8;
+  final ffi.Pointer&lt;ffi.Void&gt; tmp10_0 = ffi.Pointer.fromAddress(tmp10);
+  final tmp10_1 = _Box(this, tmp10_0, &quot;__guest_client_future_drop&quot;);
+  tmp10_1._finalizer = this._registerFinalizer(tmp10_1);
+  final tmp9 = _nativeFuture(tmp10_1, this.__guestClientFuturePoll);
+  return tmp9;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">effektio_flutter_sdk</a></li>
+  <li><a href="../../effektio/effektio-library.html">effektio</a></li>
+  <li><a href="../../effektio/Api-class.html">Api</a></li>
+  <li class="self-crumb">guestClient method</li>
+</ol>
+
+
+    <h5>Api class</h5>
+    <ol>
+
+        <li class="section-title"><a href="../../effektio/Api-class.html#constructors">Constructors</a></li>
+          <li><a href="../../effektio/Api/Api.html">Api</a></li>
+          <li><a href="../../effektio/Api/Api.fromLookup.html">fromLookup</a></li>
+          <li><a href="../../effektio/Api/Api.load.html">load</a></li>
+          <li><a href="../../effektio/Api/Api.loadDynamic.html">loadDynamic</a></li>
+          <li><a href="../../effektio/Api/Api.loadStatic.html">loadStatic</a></li>
+
+
+    <li class="section-title inherited">
+      <a href="../../effektio/Api-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../../effektio/Api-class.html#instance-methods">Methods</a></li>
+    <li><a href="../../effektio/Api/createFfiListConversation.html">createFfiListConversation</a></li>
+    <li><a href="../../effektio/Api/createFfiListEmojiUnit.html">createFfiListEmojiUnit</a></li>
+    <li><a href="../../effektio/Api/createFfiListFaq.html">createFfiListFaq</a></li>
+    <li><a href="../../effektio/Api/createFfiListGroup.html">createFfiListGroup</a></li>
+    <li><a href="../../effektio/Api/createFfiListMember.html">createFfiListMember</a></li>
+    <li><a href="../../effektio/Api/createFfiListNews.html">createFfiListNews</a></li>
+    <li><a href="../../effektio/Api/createFfiListRoomMessage.html">createFfiListRoomMessage</a></li>
+    <li><a href="../../effektio/Api/createFfiListTag.html">createFfiListTag</a></li>
+    <li><a href="../../effektio/Api/genMockNews.html">genMockNews</a></li>
+    <li><a href="../../effektio/Api/guestClient.html">guestClient</a></li>
+    <li><a href="../../effektio/Api/initLogging.html">initLogging</a></li>
+    <li><a href="../../effektio/Api/loginNewClient.html">loginNewClient</a></li>
+    <li><a href="../../effektio/Api/loginWithToken.html">loginWithToken</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../../effektio/Api/registerWithRegistrationToken.html">registerWithRegistrationToken</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../effektio/Api-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    effektio_flutter_sdk
+      0.0.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

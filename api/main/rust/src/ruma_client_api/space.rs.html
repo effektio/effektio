@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/git/checkouts/ruma-5201e73f5f917c77/9615591/crates/ruma-client-api/src/space.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>space.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" href="https://www.ruma.io/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ruma_client_api/index.html"><div class="logo-container"><img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../ruma_client_api/index.html"><div class="logo-container">
+                    <img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ruma_client_api/index.html">
+                        <img src="https://www.ruma.io/images/logo.png" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Endpoints for spaces.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! See the [Matrix specification][spec] for more details about spaces.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! [spec]: https://spec.matrix.org/v1.2/client-server-api/#spaces</span>
+
+<span class="kw">use</span> <span class="ident">js_int::UInt</span>;
+<span class="kw">use</span> <span class="ident">ruma_common</span>::{
+    <span class="ident">events::space::child::HierarchySpaceChildEvent</span>,
+    <span class="ident">room::RoomType</span>,
+    <span class="ident">serde</span>::{<span class="ident">Raw</span>, <span class="ident">StringEnum</span>},
+    <span class="ident">OwnedMxcUri</span>, <span class="ident">OwnedRoomAliasId</span>, <span class="ident">OwnedRoomId</span>,
+};
+<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::PrivOwnedStr</span>;
+
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">get_hierarchy</span>;
+
+<span class="doccomment">/// A chunk of a space hierarchy response, describing one room.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// To create an instance of this type, first create a `SpaceHierarchyRoomsChunkInit` and convert it</span>
+<span class="doccomment">/// via `SpaceHierarchyRoomsChunk::from` / `.into()`.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unstable-exhaustive-types&quot;</span>), <span class="ident">non_exhaustive</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpaceHierarchyRoomsChunk</span> {
+    <span class="doccomment">/// The canonical alias of the room, if any.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;compat&quot;</span>,
+        <span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;ruma_common::serde::empty_string_as_none&quot;</span>)
+    )]</span>
+    <span class="kw">pub</span> <span class="ident">canonical_alias</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OwnedRoomAliasId</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// The name of the room, if any.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// The number of members joined to the room.</span>
+    <span class="kw">pub</span> <span class="ident">num_joined_members</span>: <span class="ident">UInt</span>,
+
+    <span class="doccomment">/// The ID of the room.</span>
+    <span class="kw">pub</span> <span class="ident">room_id</span>: <span class="ident">OwnedRoomId</span>,
+
+    <span class="doccomment">/// The topic of the room, if any.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">topic</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// Whether the room may be viewed by guest users without joining.</span>
+    <span class="kw">pub</span> <span class="ident">world_readable</span>: <span class="ident">bool</span>,
+
+    <span class="doccomment">/// Whether guest users may join the room and participate in it.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If they can, they will be subject to ordinary power level rules like any other user.</span>
+    <span class="kw">pub</span> <span class="ident">guest_can_join</span>: <span class="ident">bool</span>,
+
+    <span class="doccomment">/// The URL for the room&#39;s avatar, if one is set.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If you activate the `compat` feature, this field being an empty string in JSON will result</span>
+    <span class="doccomment">/// in `None` here during deserialization.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(
+        <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;compat&quot;</span>,
+        <span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;ruma_common::serde::empty_string_as_none&quot;</span>)
+    )]</span>
+    <span class="kw">pub</span> <span class="ident">avatar_url</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OwnedMxcUri</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// The join rule of the room.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;ruma_common::serde::is_default&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">join_rule</span>: <span class="ident">SpaceRoomJoinRule</span>,
+
+    <span class="doccomment">/// The type of room from `m.room.create`, if any.</span>
+    <span class="kw">pub</span> <span class="ident">room_type</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RoomType</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// The stripped `m.space.child` events of the space-room.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If the room is not a space-room, this should be empty.</span>
+    <span class="kw">pub</span> <span class="ident">children_state</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Raw</span><span class="op">&lt;</span><span class="ident">HierarchySpaceChildEvent</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+}
+
+<span class="doccomment">/// Initial set of mandatory fields of `SpaceHierarchyRoomsChunk`.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This struct will not be updated even if additional fields are added to</span>
+<span class="doccomment">/// `SpaceHierarchyRoomsChunk` in a new (non-breaking) release of the Matrix specification.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::exhaustive_structs</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpaceHierarchyRoomsChunkInit</span> {
+    <span class="doccomment">/// The number of members joined to the room.</span>
+    <span class="kw">pub</span> <span class="ident">num_joined_members</span>: <span class="ident">UInt</span>,
+
+    <span class="doccomment">/// The ID of the room.</span>
+    <span class="kw">pub</span> <span class="ident">room_id</span>: <span class="ident">OwnedRoomId</span>,
+
+    <span class="doccomment">/// Whether the room may be viewed by guest users without joining.</span>
+    <span class="kw">pub</span> <span class="ident">world_readable</span>: <span class="ident">bool</span>,
+
+    <span class="doccomment">/// Whether guest users may join the room and participate in it.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If they can, they will be subject to ordinary power level rules like any other user.</span>
+    <span class="kw">pub</span> <span class="ident">guest_can_join</span>: <span class="ident">bool</span>,
+
+    <span class="doccomment">/// The join rule of the room.</span>
+    <span class="kw">pub</span> <span class="ident">join_rule</span>: <span class="ident">SpaceRoomJoinRule</span>,
+
+    <span class="doccomment">/// The stripped `m.space.child` events of the space-room.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If the room is not a space-room, this should be empty.</span>
+    <span class="kw">pub</span> <span class="ident">children_state</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Raw</span><span class="op">&lt;</span><span class="ident">HierarchySpaceChildEvent</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">SpaceHierarchyRoomsChunkInit</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SpaceHierarchyRoomsChunk</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">init</span>: <span class="ident">SpaceHierarchyRoomsChunkInit</span>) -&gt; <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">SpaceHierarchyRoomsChunkInit</span> {
+            <span class="ident">num_joined_members</span>,
+            <span class="ident">room_id</span>,
+            <span class="ident">world_readable</span>,
+            <span class="ident">guest_can_join</span>,
+            <span class="ident">join_rule</span>,
+            <span class="ident">children_state</span>,
+        } <span class="op">=</span> <span class="ident">init</span>;
+
+        <span class="self">Self</span> {
+            <span class="ident">canonical_alias</span>: <span class="prelude-val">None</span>,
+            <span class="ident">name</span>: <span class="prelude-val">None</span>,
+            <span class="ident">num_joined_members</span>,
+            <span class="ident">room_id</span>,
+            <span class="ident">topic</span>: <span class="prelude-val">None</span>,
+            <span class="ident">world_readable</span>,
+            <span class="ident">guest_can_join</span>,
+            <span class="ident">avatar_url</span>: <span class="prelude-val">None</span>,
+            <span class="ident">join_rule</span>,
+            <span class="ident">room_type</span>: <span class="prelude-val">None</span>,
+            <span class="ident">children_state</span>,
+        }
+    }
+}
+
+<span class="doccomment">/// The rule used for users wishing to join a room.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// In contrast to the regular [`JoinRule`](ruma_common::events::room::join_rules::JoinRule), this</span>
+<span class="doccomment">/// enum does not hold the conditions for joining restricted rooms. Instead, the server is assumed</span>
+<span class="doccomment">/// to only return rooms the user is allowed to join in a space hierarchy listing response.</span>
+<span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>), <span class="string">&quot;/src/doc/string_enum.md&quot;</span>))]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">StringEnum</span>)]</span>
+<span class="attribute">#[<span class="ident">ruma_enum</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;snake_case&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unstable-exhaustive-types&quot;</span>), <span class="ident">non_exhaustive</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SpaceRoomJoinRule</span> {
+    <span class="doccomment">/// A user who wishes to join the room must first receive an invite to the room from someone</span>
+    <span class="doccomment">/// already inside of the room.</span>
+    <span class="ident">Invite</span>,
+
+    <span class="doccomment">/// Users can join the room if they are invited, or they can request an invite to the room.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// They can be allowed (invited) or denied (kicked/banned) access.</span>
+    <span class="ident">Knock</span>,
+
+    <span class="doccomment">/// Reserved but not yet implemented by the Matrix specification.</span>
+    <span class="ident">Private</span>,
+
+    <span class="doccomment">/// Users can join the room if they are invited, or if they meet any of the conditions</span>
+    <span class="doccomment">/// described in a set of [`AllowRule`](ruma_common::events::room::join_rules::AllowRule)s.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// These rules are not made available as part of a space hierarchy listing response and can</span>
+    <span class="doccomment">/// only be seen by users inside the room.</span>
+    <span class="ident">Restricted</span>,
+
+    <span class="doccomment">/// Users can join the room if they are invited, or if they meet any of the conditions</span>
+    <span class="doccomment">/// described in a set of [`AllowRule`](ruma_common::events::room::join_rules::AllowRule)s, or</span>
+    <span class="doccomment">/// they can request an invite to the room.</span>
+    <span class="ident">KnockRestricted</span>,
+
+    <span class="doccomment">/// Anyone can join the room without any prior action.</span>
+    <span class="ident">Public</span>,
+
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+    <span class="ident">_Custom</span>(<span class="ident">PrivOwnedStr</span>),
+}
+
+<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SpaceRoomJoinRule</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
+        <span class="ident">SpaceRoomJoinRule::Public</span>
+    }
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ruma_client_api" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

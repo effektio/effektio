@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["Isbn",""],["Isbn10",""],["Isbn13",""]]};

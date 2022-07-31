@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["PresenceEvent","Presence event."],["PresenceEventContent","Informs the room of members presence."]]};

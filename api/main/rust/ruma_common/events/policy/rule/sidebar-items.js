@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Recommendation","The possible actions that can be taken."]],"mod":[["room","Types for the `m.policy.rule.room` event."],["server","Types for the `m.policy.rule.server` event."],["user","Types for the `m.policy.rule.user` event."]],"struct":[["PolicyRuleEventContent","The payload for policy rule events."]]};

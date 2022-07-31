@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["ToDeviceForwardedRoomKeyEventContent","The content of an `m.forwarded_room_key` event."],["ToDeviceForwardedRoomKeyEventContentInit","Initial set of fields of `ToDeviceForwardedRoomKeyEventContent`."]],"type":[["ToDeviceForwardedRoomKeyEvent","An `m.forwarded_room_key` event."]]};

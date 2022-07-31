@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["DirectEventContent","The content of an `m.direct` event."]],"type":[["DirectEvent","An `m.direct` event."]]};

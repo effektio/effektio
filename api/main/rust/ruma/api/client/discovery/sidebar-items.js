@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["discover_homeserver","`GET /.well-known/matrix/client` (spec)"],["get_capabilities","`GET /_matrix/client/*/capabilities`"],["get_supported_versions","`GET /_matrix/client/versions` (spec)"]]};

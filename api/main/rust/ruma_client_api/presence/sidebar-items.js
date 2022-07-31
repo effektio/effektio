@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["get_presence","`GET /_matrix/client/*/presence/{userId}/status`"],["set_presence","`PUT /_matrix/client/*/presence/{userId}/status`"]]};

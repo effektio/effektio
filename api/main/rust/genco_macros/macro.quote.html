@@ -1,0 +1,487 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Whitespace sensitive quasi-quoting."><meta name="keywords" content="rust, rustlang, rust-lang, quote"><title>quote in genco_macros - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../genco_macros/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../genco_macros/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><div class="sidebar-elems"><h2 class="location"><a href="index.html">In genco_macros</a></h2></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../genco_macros/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Macro <a href="index.html">genco_macros</a>::<wbr><a class="macro" href="#">quote</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/genco_macros/lib.rs.html#679-706">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><pre class="rust macro"><code>quote!() { /* proc-macro */ }</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Whitespace sensitive quasi-quoting.</p>
+<p>This and the <a href="macro.quote_in.html" title="quote_in!">quote_in!</a> macro is the thing that this library revolves
+around.</p>
+<p>It provides a flexible and intuitive mechanism for efficiently generating
+beautiful code directly inside of Rust.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">hash_map</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">dart::import</span>(<span class="string">&quot;dart:collection&quot;</span>, <span class="string">&quot;HashMap&quot;</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">dart::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="ident">print_greeting</span>(<span class="ident">String</span> <span class="ident">name</span>) {
+        <span class="ident">print</span>(#<span class="kw">_</span>(<span class="ident">Hello</span> $(<span class="ident">name</span>)));
+    }
+
+    #<span class="ident">hash_map</span><span class="op">&lt;</span><span class="ident">int</span>, <span class="ident">String</span><span class="op">&gt;</span> <span class="ident">map</span>() {
+        <span class="kw">return</span> <span class="ident">new</span> #<span class="ident">hash_map</span><span class="op">&lt;</span><span class="ident">int</span>, <span class="ident">String</span><span class="op">&gt;</span>();
+    }
+};
+
+<span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_file_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<h2 id="interpolation"><a href="#interpolation">Interpolation</a></h2>
+<p>Variables are interpolated using <code>#</code>, so to include the variable <code>test</code>, you
+would write <code>#test</code>. Interpolated variables must implement <a href="https://docs.rs/genco/0/genco/tokens/trait.FormatInto.html">FormatInto</a>.
+Expressions can be interpolated with <code>#(&lt;expr&gt;)</code>.</p>
+<blockquote>
+<p><em>Note:</em> The <code>#</code> punctuation itself can be escaped by repeating it twice.
+So <code>##</code> would produce a single <code>#</code> token.</p>
+</blockquote>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">hash_map</span> <span class="op">=</span> <span class="ident">rust::import</span>(<span class="string">&quot;std::collections&quot;</span>, <span class="string">&quot;HashMap&quot;</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">struct</span> <span class="ident">Quoted</span> {
+        <span class="ident">field</span>: #<span class="ident">hash_map</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">u32</span><span class="op">&gt;</span>,
+    }
+};
+
+<span class="macro">assert_eq!</span>(
+    <span class="macro">vec!</span>[
+        <span class="string">&quot;use std::collections::HashMap;&quot;</span>,
+        <span class="string">&quot;&quot;</span>,
+        <span class="string">&quot;struct Quoted {&quot;</span>,
+        <span class="string">&quot;    field: HashMap&lt;u32, u32&gt;,&quot;</span>,
+        <span class="string">&quot;}&quot;</span>,
+    ],
+    <span class="ident">tokens</span>.<span class="ident">to_file_vec</span>()<span class="question-mark">?</span>,
+);</code></pre></div>
+<br>
+<p>The following is an expression interpolated with <code>#(&lt;expr&gt;)</code>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">genco::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="ident">hello</span> #(<span class="string">&quot;world&quot;</span>.<span class="ident">to_uppercase</span>())
+};
+
+<span class="macro">assert_eq!</span>(<span class="string">&quot;hello WORLD&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<p>Interpolations are evaluated in the same scope as the macro, so you can
+freely make use of Rust operations like the try keyword (<code>?</code>) if
+appropriate:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::error::Error</span>;
+
+<span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">age_fn</span>(<span class="ident">age</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">rust::Tokens</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="prelude-val">Ok</span>(<span class="macro">quote!</span> {
+        <span class="kw">fn</span> <span class="ident">age</span>() {
+            <span class="macro">println!</span>(<span class="string">&quot;You are {} years old!&quot;</span>, #(<span class="ident">str::parse</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="ident">age</span>)<span class="question-mark">?</span>));
+        }
+    })
+}</code></pre></div>
+<br>
+<h2 id="escape-sequences"><a href="#escape-sequences">Escape Sequences</a></h2>
+<p>Because this macro is <em>whitespace sensitive</em>, it might sometimes be
+necessary to provide hints of where whitespace should be inserted.</p>
+<p><code>quote!</code> trims any trailing and leading whitespace that it sees. So
+<code>quote!(Hello )</code> is the same as <code>quote!(Hello)</code>. To include a space at the
+end, we can use the special <code>#&lt;space&gt;</code> escape sequence:
+<code>quote!(Hello#&lt;space&gt;)</code>.</p>
+<p>The available escape sequences are:</p>
+<ul>
+<li>
+<p><code>#&lt;space&gt;</code> — Inserts a space between tokens. This corresponds to the
+<a href="https://docs.rs/genco/0/genco/struct.Tokens.html#method.space">Tokens::space</a> function.</p>
+</li>
+<li>
+<p><code>#&lt;push&gt;</code> — Inserts a push operation. Push operations makes sure that
+any following tokens are on their own dedicated line. This corresponds to
+the <a href="https://docs.rs/genco/0/genco/struct.Tokens.html#method.push">Tokens::push</a> function.</p>
+</li>
+<li>
+<p><code>#&lt;line&gt;</code> — Inserts a forced line. Line operations makes sure that any
+following tokens have an empty line separating them. This corresponds to
+the <a href="https://docs.rs/genco/0/genco/struct.Tokens.html#method.line">Tokens::line</a> function.</p>
+</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">numbers</span> <span class="op">=</span> <span class="number">3</span>..<span class="op">=</span><span class="number">5</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">quote!</span>(<span class="ident">foo</span>#<span class="op">&lt;</span><span class="ident">push</span><span class="op">&gt;</span><span class="ident">bar</span>#<span class="op">&lt;</span><span class="ident">line</span><span class="op">&gt;</span><span class="ident">baz</span>#<span class="op">&lt;</span><span class="ident">space</span><span class="op">&gt;</span><span class="ident">biz</span>);
+
+<span class="macro">assert_eq!</span>(<span class="string">&quot;foo\nbar\n\nbaz biz&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h2 id="string-quoting"><a href="#string-quoting">String Quoting</a></h2>
+<p>Literal strings like <code>&quot;hello&quot;</code> are automatically quoted for the target
+language according to its <a href="https://docs.rs/genco/0/genco/lang/trait.Lang.html#method.write_quoted">Lang::write_quoted</a> implementation.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">java::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="string">&quot;hello world 😊&quot;</span>
+    #(<span class="ident">quoted</span>(<span class="string">&quot;hello world 😊&quot;</span>))
+    #(<span class="string">&quot;\&quot;hello world 😊\&quot;&quot;</span>)
+    #<span class="kw">_</span>(<span class="ident">hello</span> <span class="ident">world</span> #(<span class="string">&quot;😊&quot;</span>))
+};
+
+<span class="macro">assert_eq!</span>(
+    <span class="macro">vec!</span>[
+        <span class="string">&quot;\&quot;hello world \\ud83d\\ude0a\&quot;&quot;</span>,
+        <span class="string">&quot;\&quot;hello world \\ud83d\\ude0a\&quot;&quot;</span>,
+        <span class="string">&quot;\&quot;hello world 😊\&quot;&quot;</span>,
+        <span class="string">&quot;\&quot;hello world \\ud83d\\ude0a\&quot;&quot;</span>,
+    ],
+    <span class="ident">tokens</span>.<span class="ident">to_file_vec</span>()<span class="question-mark">?</span>,
+);</code></pre></div>
+<h2 id="efficient-string-quoting"><a href="#efficient-string-quoting">Efficient String Quoting</a></h2>
+<p>It’s worth investigating the different forms of tokens produced by the
+above example.</p>
+<ul>
+<li>The first one is a static <em>quoted string</em>.</li>
+<li>The second one is a boxed <em>quoted string</em>, who’s content will be copied
+and is stored on the heap.</li>
+<li>The third one is a static <em>literal</em> which bypasses language quoting
+entirely.</li>
+<li>Finally the fourth one is an interpolated string. They are really neat,
+and will be covered more in the next section. It’s worth noting that
+<code>#(&quot;😊&quot;)</code> is used, because 😊 is not a valid identifier in Rust. So this
+example showcases how strings can be directly embedded in an
+interpolation.</li>
+</ul>
+<p>Here you can see the items produced by the macro.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::tokens</span>::{<span class="ident">Item</span>, <span class="ident">ItemStr</span>};
+
+<span class="macro">assert_eq!</span>(
+    <span class="macro">vec!</span>[
+        <span class="ident">Item::OpenQuote</span>(<span class="bool-val">false</span>),
+        <span class="ident">Item::Literal</span>(<span class="ident">ItemStr::Static</span>(<span class="string">&quot;hello world 😊&quot;</span>)),
+        <span class="ident">Item::CloseQuote</span>,
+        <span class="ident">Item::Push</span>,
+        <span class="ident">Item::OpenQuote</span>(<span class="bool-val">false</span>),
+        <span class="ident">Item::Literal</span>(<span class="ident">ItemStr::Box</span>(<span class="string">&quot;hello world 😊&quot;</span>.<span class="ident">into</span>())),
+        <span class="ident">Item::CloseQuote</span>,
+        <span class="ident">Item::Push</span>,
+        <span class="ident">Item::Literal</span>(<span class="ident">ItemStr::Static</span>(<span class="string">&quot;\&quot;hello world 😊\&quot;&quot;</span>)),
+        <span class="ident">Item::Push</span>,
+        <span class="ident">Item::OpenQuote</span>(<span class="bool-val">false</span>),
+        <span class="ident">Item::Literal</span>(<span class="ident">ItemStr::Static</span>(<span class="string">&quot;hello world 😊&quot;</span>)),
+        <span class="ident">Item::CloseQuote</span>
+    ],
+    <span class="ident">tokens</span>,
+);</code></pre></div>
+<br>
+<h2 id="quoted-string-interpolation"><a href="#quoted-string-interpolation">Quoted String Interpolation</a></h2>
+<p>Some languages support interpolating values into strings.</p>
+<p>Examples of these are:</p>
+<ul>
+<li>JavaScript - With <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template literals</a> <code>`Hello ${a}`</code> (note the
+backticks).</li>
+<li>Dart - With <a href="https://medium.com/run-dart/dart-dartlang-introduction-string-interpolation-8ed99174119a">interpolated strings</a> like <code>&quot;Hello $a&quot;</code> or <code>&quot;Hello ${a + b}&quot;</code>.</li>
+</ul>
+<p>The <a href="macro.quote.html">quote!</a> macro supports this through <code>#_(&lt;content&gt;)</code>. This will produce
+literal strings with the appropriate language-specific quoting and string
+interpolation formats used.</p>
+<p>Interpolated values are specified with <code>$(&lt;quoted&gt;)</code>. And <code>$</code> itself is
+escaped by repeating it twice through <code>$$</code>. The <code>&lt;quoted&gt;</code> section is
+interpreted the same as in the <a href="macro.quote.html">quote!</a> macro, but is whitespace sensitive.
+This means that <code>$(foo)</code> is not the same as <code>$(foo )</code> since the latter will
+have a space preserved at the end.</p>
+<p>Raw items can be interpolated with <code>#(&lt;expr&gt;)</code> or <code>#&lt;ident&gt;</code>. Escaping <code>#</code>
+is done similarly with <code>##</code>. Note that <a href="#control-flow">control flow</a> is
+<em>not</em> supported inside of quoted strings.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">smile</span> <span class="op">=</span> <span class="string">&quot;😊&quot;</span>;
+
+<span class="kw">let</span> <span class="ident">t</span>: <span class="ident">dart::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span>(#<span class="kw">_</span>(<span class="ident">Hello</span> #<span class="ident">smile</span> $(<span class="ident">world</span>)));
+<span class="macro">assert_eq!</span>(<span class="string">&quot;\&quot;Hello 😊 $world\&quot;&quot;</span>, <span class="ident">t</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">t</span>: <span class="ident">dart::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span>(#<span class="kw">_</span>(<span class="ident">Hello</span> #<span class="ident">smile</span> $(<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>)));
+<span class="macro">assert_eq!</span>(<span class="string">&quot;\&quot;Hello 😊 ${a + b}\&quot;&quot;</span>, <span class="ident">t</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">t</span>: <span class="ident">js::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span>(#<span class="kw">_</span>(<span class="ident">Hello</span> #<span class="ident">smile</span> $(<span class="ident">world</span>)));
+<span class="macro">assert_eq!</span>(<span class="string">&quot;`Hello 😊 ${world}`&quot;</span>, <span class="ident">t</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h2 id="control-flow"><a href="#control-flow">Control Flow</a></h2>
+<p><a href="macro.quote.html">quote!</a> provides some limited mechanisms for control flow inside of the
+macro for convenience. The supported mechanisms are:</p>
+<ul>
+<li><a href="#loops">Loops</a> - <code>#(for &lt;bindings&gt; in &lt;expr&gt; [join (&lt;quoted&gt;)] =&gt; &lt;quoted&gt;)</code>.</li>
+<li><a href="#conditionals">Conditionals</a> - <code>#(if &lt;pattern&gt; =&gt; &lt;quoted&gt;)</code>.</li>
+<li><a href="#match-statements">Match Statements</a> - <code>#(match &lt;expr&gt; { [&lt;pattern&gt; =&gt; &lt;quoted&gt;,]* })</code>.</li>
+</ul>
+<br>
+<h2 id="loops"><a href="#loops">Loops</a></h2>
+<p>To repeat a pattern you can use <code>#(for &lt;bindings&gt; in &lt;expr&gt; { &lt;quoted&gt; })</code>,
+where <code>&lt;expr&gt;</code> is an iterator.</p>
+<p>It is also possible to use the more compact <code>#(for &lt;bindings&gt; in &lt;expr&gt; =&gt; &lt;quoted&gt;)</code> (note the arrow).</p>
+<p><code>&lt;quoted&gt;</code> will be treated as a quoted expression, so anything which works
+during regular quoting will work here as well, with the addition that
+anything defined in <code>&lt;bindings&gt;</code> will be made available to the statement.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">numbers</span> <span class="op">=</span> <span class="number">3</span>..<span class="op">=</span><span class="number">5</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="ident">Your</span> <span class="ident">numbers</span> <span class="ident">are</span>: #(<span class="kw">for</span> <span class="ident">n</span> <span class="kw">in</span> <span class="ident">numbers</span> =&gt; #<span class="ident">n</span>#<span class="op">&lt;</span><span class="ident">space</span><span class="op">&gt;</span>)
+};
+
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Your numbers are: 3 4 5&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h2 id="joining-loops"><a href="#joining-loops">Joining Loops</a></h2>
+<p>You can add <code>join (&lt;quoted&gt;)</code> to the end of a repetition.</p>
+<p>The expression specified in <code>join (&lt;quoted&gt;)</code> is added <em>between</em> each
+element produced by the loop.</p>
+<blockquote>
+<p><em>Note:</em> The argument to <code>join</code> is <em>whitespace sensitive</em>, so leading and
+trailing is preserved. <code>join (,)</code> and <code>join (, )</code> would therefore produce
+different results.</p>
+</blockquote>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">numbers</span> <span class="op">=</span> <span class="number">3</span>..<span class="op">=</span><span class="number">5</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="ident">Your</span> <span class="ident">numbers</span> <span class="ident">are</span>: #(<span class="kw">for</span> <span class="ident">n</span> <span class="kw">in</span> <span class="ident">numbers</span> <span class="ident">join</span> (, ) =&gt; #<span class="ident">n</span>).
+};
+
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Your numbers are: 3, 4, 5.&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h2 id="conditionals"><a href="#conditionals">Conditionals</a></h2>
+<p>You can specify a conditional with <code>#(if &lt;pattern&gt; =&gt; &lt;then&gt;)</code> where
+<pattern> is an pattern or expression evaluating to a <code>bool</code>, and <code>&lt;then&gt;</code>
+is a quoted expressions.</p>
+<p>It’s also possible to specify a condition with an else branch, by using
+<code>#(if &lt;pattern&gt; { &lt;then&gt; } else { &lt;else&gt; })</code>. <code>&lt;else&gt;</code> is also a quoted
+expression.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">greeting</span>(<span class="ident">hello</span>: <span class="ident">bool</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="macro">quote!</span>(<span class="ident">Custom</span> <span class="ident">Greeting</span>: #(<span class="kw">if</span> <span class="ident">hello</span> {
+        <span class="ident">Hello</span> #<span class="ident">name</span>
+    } <span class="kw">else</span> {
+        <span class="ident">Goodbye</span> #<span class="ident">name</span>
+    }))
+}
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="bool-val">true</span>, <span class="string">&quot;John&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Custom Greeting: Hello John&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="bool-val">false</span>, <span class="string">&quot;John&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Custom Greeting: Goodbye John&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<p>The <code>&lt;else&gt;</code> branch is optional, conditionals which do not have an else
+branch and evaluated to <code>false</code> won’t produce any tokens:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">greeting</span>(<span class="ident">hello</span>: <span class="ident">bool</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="macro">quote!</span>(<span class="ident">Custom</span> <span class="ident">Greeting</span>:#(<span class="kw">if</span> <span class="ident">hello</span> {
+        #<span class="op">&lt;</span><span class="ident">space</span><span class="op">&gt;</span><span class="ident">Hello</span> #<span class="ident">name</span>
+    }))
+}
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="bool-val">true</span>, <span class="string">&quot;John&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Custom Greeting: Hello John&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="bool-val">false</span>, <span class="string">&quot;John&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Custom Greeting:&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h2 id="match-statements"><a href="#match-statements">Match Statements</a></h2>
+<p>You can specify a match expression using <code>#(match &lt;expr&gt; { [&lt;pattern&gt; =&gt; &lt;quoted&gt;,]* }</code>, where <code>&lt;expr&gt;</code> is an evaluated expression that is match
+against each subsequent <code>&lt;pattern&gt;</code>. If a pattern matches, the arm with the
+matching <code>&lt;quoted&gt;</code> block is evaluated.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">greeting</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="macro">quote!</span>(<span class="ident">Hello</span> #(<span class="kw">match</span> <span class="ident">name</span> {
+        <span class="string">&quot;John&quot;</span> <span class="op">|</span> <span class="string">&quot;Jane&quot;</span> =&gt; #(<span class="string">&quot;Random Stranger&quot;</span>),
+        <span class="ident">other</span> =&gt; #<span class="ident">other</span>,
+    }))
+}
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="string">&quot;John&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Random Stranger&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="string">&quot;Mio&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Mio&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<p>If a match arm contains parenthesis (<code>=&gt; (&lt;quoted&gt;)</code>), the expansion will be
+<em>whitespace sensitive</em>. Allowing leading and trailing whitespace to be
+preserved:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">greeting</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="macro">quote!</span>(<span class="ident">Hello</span>#(<span class="kw">match</span> <span class="ident">name</span> {
+        <span class="string">&quot;John&quot;</span> <span class="op">|</span> <span class="string">&quot;Jane&quot;</span> =&gt; ( #(<span class="string">&quot;Random Stranger&quot;</span>)),
+        <span class="ident">other</span> =&gt; ( #<span class="ident">other</span>),
+    }))
+}
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="string">&quot;John&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Random Stranger&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="string">&quot;Mio&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Mio&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<p>The following is an example with more complex matching:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">enum</span> <span class="ident">Greeting</span> {
+    <span class="ident">Named</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
+    <span class="ident">Unknown</span>,
+}
+
+<span class="kw">fn</span> <span class="ident">greeting</span>(<span class="ident">name</span>: <span class="ident">Greeting</span>) -&gt; <span class="ident">Tokens</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="macro">quote!</span>(<span class="ident">Hello</span> #(<span class="kw">match</span> <span class="ident">name</span> {
+        <span class="ident">Greeting::Named</span>(<span class="string">&quot;John&quot;</span>) <span class="op">|</span> <span class="ident">Greeting::Named</span>(<span class="string">&quot;Jane&quot;</span>) =&gt; #(<span class="string">&quot;Random Stranger&quot;</span>),
+        <span class="ident">Greeting::Named</span>(<span class="ident">other</span>) =&gt; #<span class="ident">other</span>,
+        <span class="ident">Greeting::Unknown</span> =&gt; #(<span class="string">&quot;Unknown Person&quot;</span>),
+    }))
+}
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="ident">Greeting::Named</span>(<span class="string">&quot;John&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Random Stranger&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="ident">Greeting::Unknown</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Unknown Person&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">greeting</span>(<span class="ident">Greeting::Named</span>(<span class="string">&quot;Mio&quot;</span>));
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello Mio&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h2 id="scopes"><a href="#scopes">Scopes</a></h2>
+<p>You can use <code>#(ref &lt;binding&gt; { &lt;expr&gt; })</code> to gain access to the current
+token stream. This is an alternative to existing control flow operators if
+you want to run some custom code during evaluation which is otherwise not
+supported. This is called a <em>scope</em>.</p>
+<p>For a more compact variant you can omit the braces with <code>#(ref &lt;binding&gt; =&gt; &lt;expr&gt;)</code>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">quote_greeting</span>(<span class="ident">surname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">lastname</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">rust::Tokens</span> {
+    <span class="macro">quote!</span> {
+        <span class="ident">Hello</span> #<span class="ident">surname</span>#(<span class="kw-2">ref</span> <span class="ident">toks</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">lastname</span>) <span class="op">=</span> <span class="ident">lastname</span> {
+                <span class="ident">toks</span>.<span class="ident">space</span>();
+                <span class="ident">toks</span>.<span class="ident">append</span>(<span class="ident">lastname</span>);
+            }
+        })
+    }
+}
+
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello John&quot;</span>, <span class="ident">quote_greeting</span>(<span class="string">&quot;John&quot;</span>, <span class="prelude-val">None</span>).<span class="ident">to_string</span>()<span class="question-mark">?</span>);
+<span class="macro">assert_eq!</span>(<span class="string">&quot;Hello John Doe&quot;</span>, <span class="ident">quote_greeting</span>(<span class="string">&quot;John&quot;</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;Doe&quot;</span>)).<span class="ident">to_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<br>
+<h3 id="whitespace-detection"><a href="#whitespace-detection">Whitespace Detection</a></h3>
+<p>The <a href="macro.quote.html">quote!</a> macro has the following rules for dealing with indentation and
+spacing.</p>
+<p><strong>Spaces</strong> — Two tokens that are separated are spaced. Regardless of how
+many spaces there are between them. This can be controlled manually by
+inserting the <a href="#escape-sequences"><code>#&lt;space&gt;</code></a> escape sequence in the token stream.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">fn</span>     <span class="ident">test</span>()     {
+        <span class="macro">println!</span>(<span class="string">&quot;Hello... &quot;</span>);
+
+        <span class="macro">println!</span>(<span class="string">&quot;World!&quot;</span>);
+    }
+};
+
+<span class="macro">assert_eq!</span>(
+    <span class="macro">vec!</span>[
+        <span class="string">&quot;fn test() {&quot;</span>,
+        <span class="string">&quot;    println!(\&quot;Hello... \&quot;);&quot;</span>,
+        <span class="string">&quot;&quot;</span>,
+        <span class="string">&quot;    println!(\&quot;World!\&quot;);&quot;</span>,
+        <span class="string">&quot;}&quot;</span>,
+    ],
+    <span class="ident">tokens</span>.<span class="ident">to_file_vec</span>()<span class="question-mark">?</span>,
+);</code></pre></div>
+<br>
+<p><strong>Line breaking</strong> — Line breaks are detected by leaving two empty lines
+between two tokens. This can be controlled manually by inserting the
+<a href="#escape-sequences"><code>#&lt;line&gt;</code></a> escape in the token stream.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">fn</span> <span class="ident">test</span>() {
+        <span class="macro">println!</span>(<span class="string">&quot;Hello... &quot;</span>);
+
+
+
+        <span class="macro">println!</span>(<span class="string">&quot;World!&quot;</span>);
+    }
+};
+
+<span class="macro">assert_eq!</span>(
+    <span class="macro">vec!</span>[
+        <span class="string">&quot;fn test() {&quot;</span>,
+        <span class="string">&quot;    println!(\&quot;Hello... \&quot;);&quot;</span>,
+        <span class="string">&quot;&quot;</span>,
+        <span class="string">&quot;    println!(\&quot;World!\&quot;);&quot;</span>,
+        <span class="string">&quot;}&quot;</span>,
+    ],
+    <span class="ident">tokens</span>.<span class="ident">to_file_vec</span>()<span class="question-mark">?</span>,
+);</code></pre></div>
+<br>
+<p><strong>Indentation</strong> — Indentation is determined on a row-by-row basis. If a
+column is further in than the one on the preceeding row, it is indented <em>one
+level</em> deeper.</p>
+<p>If a column starts shallower than a preceeding, non-whitespace only row, it
+will be matched against previously known indentation levels. Failure to
+match a previously known level is an error.</p>
+<p>All indentations inserted during the macro will be unrolled at the end of
+it. So any trailing indentations will be matched by unindentations.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">fn</span> <span class="ident">test</span>() {
+            <span class="macro">println!</span>(<span class="string">&quot;Hello... &quot;</span>);
+
+            <span class="macro">println!</span>(<span class="string">&quot;World!&quot;</span>);
+    }
+};
+
+<span class="macro">assert_eq!</span>(
+    <span class="macro">vec!</span>[
+        <span class="string">&quot;fn test() {&quot;</span>,
+        <span class="string">&quot;    println!(\&quot;Hello... \&quot;);&quot;</span>,
+        <span class="string">&quot;&quot;</span>,
+        <span class="string">&quot;    println!(\&quot;World!\&quot;);&quot;</span>,
+        <span class="string">&quot;}&quot;</span>,
+    ],
+    <span class="ident">tokens</span>.<span class="ident">to_file_vec</span>()<span class="question-mark">?</span>,
+);</code></pre></div>
+<p>Example showcasing an indentation mismatch:</p>
+
+<div class='information'><div class='tooltip compile_fail'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered compile_fail"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">fn</span> <span class="ident">test</span>() {
+            <span class="macro">println!</span>(<span class="string">&quot;Hello... &quot;</span>);
+
+        <span class="macro">println!</span>(<span class="string">&quot;World!&quot;</span>);
+    }
+};</code></pre></div>
+<div class="example-wrap"><pre class="language-text"><code>---- src\lib.rs -  (line 150) stdout ----
+error: expected 4 less spaces of indentation
+--&gt; src\lib.rs:157:9
+   |
+10 |         println!(&quot;World!&quot;);
+   |         ^^^^^^^</code></pre></div></div></details></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="genco_macros" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

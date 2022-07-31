@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["get_relating_events","`GET /_matrix/client/*/rooms/{roomId}/relations/{eventId}`"],["get_relating_events_with_rel_type","`GET /_matrix/client/*/rooms/{roomId}/relations/{eventId}/{relType}`"],["get_relating_events_with_rel_type_and_event_type","`GET /_matrix/client/*/rooms/{roomId}/relations/{eventId}/{relType}/{eventType}`"]]};

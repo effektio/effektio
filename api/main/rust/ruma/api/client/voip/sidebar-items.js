@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["get_turn_server_info","`GET /_matrix/client/*/voip/turnServer`"]]};

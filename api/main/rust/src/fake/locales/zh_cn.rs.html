@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/fake-2.5.0/src/locales/zh_cn.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>zh_cn.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../fake/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../fake/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../fake/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::locales::Data</span>;
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ZH_CN</span>;
+
+<span class="kw">impl</span> <span class="ident">Data</span> <span class="kw">for</span> <span class="ident">ZH_CN</span> {
+    <span class="kw">const</span> <span class="ident">NAME_FIRST_NAME</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+        <span class="string">&quot;文辉&quot;</span>, <span class="string">&quot;杰邦&quot;</span>, <span class="string">&quot;文材&quot;</span>, <span class="string">&quot;文渊&quot;</span>, <span class="string">&quot;文达&quot;</span>, <span class="string">&quot;明轩&quot;</span>, <span class="string">&quot;彬华&quot;</span>, <span class="string">&quot;瀚福&quot;</span>, <span class="string">&quot;厉轩&quot;</span>, <span class="string">&quot;杰裕&quot;</span>, <span class="string">&quot;俊胜&quot;</span>,
+        <span class="string">&quot;睿轩&quot;</span>, <span class="string">&quot;远旭&quot;</span>, <span class="string">&quot;寒烟&quot;</span>, <span class="string">&quot;杰毅&quot;</span>, <span class="string">&quot;鸿灿&quot;</span>, <span class="string">&quot;远鸿&quot;</span>, <span class="string">&quot;文兴&quot;</span>, <span class="string">&quot;志国&quot;</span>, <span class="string">&quot;鼎遥&quot;</span>, <span class="string">&quot;镜宇&quot;</span>, <span class="string">&quot;鸿承&quot;</span>,
+        <span class="string">&quot;俊伟&quot;</span>, <span class="string">&quot;鼎翎&quot;</span>, <span class="string">&quot;修永&quot;</span>, <span class="string">&quot;世图&quot;</span>, <span class="string">&quot;俊新&quot;</span>, <span class="string">&quot;冠宇&quot;</span>, <span class="string">&quot;寒云&quot;</span>, <span class="string">&quot;瀚君&quot;</span>, <span class="string">&quot;弘玮&quot;</span>, <span class="string">&quot;韵杰&quot;</span>, <span class="string">&quot;杰雄&quot;</span>,
+        <span class="string">&quot;文霖&quot;</span>, <span class="string">&quot;俊帆&quot;</span>, <span class="string">&quot;昌凯&quot;</span>, <span class="string">&quot;德春&quot;</span>, <span class="string">&quot;杰书&quot;</span>, <span class="string">&quot;昌翔&quot;</span>, <span class="string">&quot;德元&quot;</span>, <span class="string">&quot;乐奇&quot;</span>, <span class="string">&quot;旭翰&quot;</span>, <span class="string">&quot;君乾&quot;</span>, <span class="string">&quot;任平&quot;</span>,
+        <span class="string">&quot;泽信&quot;</span>, <span class="string">&quot;圣国&quot;</span>, <span class="string">&quot;弘耀&quot;</span>, <span class="string">&quot;博远&quot;</span>, <span class="string">&quot;月阳&quot;</span>, <span class="string">&quot;泰玄&quot;</span>, <span class="string">&quot;伦博&quot;</span>, <span class="string">&quot;龙德&quot;</span>, <span class="string">&quot;鼎佑&quot;</span>, <span class="string">&quot;哲瀚&quot;</span>, <span class="string">&quot;弘振&quot;</span>,
+        <span class="string">&quot;昌云&quot;</span>, <span class="string">&quot;新远&quot;</span>, <span class="string">&quot;贵依&quot;</span>, <span class="string">&quot;俊颜&quot;</span>, <span class="string">&quot;文来&quot;</span>, <span class="string">&quot;玮轩&quot;</span>, <span class="string">&quot;鼎鸿&quot;</span>, <span class="string">&quot;秋风&quot;</span>, <span class="string">&quot;荣银&quot;</span>, <span class="string">&quot;志辉&quot;</span>, <span class="string">&quot;博伦&quot;</span>,
+        <span class="string">&quot;荣春&quot;</span>, <span class="string">&quot;睿博&quot;</span>, <span class="string">&quot;世康&quot;</span>, <span class="string">&quot;瀚景&quot;</span>, <span class="string">&quot;智涛&quot;</span>, <span class="string">&quot;晋运&quot;</span>, <span class="string">&quot;杰翔&quot;</span>, <span class="string">&quot;晋刚&quot;</span>, <span class="string">&quot;明新&quot;</span>, <span class="string">&quot;展瀚&quot;</span>, <span class="string">&quot;杰依&quot;</span>,
+        <span class="string">&quot;昌毅&quot;</span>, <span class="string">&quot;风涛&quot;</span>, <span class="string">&quot;寒承&quot;</span>, <span class="string">&quot;圣帆&quot;</span>, <span class="string">&quot;明志&quot;</span>, <span class="string">&quot;旭冠&quot;</span>, <span class="string">&quot;玮博&quot;</span>, <span class="string">&quot;宇灿&quot;</span>, <span class="string">&quot;雨瑞&quot;</span>, <span class="string">&quot;清泉&quot;</span>, <span class="string">&quot;月星&quot;</span>,
+        <span class="string">&quot;志欧&quot;</span>, <span class="string">&quot;德宝&quot;</span>, <span class="string">&quot;文韵&quot;</span>, <span class="string">&quot;文祖&quot;</span>, <span class="string">&quot;文春&quot;</span>, <span class="string">&quot;韵宇&quot;</span>, <span class="string">&quot;光耀&quot;</span>, <span class="string">&quot;弘靖&quot;</span>, <span class="string">&quot;君翔&quot;</span>, <span class="string">&quot;棋博&quot;</span>, <span class="string">&quot;弘浩&quot;</span>,
+        <span class="string">&quot;宇驰&quot;</span>, <span class="string">&quot;文驰&quot;</span>, <span class="string">&quot;彬逸&quot;</span>, <span class="string">&quot;瀚舟&quot;</span>, <span class="string">&quot;新杰&quot;</span>, <span class="string">&quot;哲南&quot;</span>, <span class="string">&quot;志邦&quot;</span>, <span class="string">&quot;泽君&quot;</span>, <span class="string">&quot;文辰&quot;</span>, <span class="string">&quot;玮畅&quot;</span>, <span class="string">&quot;彬城&quot;</span>,
+        <span class="string">&quot;涛胜&quot;</span>, <span class="string">&quot;晋永&quot;</span>, <span class="string">&quot;涛羽&quot;</span>, <span class="string">&quot;鼎宇&quot;</span>, <span class="string">&quot;棋翰&quot;</span>, <span class="string">&quot;贵博&quot;</span>, <span class="string">&quot;桦楠&quot;</span>, <span class="string">&quot;志伟&quot;</span>, <span class="string">&quot;弘邦&quot;</span>, <span class="string">&quot;明瑞&quot;</span>, <span class="string">&quot;柯勤&quot;</span>,
+        <span class="string">&quot;青松&quot;</span>, <span class="string">&quot;德轩&quot;</span>, <span class="string">&quot;翰辰&quot;</span>, <span class="string">&quot;远乔&quot;</span>, <span class="string">&quot;鸿祥&quot;</span>, <span class="string">&quot;翰颜&quot;</span>, <span class="string">&quot;杉晖&quot;</span>, <span class="string">&quot;金福&quot;</span>, <span class="string">&quot;远瑾&quot;</span>, <span class="string">&quot;博尘&quot;</span>, <span class="string">&quot;晋岳&quot;</span>,
+        <span class="string">&quot;德石&quot;</span>, <span class="string">&quot;海杉&quot;</span>, <span class="string">&quot;鼎承&quot;</span>, <span class="string">&quot;明健&quot;</span>, <span class="string">&quot;瀚诚&quot;</span>, <span class="string">&quot;浩新&quot;</span>, <span class="string">&quot;彬琪&quot;</span>, <span class="string">&quot;城德&quot;</span>, <span class="string">&quot;鼎智&quot;</span>, <span class="string">&quot;圣天&quot;</span>, <span class="string">&quot;晋枝&quot;</span>,
+        <span class="string">&quot;德君&quot;</span>, <span class="string">&quot;曲漾&quot;</span>, <span class="string">&quot;翰逸&quot;</span>, <span class="string">&quot;若菲&quot;</span>, <span class="string">&quot;博泰&quot;</span>, <span class="string">&quot;秀永&quot;</span>, <span class="string">&quot;宇瀚&quot;</span>, <span class="string">&quot;君裕&quot;</span>, <span class="string">&quot;仁顺&quot;</span>, <span class="string">&quot;鼎风&quot;</span>, <span class="string">&quot;辰逸&quot;</span>,
+        <span class="string">&quot;杰奥&quot;</span>, <span class="string">&quot;百川&quot;</span>, <span class="string">&quot;瀚德&quot;</span>, <span class="string">&quot;浩诚&quot;</span>, <span class="string">&quot;杰宏&quot;</span>, <span class="string">&quot;昌奇&quot;</span>, <span class="string">&quot;丰瞻&quot;</span>, <span class="string">&quot;博仁&quot;</span>, <span class="string">&quot;文皓&quot;</span>, <span class="string">&quot;俊龙&quot;</span>, <span class="string">&quot;彬锐&quot;</span>,
+        <span class="string">&quot;畅瑞&quot;</span>, <span class="string">&quot;昌贤&quot;</span>, <span class="string">&quot;雪松&quot;</span>, <span class="string">&quot;玉燕&quot;</span>, <span class="string">&quot;春柏&quot;</span>, <span class="string">&quot;楠素&quot;</span>, <span class="string">&quot;君壁&quot;</span>, <span class="string">&quot;睿娇&quot;</span>, <span class="string">&quot;甜英&quot;</span>, <span class="string">&quot;向卉&quot;</span>, <span class="string">&quot;丽梅&quot;</span>,
+        <span class="string">&quot;芙香&quot;</span>, <span class="string">&quot;云昕&quot;</span>, <span class="string">&quot;馥烟&quot;</span>, <span class="string">&quot;娜盈&quot;</span>, <span class="string">&quot;娜漫&quot;</span>, <span class="string">&quot;凝雁&quot;</span>, <span class="string">&quot;紫槐&quot;</span>, <span class="string">&quot;雪娅&quot;</span>, <span class="string">&quot;冰兰&quot;</span>, <span class="string">&quot;幻莲&quot;</span>, <span class="string">&quot;雪柳&quot;</span>,
+        <span class="string">&quot;冰旋&quot;</span>, <span class="string">&quot;甜熙&quot;</span>, <span class="string">&quot;沛珊&quot;</span>, <span class="string">&quot;语雅&quot;</span>, <span class="string">&quot;芳虹&quot;</span>, <span class="string">&quot;若雪&quot;</span>, <span class="string">&quot;雨珍&quot;</span>, <span class="string">&quot;春竹&quot;</span>, <span class="string">&quot;妙香&quot;</span>, <span class="string">&quot;花萍&quot;</span>, <span class="string">&quot;惜茵&quot;</span>,
+        <span class="string">&quot;沐娟&quot;</span>, <span class="string">&quot;月爽&quot;</span>, <span class="string">&quot;瑜柔&quot;</span>, <span class="string">&quot;红芍&quot;</span>, <span class="string">&quot;秋柔&quot;</span>, <span class="string">&quot;紫呜&quot;</span>, <span class="string">&quot;娇语&quot;</span>, <span class="string">&quot;雅瑾&quot;</span>, <span class="string">&quot;妙筠&quot;</span>, <span class="string">&quot;琪涵&quot;</span>, <span class="string">&quot;秋荷&quot;</span>,
+        <span class="string">&quot;茹婕&quot;</span>, <span class="string">&quot;冰婉&quot;</span>, <span class="string">&quot;雨双&quot;</span>, <span class="string">&quot;雨雪&quot;</span>, <span class="string">&quot;映倚&quot;</span>, <span class="string">&quot;翠竹&quot;</span>, <span class="string">&quot;珍美&quot;</span>, <span class="string">&quot;怡钰&quot;</span>, <span class="string">&quot;馨梨&quot;</span>, <span class="string">&quot;娅楠&quot;</span>, <span class="string">&quot;晓巧&quot;</span>,
+        <span class="string">&quot;雪芳&quot;</span>, <span class="string">&quot;韵雪&quot;</span>, <span class="string">&quot;以菱&quot;</span>, <span class="string">&quot;静影&quot;</span>, <span class="string">&quot;依云&quot;</span>, <span class="string">&quot;凌瑶&quot;</span>, <span class="string">&quot;巧春&quot;</span>, <span class="string">&quot;安荷&quot;</span>, <span class="string">&quot;佳红&quot;</span>, <span class="string">&quot;雁卉&quot;</span>, <span class="string">&quot;菲霞&quot;</span>,
+        <span class="string">&quot;莉梦&quot;</span>, <span class="string">&quot;梦芹&quot;</span>, <span class="string">&quot;月虹&quot;</span>, <span class="string">&quot;以萱&quot;</span>, <span class="string">&quot;红芳&quot;</span>, <span class="string">&quot;水云&quot;</span>, <span class="string">&quot;幻丝&quot;</span>, <span class="string">&quot;语凤&quot;</span>, <span class="string">&quot;香怡&quot;</span>, <span class="string">&quot;婷莉&quot;</span>, <span class="string">&quot;依柏&quot;</span>,
+        <span class="string">&quot;润慧&quot;</span>, <span class="string">&quot;雪曦&quot;</span>, <span class="string">&quot;璇盈&quot;</span>, <span class="string">&quot;平绿&quot;</span>, <span class="string">&quot;乐丹&quot;</span>, <span class="string">&quot;紫真&quot;</span>, <span class="string">&quot;念薇&quot;</span>, <span class="string">&quot;春儿&quot;</span>, <span class="string">&quot;谷波&quot;</span>, <span class="string">&quot;菡颖&quot;</span>, <span class="string">&quot;秋春&quot;</span>,
+        <span class="string">&quot;蕾碧&quot;</span>, <span class="string">&quot;珊琴&quot;</span>, <span class="string">&quot;翠柳&quot;</span>, <span class="string">&quot;芹香&quot;</span>, <span class="string">&quot;云燕&quot;</span>, <span class="string">&quot;紫超&quot;</span>, <span class="string">&quot;艳姗&quot;</span>, <span class="string">&quot;瑜昕&quot;</span>, <span class="string">&quot;念芹&quot;</span>, <span class="string">&quot;静琪&quot;</span>, <span class="string">&quot;柔雅&quot;</span>,
+        <span class="string">&quot;宛凝&quot;</span>, <span class="string">&quot;沛菡&quot;</span>, <span class="string">&quot;醉蝶&quot;</span>, <span class="string">&quot;语嫣&quot;</span>, <span class="string">&quot;幻紫&quot;</span>, <span class="string">&quot;萱雅&quot;</span>, <span class="string">&quot;绮彤&quot;</span>, <span class="string">&quot;香菱&quot;</span>, <span class="string">&quot;若蕾&quot;</span>, <span class="string">&quot;晓玫&quot;</span>, <span class="string">&quot;馨蕊&quot;</span>,
+        <span class="string">&quot;水瑶&quot;</span>, <span class="string">&quot;珊缦&quot;</span>, <span class="string">&quot;芳菲&quot;</span>, <span class="string">&quot;海桃&quot;</span>, <span class="string">&quot;雅儿&quot;</span>, <span class="string">&quot;蕾雅&quot;</span>, <span class="string">&quot;碧彤&quot;</span>, <span class="string">&quot;黛亦&quot;</span>, <span class="string">&quot;蝶葵&quot;</span>, <span class="string">&quot;淑颖&quot;</span>, <span class="string">&quot;寻春&quot;</span>,
+        <span class="string">&quot;梅雪&quot;</span>, <span class="string">&quot;如春&quot;</span>, <span class="string">&quot;紫怡&quot;</span>, <span class="string">&quot;妍芳&quot;</span>, <span class="string">&quot;静璇&quot;</span>, <span class="string">&quot;昕怡&quot;</span>, <span class="string">&quot;醉珊&quot;</span>, <span class="string">&quot;紫芳&quot;</span>, <span class="string">&quot;雨嘉&quot;</span>, <span class="string">&quot;晓青&quot;</span>, <span class="string">&quot;艳蓉&quot;</span>,
+        <span class="string">&quot;采菡&quot;</span>, <span class="string">&quot;清云&quot;</span>, <span class="string">&quot;婕莲&quot;</span>, <span class="string">&quot;冰烟&quot;</span>, <span class="string">&quot;玫雅&quot;</span>, <span class="string">&quot;雅彤&quot;</span>, <span class="string">&quot;茹桃&quot;</span>, <span class="string">&quot;紫薇&quot;</span>, <span class="string">&quot;思芳&quot;</span>, <span class="string">&quot;冰颖&quot;</span>, <span class="string">&quot;晓亦&quot;</span>,
+        <span class="string">&quot;含樱&quot;</span>, <span class="string">&quot;菲槐&quot;</span>, <span class="string">&quot;水莹&quot;</span>, <span class="string">&quot;水冰&quot;</span>, <span class="string">&quot;彤旋&quot;</span>, <span class="string">&quot;月霞&quot;</span>, <span class="string">&quot;丹华&quot;</span>, <span class="string">&quot;海亦&quot;</span>, <span class="string">&quot;晴柔&quot;</span>, <span class="string">&quot;曦奇&quot;</span>, <span class="string">&quot;歆翠&quot;</span>,
+    ];
+    <span class="kw">const</span> <span class="ident">NAME_LAST_NAME</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+        <span class="string">&quot;王&quot;</span>, <span class="string">&quot;李&quot;</span>, <span class="string">&quot;张&quot;</span>, <span class="string">&quot;刘&quot;</span>, <span class="string">&quot;陈&quot;</span>, <span class="string">&quot;杨&quot;</span>, <span class="string">&quot;黄&quot;</span>, <span class="string">&quot;赵&quot;</span>, <span class="string">&quot;吴&quot;</span>, <span class="string">&quot;周&quot;</span>, <span class="string">&quot;徐&quot;</span>, <span class="string">&quot;孙&quot;</span>, <span class="string">&quot;马&quot;</span>, <span class="string">&quot;朱&quot;</span>, <span class="string">&quot;胡&quot;</span>,
+        <span class="string">&quot;郭&quot;</span>, <span class="string">&quot;何&quot;</span>, <span class="string">&quot;高&quot;</span>, <span class="string">&quot;林&quot;</span>, <span class="string">&quot;郑&quot;</span>, <span class="string">&quot;谢&quot;</span>, <span class="string">&quot;罗&quot;</span>, <span class="string">&quot;梁&quot;</span>, <span class="string">&quot;宋&quot;</span>, <span class="string">&quot;唐&quot;</span>, <span class="string">&quot;许&quot;</span>, <span class="string">&quot;韩&quot;</span>, <span class="string">&quot;冯&quot;</span>, <span class="string">&quot;邓&quot;</span>, <span class="string">&quot;曹&quot;</span>,
+        <span class="string">&quot;彭&quot;</span>, <span class="string">&quot;曾&quot;</span>, <span class="string">&quot;萧&quot;</span>, <span class="string">&quot;田&quot;</span>, <span class="string">&quot;董&quot;</span>, <span class="string">&quot;袁&quot;</span>, <span class="string">&quot;潘&quot;</span>, <span class="string">&quot;于&quot;</span>, <span class="string">&quot;蒋&quot;</span>, <span class="string">&quot;蔡&quot;</span>, <span class="string">&quot;余&quot;</span>, <span class="string">&quot;杜&quot;</span>, <span class="string">&quot;叶&quot;</span>, <span class="string">&quot;程&quot;</span>, <span class="string">&quot;苏&quot;</span>,
+        <span class="string">&quot;魏&quot;</span>, <span class="string">&quot;吕&quot;</span>, <span class="string">&quot;丁&quot;</span>, <span class="string">&quot;任&quot;</span>, <span class="string">&quot;沈&quot;</span>, <span class="string">&quot;姚&quot;</span>, <span class="string">&quot;卢&quot;</span>, <span class="string">&quot;姜&quot;</span>, <span class="string">&quot;崔&quot;</span>, <span class="string">&quot;钟&quot;</span>, <span class="string">&quot;谭&quot;</span>, <span class="string">&quot;陆&quot;</span>, <span class="string">&quot;汪&quot;</span>, <span class="string">&quot;范&quot;</span>, <span class="string">&quot;金&quot;</span>,
+        <span class="string">&quot;石&quot;</span>, <span class="string">&quot;廖&quot;</span>, <span class="string">&quot;贾&quot;</span>, <span class="string">&quot;夏&quot;</span>, <span class="string">&quot;韦&quot;</span>, <span class="string">&quot;付&quot;</span>, <span class="string">&quot;方&quot;</span>, <span class="string">&quot;白&quot;</span>, <span class="string">&quot;邹&quot;</span>, <span class="string">&quot;孟&quot;</span>, <span class="string">&quot;熊&quot;</span>, <span class="string">&quot;秦&quot;</span>, <span class="string">&quot;邱&quot;</span>, <span class="string">&quot;江&quot;</span>, <span class="string">&quot;尹&quot;</span>,
+        <span class="string">&quot;薛&quot;</span>, <span class="string">&quot;闫&quot;</span>, <span class="string">&quot;段&quot;</span>, <span class="string">&quot;雷&quot;</span>, <span class="string">&quot;侯&quot;</span>, <span class="string">&quot;龙&quot;</span>, <span class="string">&quot;史&quot;</span>, <span class="string">&quot;陶&quot;</span>, <span class="string">&quot;黎&quot;</span>, <span class="string">&quot;贺&quot;</span>, <span class="string">&quot;顾&quot;</span>, <span class="string">&quot;毛&quot;</span>, <span class="string">&quot;郝&quot;</span>, <span class="string">&quot;龚&quot;</span>, <span class="string">&quot;邵&quot;</span>,
+        <span class="string">&quot;万&quot;</span>, <span class="string">&quot;钱&quot;</span>, <span class="string">&quot;严&quot;</span>, <span class="string">&quot;覃&quot;</span>, <span class="string">&quot;武&quot;</span>, <span class="string">&quot;戴&quot;</span>, <span class="string">&quot;莫&quot;</span>, <span class="string">&quot;孔&quot;</span>, <span class="string">&quot;向&quot;</span>, <span class="string">&quot;汤&quot;</span>, <span class="string">&quot;欧阳&quot;</span>,
+    ];
+    <span class="kw">const</span> <span class="ident">NAME_TITLE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;先生&quot;</span>, <span class="string">&quot;小姐&quot;</span>, <span class="string">&quot;男士&quot;</span>, <span class="string">&quot;女士&quot;</span>];
+    <span class="kw">const</span> <span class="ident">NAME_TPL</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;{LastName}{FirstName}&quot;</span>;
+    <span class="kw">const</span> <span class="ident">NAME_WITH_TITLE_TPL</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;{LastName}{FirstName}{Title}&quot;</span>;
+
+    <span class="kw">const</span> <span class="ident">JOB_SENIORITY</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span>
+        <span class="kw-2">&amp;</span>[<span class="string">&quot;领导级&quot;</span>, <span class="string">&quot;高级&quot;</span>, <span class="string">&quot;初级&quot;</span>, <span class="string">&quot;首席级&quot;</span>, <span class="string">&quot;负责人级&quot;</span>];
+    <span class="kw">const</span> <span class="ident">JOB_FIELD</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+        <span class="string">&quot;市场&quot;</span>,
+        <span class="string">&quot;程序员&quot;</span>,
+        <span class="string">&quot;会计师&quot;</span>,
+        <span class="string">&quot;管理员&quot;</span>,
+        <span class="string">&quot;广告&quot;</span>,
+        <span class="string">&quot;银行&quot;</span>,
+        <span class="string">&quot;社区服务&quot;</span>,
+        <span class="string">&quot;建设&quot;</span>,
+        <span class="string">&quot;咨询&quot;</span>,
+        <span class="string">&quot;设计&quot;</span>,
+        <span class="string">&quot;教育&quot;</span>,
+        <span class="string">&quot;农业&quot;</span>,
+        <span class="string">&quot;政府&quot;</span>,
+        <span class="string">&quot;医疗&quot;</span>,
+        <span class="string">&quot;招待&quot;</span>,
+        <span class="string">&quot;法律&quot;</span>,
+        <span class="string">&quot;制造&quot;</span>,
+        <span class="string">&quot;采矿&quot;</span>,
+        <span class="string">&quot;房地产&quot;</span>,
+        <span class="string">&quot;零售&quot;</span>,
+        <span class="string">&quot;销售&quot;</span>,
+        <span class="string">&quot;技术&quot;</span>,
+    ];
+    <span class="kw">const</span> <span class="ident">JOB_POSITION</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
+        <span class="string">&quot;主管&quot;</span>,
+        <span class="string">&quot;执行&quot;</span>,
+        <span class="string">&quot;联络&quot;</span>,
+        <span class="string">&quot;主任&quot;</span>,
+        <span class="string">&quot;经理&quot;</span>,
+        <span class="string">&quot;工程师&quot;</span>,
+        <span class="string">&quot;专员&quot;</span>,
+        <span class="string">&quot;主任&quot;</span>,
+        <span class="string">&quot;协调员&quot;</span>,
+        <span class="string">&quot;行政&quot;</span>,
+        <span class="string">&quot;建筑师&quot;</span>,
+        <span class="string">&quot;分析师&quot;</span>,
+        <span class="string">&quot;设计师&quot;</span>,
+        <span class="string">&quot;策划人&quot;</span>,
+        <span class="string">&quot;管事员&quot;</span>,
+        <span class="string">&quot;技术员&quot;</span>,
+        <span class="string">&quot;开发商&quot;</span>,
+        <span class="string">&quot;制作人&quot;</span>,
+        <span class="string">&quot;顾问&quot;</span>,
+        <span class="string">&quot;助理&quot;</span>,
+        <span class="string">&quot;调解人&quot;</span>,
+        <span class="string">&quot;代理&quot;</span>,
+        <span class="string">&quot;代表&quot;</span>,
+        <span class="string">&quot;战略家&quot;</span>,
+    ];
+    <span class="kw">const</span> <span class="ident">JOB_TITLE_TPL</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;{Seniority} {Field} {Position}&quot;</span>;
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="fake" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

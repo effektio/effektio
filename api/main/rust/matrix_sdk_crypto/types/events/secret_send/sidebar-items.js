@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["SecretSendContent","The `m.secret.send` event content."]],"type":[["SecretSendEvent","The `m.secret.send` to-device event."]]};

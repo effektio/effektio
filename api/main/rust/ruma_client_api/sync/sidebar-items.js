@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["sync_events","`GET /_matrix/client/*/sync`"]]};

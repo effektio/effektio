@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Abi","Abi type."]],"struct":[["FfiGen","Main entry point to `ffi-gen`."]]};

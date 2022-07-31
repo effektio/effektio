@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["RequestAction","Action for an `m.secret.request` event."],["SecretName","The name of a secret."]],"struct":[["ToDeviceSecretRequestEventContent","The content of an `m.secret.request` event."]],"type":[["ToDeviceSecretRequestEvent","An `m.secret.request` event."]]};

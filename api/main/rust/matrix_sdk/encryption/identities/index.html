@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Cryptographic identities used in Matrix."><meta name="keywords" content="rust, rustlang, rust-lang, identities"><title>matrix_sdk::encryption::identities - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../matrix_sdk/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../matrix_sdk/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Module identities</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../matrix_sdk/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">matrix_sdk</a>::<wbr><a href="../index.html">encryption</a>::<wbr><a class="mod" href="#">identities</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/matrix_sdk/encryption/identities/mod.rs.html#15-120">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Cryptographic identities used in Matrix.</p>
+<p>There are two types of cryptographic identities in Matrix.</p>
+<ol>
+<li>
+<p>Devices, which are backed by <a href="https://spec.matrix.org/unstable/client-server-api/#device-keys">device keys</a>, they represent each
+individual log in by an E2EE capable Matrix client. We represent devices
+using the <a href="struct.Device.html" title="Device"><code>Device</code></a> struct.</p>
+</li>
+<li>
+<p>User identities, which are backed by <a href="https://spec.matrix.org/unstable/client-server-api/#cross-signing">cross signing keys</a>. The user
+identity represent a unique E2EE capable identity of any given user. This
+identity is generally created and uploaded to the server by the first E2EE
+capable client the user logs in with. We represent user identities using the
+<a href="struct.UserIdentity.html" title="UserIdentity"><code>UserIdentity</code></a> struct.</p>
+</li>
+</ol>
+<p>A <a href="struct.Device.html" title="Device"><code>Device</code></a> or an <a href="struct.UserIdentity.html" title="UserIdentity"><code>UserIdentity</code></a> can be used to inspect the public keys
+of the device/identity, or it can be used to initiate a interactive
+verification flow. They can also be manually marked as verified.</p>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<p>Verifying a device is pretty straightforward:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">encryption</span>().<span class="ident">get_device</span>(<span class="ident">alice</span>, <span class="macro">device_id!</span>(<span class="string">&quot;DEVICEID&quot;</span>)).<span class="kw">await</span><span class="question-mark">?</span>;
+
+<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">device</span>) <span class="op">=</span> <span class="ident">device</span> {
+    <span class="comment">// Let&#39;s request the device to be verified.</span>
+    <span class="kw">let</span> <span class="ident">verification</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">request_verification</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+
+    <span class="comment">// Actually this is taking too long.</span>
+    <span class="ident">verification</span>.<span class="ident">cancel</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+
+    <span class="comment">// Let&#39;s just mark it as verified.</span>
+    <span class="ident">device</span>.<span class="ident">verify</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+}</code></pre></div>
+<p>Verifying a user identity works largely the same:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">user</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">encryption</span>().<span class="ident">get_user_identity</span>(<span class="ident">alice</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+
+<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">user</span>) <span class="op">=</span> <span class="ident">user</span> {
+    <span class="comment">// Let&#39;s request the user to be verified.</span>
+    <span class="kw">let</span> <span class="ident">verification</span> <span class="op">=</span> <span class="ident">user</span>.<span class="ident">request_verification</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+
+    <span class="comment">// Actually this is taking too long.</span>
+    <span class="ident">verification</span>.<span class="ident">cancel</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+
+    <span class="comment">// Let&#39;s just mark it as verified.</span>
+    <span class="ident">user</span>.<span class="ident">verify</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+}</code></pre></div>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Device.html" title="matrix_sdk::encryption::identities::Device struct">Device</a></div><div class="item-right docblock-short"><p>A device represents a E2EE capable client or device of an user.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MasterPubkey.html" title="matrix_sdk::encryption::identities::MasterPubkey struct">MasterPubkey</a></div><div class="item-right docblock-short"><p>Wrapper for a cross signing key marking it as the master key.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.UserDevices.html" title="matrix_sdk::encryption::identities::UserDevices struct">UserDevices</a></div><div class="item-right docblock-short"><p>The collection of all the <a href="struct.Device.html" title="Device"><code>Device</code></a>s a user has.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.UserIdentity.html" title="matrix_sdk::encryption::identities::UserIdentity struct">UserIdentity</a></div><div class="item-right docblock-short"><p>A struct representing a E2EE capable identity of a user.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ManualVerifyError.html" title="matrix_sdk::encryption::identities::ManualVerifyError enum">ManualVerifyError</a></div><div class="item-right docblock-short"><p>Error for the manual verification step, when we manually sign users or
+devices.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.RequestVerificationError.html" title="matrix_sdk::encryption::identities::RequestVerificationError enum">RequestVerificationError</a></div><div class="item-right docblock-short"><p>Error when requesting a verification.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="matrix_sdk" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

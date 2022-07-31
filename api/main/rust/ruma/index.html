@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Types and traits for working with the Matrix protocol."><meta name="keywords" content="rust, rustlang, rust-lang, ruma"><title>ruma - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" href="https://www.ruma.io/favicon.ico"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../ruma/index.html"><div class="logo-container"><img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../ruma/index.html"><div class="logo-container">
+                    <img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate ruma</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.6.3</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../ruma/index.html">
+                        <img src="https://www.ruma.io/images/logo.png" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">ruma</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/ruma/lib.rs.html#1-177">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Types and traits for working with the <a href="https://matrix.org">Matrix</a> protocol.</p>
+<p>This crate re-exports things from all of the other ruma crates so you don’t
+have to manually keep all the versions in sync.</p>
+<p>Which crates are re-exported can be configured through cargo features.</p>
+<blockquote>
+<p>⚠ Some details might be missing because rustdoc has trouble with re-exports so you may need
+to refer to other crates’ documentations.</p>
+</blockquote>
+<blockquote>
+<p>🛈 For internal consistency, ruma uses American spelling for variable names. Actual values may
+differ, as the matrix specification has a mix of British and American English.</p>
+</blockquote>
+<h2 id="api-features"><a href="#api-features">API features</a></h2>
+<p>Depending on which parts of Matrix are relevant to you, activate the following features:</p>
+<ul>
+<li><code>appservice-api</code> – Application Service API.</li>
+<li><code>client-api</code> – Client-Server API.</li>
+<li><code>federation-api</code> – Server-Server (Federation) API.</li>
+<li><code>identity-service-api</code> – Identity Service API.</li>
+<li><code>push-gateway-api</code> – Push Gateway API.</li>
+</ul>
+<p>These features have <code>client</code>- and <code>server</code>-optimized variants that are enabled respectively
+with the <code>-c</code> and <code>-s</code> suffixes. For example:</p>
+<ul>
+<li><code>client-api-c</code> – The Client-Server API optimized for the client side.</li>
+<li><code>client-api-s</code> – The Client-Server API optimized for the server side.</li>
+</ul>
+<h2 id="compatibility-feature"><a href="#compatibility-feature">Compatibility feature</a></h2>
+<ul>
+<li><code>compat</code> increases compatibility with other parts of the Matrix ecosystem, at the expense of
+deviating from the specification.</li>
+</ul>
+<h2 id="convenience-features"><a href="#convenience-features">Convenience features</a></h2>
+<p>These features are only useful if you want to use a method that requires it:</p>
+<ul>
+<li><code>rand</code></li>
+<li><code>markdown</code></li>
+</ul>
+<h2 id="unstable-features"><a href="#unstable-features">Unstable features</a></h2>
+<p>By using these features, you opt out of all semver guarantees Ruma otherwise provides:</p>
+<ul>
+<li><code>unstable-exhaustive-types</code> – Most types in Ruma are marked as non-exhaustive to avoid
+breaking changes when new fields are added in the specification. This feature compiles all
+types as exhaustive.</li>
+<li><code>unstable-mscXXXX</code>, where <code>XXXX</code> is the MSC number – Upcoming Matrix features that may be
+subject to change or removal.</li>
+<li><code>unstable-pre-spec</code> – Undocumented Matrix features that may be subject to change or removal.</li>
+<li><code>unstable-sanitize</code> – Convenience methods for spec-compliant HTML sanitization that have not
+been thoroughly tested.</li>
+</ul>
+<h2 id="common-features"><a href="#common-features">Common features</a></h2>
+<p>These submodules are usually activated by the API features when needed:</p>
+<ul>
+<li><code>api</code></li>
+<li><code>events</code></li>
+<li><code>signatures</code></li>
+</ul>
+<h2 id="ruma-client-features"><a href="#ruma-client-features"><code>ruma-client</code> features</a></h2>
+<p>The <code>client</code> feature activates [<code>ruma::client</code>][client], and <code>client-ext-client-api</code> activates
+<code>ruma-client</code>s <code>client-api</code> feature. All other <code>client-*</code> features activate the same feature
+without the <code>client-</code> prefix on <code>ruma-client</code>. See the crate’s documentation for the effect of
+these features.</p>
+<p>If you are viewing this on <code>docs.rs</code>, you can have a look at the feature dependencies by
+clicking <strong>Feature flags</strong> in the toolbar at the top.</p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.assign"><code>pub use assign::<a class="macro" href="../assign/macro.assign.html" title="macro assign::assign">assign</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.int"><code>pub use js_int::<a class="macro" href="../js_int/macro.int.html" title="macro js_int::int">int</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.uint"><code>pub use js_int::<a class="macro" href="../js_int/macro.uint.html" title="macro js_int::uint">uint</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.Int"><code>pub use js_int::<a class="struct" href="../js_int/int/struct.Int.html" title="struct js_int::int::Int">Int</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.UInt"><code>pub use js_int::<a class="struct" href="../js_int/uint/struct.UInt.html" title="struct js_int::uint::UInt">UInt</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="api/index.html" title="ruma::api mod">api</a></div><div class="item-right docblock-short"><p>(De)serializable types for various <a href="https://spec.matrix.org/v1.2/#matrix-apis">Matrix APIs</a> requests and responses and abstractions
+for them.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="authentication/index.html" title="ruma::authentication mod">authentication</a></div><div class="item-right docblock-short"><p>Common types for authentication.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="canonical_json/index.html" title="ruma::canonical_json mod">canonical_json</a></div><div class="item-right docblock-short"><p>Canonical JSON types and related functions.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="directory/index.html" title="ruma::directory mod">directory</a></div><div class="item-right docblock-short"><p>Common types for room directory endpoints.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="encryption/index.html" title="ruma::encryption mod">encryption</a></div><div class="item-right docblock-short"><p>Common types for <a href="https://spec.matrix.org/v1.2/client-server-api/#end-to-end-encryption">encryption</a> related tasks.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="events/index.html" title="ruma::events mod">events</a></div><div class="item-right docblock-short"><p>(De)serializable types for the events in the <a href="https://matrix.org">Matrix</a> specification.
+These types are used by other Ruma crates.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="matrix_uri/index.html" title="ruma::matrix_uri mod">matrix_uri</a></div><div class="item-right docblock-short"><p>Matrix URIs.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="power_levels/index.html" title="ruma::power_levels mod">power_levels</a></div><div class="item-right docblock-short"><p>Common types for the <a href="https://spec.matrix.org/v1.2/client-server-api/#mroompower_levels"><code>m.room.power_levels</code> event</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="presence/index.html" title="ruma::presence mod">presence</a></div><div class="item-right docblock-short"><p>Common types for the <a href="https://spec.matrix.org/v1.2/client-server-api/#presence">presence module</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="push/index.html" title="ruma::push mod">push</a></div><div class="item-right docblock-short"><p>Common types for the <a href="https://spec.matrix.org/v1.2/client-server-api/#push-notifications">push notifications module</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="receipt/index.html" title="ruma::receipt mod">receipt</a></div><div class="item-right docblock-short"><p>Common types for receipts.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="room/index.html" title="ruma::room mod">room</a></div><div class="item-right docblock-short"><p>Common types for rooms.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="serde/index.html" title="ruma::serde mod">serde</a></div><div class="item-right docblock-short"><p>(De)serialization helpers for other Ruma crates.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="thirdparty/index.html" title="ruma::thirdparty mod">thirdparty</a></div><div class="item-right docblock-short"><p>Common types for the <a href="https://spec.matrix.org/v1.2/client-server-api/#third-party-networks">third party networks module</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="to_device/index.html" title="ruma::to_device mod">to_device</a></div><div class="item-right docblock-short"><p>Common types for the Send-To-Device Messaging</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="user_id/index.html" title="ruma::user_id mod">user_id</a></div><div class="item-right docblock-short"><p>Matrix user identifiers.</p>
+</div></div></div><h2 id="macros" class="small-section-header"><a href="#macros">Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.device_id.html" title="ruma::device_id macro">device_id</a></div><div class="item-right docblock-short"><p>Shorthand for <code>&lt;&amp;DeviceId&gt;::from</code>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.device_key_id.html" title="ruma::device_key_id macro">device_key_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>DeviceKeyId</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.event_id.html" title="ruma::event_id macro">event_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>EventId</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.mxc_uri.html" title="ruma::mxc_uri macro">mxc_uri</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>MxcUri</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.room_alias_id.html" title="ruma::room_alias_id macro">room_alias_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>RoomAliasId</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.room_id.html" title="ruma::room_id macro">room_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>RoomId</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.room_version_id.html" title="ruma::room_version_id macro">room_version_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>RoomVersionId</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.server_name.html" title="ruma::server_name macro">server_name</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>ServerName</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.server_signing_key_id.html" title="ruma::server_signing_key_id macro">server_signing_key_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>ServerSigningKeyId</code> construction.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.user_id.html" title="ruma::user_id macro">user_id</a></div><div class="item-right docblock-short"><p>Compile-time checked <code>UserId</code> construction.</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ClientSecret.html" title="ruma::ClientSecret struct">ClientSecret</a></div><div class="item-right docblock-short"><p>A client secret.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DeviceId.html" title="ruma::DeviceId struct">DeviceId</a></div><div class="item-right docblock-short"><p>A Matrix key ID.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DeviceKeyId.html" title="ruma::DeviceKeyId struct">DeviceKeyId</a></div><div class="item-right docblock-short"><p>A key algorithm and a device id, combined with a ‘:’.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.EventId.html" title="ruma::EventId struct">EventId</a></div><div class="item-right docblock-short"><p>A Matrix <a href="https://spec.matrix.org/v1.2/appendices/#room-ids-and-event-ids">event ID</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.KeyId.html" title="ruma::KeyId struct">KeyId</a></div><div class="item-right docblock-short"><p>A key algorithm and key name delimited by a colon.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.KeyName.html" title="ruma::KeyName struct">KeyName</a></div><div class="item-right docblock-short"><p>A Matrix key identifier.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MatrixToUri.html" title="ruma::MatrixToUri struct">MatrixToUri</a></div><div class="item-right docblock-short"><p>The <a href="https://spec.matrix.org/v1.2/appendices/#matrixto-navigation"><code>matrix.to</code> URI</a> representation of a user, room or event.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MatrixUri.html" title="ruma::MatrixUri struct">MatrixUri</a></div><div class="item-right docblock-short"><p>The <a href="https://spec.matrix.org/v1.2/appendices/#matrix-uri-scheme"><code>matrix:</code> URI</a> representation of a user, room or event.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MilliSecondsSinceUnixEpoch.html" title="ruma::MilliSecondsSinceUnixEpoch struct">MilliSecondsSinceUnixEpoch</a></div><div class="item-right docblock-short"><p>A timestamp represented as the number of milliseconds since the unix epoch.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MxcUri.html" title="ruma::MxcUri struct">MxcUri</a></div><div class="item-right docblock-short"><p>A URI that should be a Matrix-spec compliant <a href="https://spec.matrix.org/v1.2/client-server-api/#matrix-content-mxc-uris">MXC URI</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedClientSecret.html" title="ruma::OwnedClientSecret struct">OwnedClientSecret</a></div><div class="item-right docblock-short"><p>Owned variant of ClientSecret</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedDeviceId.html" title="ruma::OwnedDeviceId struct">OwnedDeviceId</a></div><div class="item-right docblock-short"><p>Owned variant of DeviceId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedDeviceKeyId.html" title="ruma::OwnedDeviceKeyId struct">OwnedDeviceKeyId</a></div><div class="item-right docblock-short"><p>Owned variant of DeviceKeyId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedEventId.html" title="ruma::OwnedEventId struct">OwnedEventId</a></div><div class="item-right docblock-short"><p>Owned variant of EventId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedKeyId.html" title="ruma::OwnedKeyId struct">OwnedKeyId</a></div><div class="item-right docblock-short"><p>Owned variant of KeyId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedKeyName.html" title="ruma::OwnedKeyName struct">OwnedKeyName</a></div><div class="item-right docblock-short"><p>Owned variant of KeyName</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedMxcUri.html" title="ruma::OwnedMxcUri struct">OwnedMxcUri</a></div><div class="item-right docblock-short"><p>Owned variant of MxcUri</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedRoomAliasId.html" title="ruma::OwnedRoomAliasId struct">OwnedRoomAliasId</a></div><div class="item-right docblock-short"><p>Owned variant of RoomAliasId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedRoomId.html" title="ruma::OwnedRoomId struct">OwnedRoomId</a></div><div class="item-right docblock-short"><p>Owned variant of RoomId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedRoomOrAliasId.html" title="ruma::OwnedRoomOrAliasId struct">OwnedRoomOrAliasId</a></div><div class="item-right docblock-short"><p>Owned variant of RoomOrAliasId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedServerName.html" title="ruma::OwnedServerName struct">OwnedServerName</a></div><div class="item-right docblock-short"><p>Owned variant of ServerName</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedSessionId.html" title="ruma::OwnedSessionId struct">OwnedSessionId</a></div><div class="item-right docblock-short"><p>Owned variant of SessionId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedTransactionId.html" title="ruma::OwnedTransactionId struct">OwnedTransactionId</a></div><div class="item-right docblock-short"><p>Owned variant of TransactionId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OwnedUserId.html" title="ruma::OwnedUserId struct">OwnedUserId</a></div><div class="item-right docblock-short"><p>Owned variant of UserId</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RoomAliasId.html" title="ruma::RoomAliasId struct">RoomAliasId</a></div><div class="item-right docblock-short"><p>A Matrix <a href="https://spec.matrix.org/v1.2/appendices/#room-aliases">room alias ID</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RoomId.html" title="ruma::RoomId struct">RoomId</a></div><div class="item-right docblock-short"><p>A Matrix <a href="https://spec.matrix.org/v1.2/appendices/#room-ids-and-event-ids">room ID</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RoomOrAliasId.html" title="ruma::RoomOrAliasId struct">RoomOrAliasId</a></div><div class="item-right docblock-short"><p>A Matrix <a href="https://spec.matrix.org/v1.2/appendices/#room-ids-and-event-ids">room ID</a> or a Matrix <a href="https://spec.matrix.org/v1.2/appendices/#room-aliases">room alias ID</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SecondsSinceUnixEpoch.html" title="ruma::SecondsSinceUnixEpoch struct">SecondsSinceUnixEpoch</a></div><div class="item-right docblock-short"><p>A timestamp represented as the number of seconds since the unix epoch.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ServerName.html" title="ruma::ServerName struct">ServerName</a></div><div class="item-right docblock-short"><p>A Matrix-spec compliant <a href="https://spec.matrix.org/v1.2/appendices/#server-name">server name</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SessionId.html" title="ruma::SessionId struct">SessionId</a></div><div class="item-right docblock-short"><p>A session ID.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Signatures.html" title="ruma::Signatures struct">Signatures</a></div><div class="item-right docblock-short"><p>Map of all signatures, grouped by entity</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.TransactionId.html" title="ruma::TransactionId struct">TransactionId</a></div><div class="item-right docblock-short"><p>A Matrix transaction ID.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.UserId.html" title="ruma::UserId struct">UserId</a></div><div class="item-right docblock-short"><p>A Matrix <a href="https://spec.matrix.org/v1.2/appendices/#user-identifiers">user ID</a>.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.CanonicalJsonError.html" title="ruma::CanonicalJsonError enum">CanonicalJsonError</a></div><div class="item-right docblock-short"><p>The set of possible errors when serializing to canonical JSON.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.CanonicalJsonValue.html" title="ruma::CanonicalJsonValue enum">CanonicalJsonValue</a></div><div class="item-right docblock-short"><p>Represents a canonical JSON value as per the Matrix specification.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DeviceKeyAlgorithm.html" title="ruma::DeviceKeyAlgorithm enum">DeviceKeyAlgorithm</a></div><div class="item-right docblock-short"><p>The basic key algorithms in the specification.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.EventEncryptionAlgorithm.html" title="ruma::EventEncryptionAlgorithm enum">EventEncryptionAlgorithm</a></div><div class="item-right docblock-short"><p>An encryption algorithm to be used to encrypt messages sent to a room.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.IdParseError.html" title="ruma::IdParseError enum">IdParseError</a></div><div class="item-right docblock-short"><p>An error encountered when trying to parse an invalid ID string.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.RoomVersionId.html" title="ruma::RoomVersionId enum">RoomVersionId</a></div><div class="item-right docblock-short"><p>A Matrix <a href="https://spec.matrix.org/v1.2/rooms/">room version</a> ID.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SigningKeyAlgorithm.html" title="ruma::SigningKeyAlgorithm enum">SigningKeyAlgorithm</a></div><div class="item-right docblock-short"><p>The signing key algorithms defined in the Matrix spec.</p>
+</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.CanonicalJsonObject.html" title="ruma::CanonicalJsonObject type">CanonicalJsonObject</a></div><div class="item-right docblock-short"><p>The inner type of <code>CanonicalJsonValue::Object</code>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.DeviceSignatures.html" title="ruma::DeviceSignatures type">DeviceSignatures</a></div><div class="item-right docblock-short"><p>Map of device signatures for an event, grouped by user.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.DeviceSigningKeyId.html" title="ruma::DeviceSigningKeyId type">DeviceSigningKeyId</a></div><div class="item-right docblock-short"><p>Algorithm + key name for device keys.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.EntitySignatures.html" title="ruma::EntitySignatures type">EntitySignatures</a></div><div class="item-right docblock-short"><p>Map of key identifier to signature values.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.OwnedDeviceSigningKeyId.html" title="ruma::OwnedDeviceSigningKeyId type">OwnedDeviceSigningKeyId</a></div><div class="item-right docblock-short"><p>Algorithm + key name for device keys.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.OwnedServerSigningKeyId.html" title="ruma::OwnedServerSigningKeyId type">OwnedServerSigningKeyId</a></div><div class="item-right docblock-short"><p>Algorithm + key name for homeserver signing keys.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.OwnedSigningKeyId.html" title="ruma::OwnedSigningKeyId type">OwnedSigningKeyId</a></div><div class="item-right docblock-short"><p>Algorithm + key name for signing keys.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ServerSignatures.html" title="ruma::ServerSignatures type">ServerSignatures</a></div><div class="item-right docblock-short"><p>Map of server signatures for an event, grouped by server.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ServerSigningKeyId.html" title="ruma::ServerSigningKeyId type">ServerSigningKeyId</a></div><div class="item-right docblock-short"><p>Algorithm + key name for homeserver signing keys.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="ruma" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

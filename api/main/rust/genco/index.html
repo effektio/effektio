@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="A whitespace-aware quasiquoter for beautiful code generation."><meta name="keywords" content="rust, rustlang, rust-lang, genco"><title>genco - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../genco/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../genco/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate genco</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.15.1</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../genco/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">genco</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/genco/lib.rs.html#1-152">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A whitespace-aware quasiquoter for beautiful code generation.</p>
+<p>Central to genco are the <a href="https://docs.rs/genco/0/genco/macro.quote.html">quote!</a> and <a href="https://docs.rs/genco/0/genco/macro.quote_in.html">quote_in!</a> procedural macros which
+ease the construction of <a href="https://docs.rs/genco/0/genco/tokens/struct.Tokens.html">token streams</a>.</p>
+<p>This project solves the following language-specific concerns:</p>
+<ul>
+<li>
+<p><strong>Imports</strong> — Generates and groups <a href="https://docs.rs/genco/0/genco/macro.quote.html#imports">import statements</a> as they are used.
+So you only import what you use, with no redundancy. We also do our best
+to <a href="file:///home/udoprog/repo/genco/target/doc/genco/lang/csharp/fn.import.html">solve namespace conflicts</a>.</p>
+</li>
+<li>
+<p><strong>String Quoting</strong> — genco knows how to <a href="https://docs.rs/genco/0/genco/macro.quote.html#string-quoting">quote strings</a>. And can even
+<a href="https://docs.rs/genco/0/genco/macro.quote.html#quoted-string-interpolation">interpolate</a> values <em>into</em> the quoted string if it’s supported by the
+language.</p>
+</li>
+<li>
+<p><strong>Structural Indentation</strong> — The quoter relies on intuitive
+<a href="https://docs.rs/genco/0/genco/macro.quote.html#whitespace-detection">whitespace detection</a> to structurally sort out spacings and indentation.
+Allowing genco to generate beautiful readable code with minimal effort.
+This is also a requirement for generating correctly behaving code in
+languages like Python where <a href="https://docs.python.org/3/faq/design.html#why-does-python-use-indentation-for-grouping-of-statements">indentation is meaningful</a>.</p>
+</li>
+<li>
+<p><strong>Language Customization</strong> — Building support for new languages is a
+piece of cake with the help of the <a href="https://docs.rs/genco/0/genco/macro.impl_lang.html">impl_lang!</a> macro.</p>
+</li>
+</ul>
+<br>
+<p>To do <a href="https://docs.rs/genco/0/genco/macro.quote.html#whitespace-detection">whitespace detection</a>, we depend on the nightly
+<a href="https://github.com/rust-lang/rust/issues/54725"><code>proc_macro_span</code> feature</a>.</p>
+<p><em>Until this is stabilized</em>, you must build and run projects using genco
+with a <code>nightly</code> compiler.</p>
+<div class="example-wrap"><pre class="language-bash"><code>cargo +nightly run --example rust</code></pre></div><br>
+<h3 id="supported-languages"><a href="#supported-languages">Supported Languages</a></h3>
+<p>The following are languages which have built-in support in genco.</p>
+<ul>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/rust/index.html">🦀 <b>Rust</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/rust.rs">Example</a></small></p>
+</li>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/java/index.html">☕ <b>Java</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/java.rs">Example</a></small></p>
+</li>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/csharp/index.html">🎼 <b>C#</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/csharp.rs">Example</a></small></p>
+</li>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/go/index.html">🐿️ <b>Go</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/go.rs">Example</a></small></p>
+</li>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/dart/index.html">🎯 <b>Dart</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/dart.rs">Example</a></small></p>
+</li>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/js/index.html">🌐 <b>JavaScript</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/js.rs">Example</a></small></p>
+</li>
+<li>
+<p><a href="https://docs.rs/genco/0/genco/lang/python/index.html">🐍 <b>Python</b></a><br>
+<small><a href="https://github.com/udoprog/genco/blob/master/examples/python.rs">Example</a></small></p>
+</li>
+</ul>
+<p><small>Is your favorite language missing? <b><a href="https://github.com/udoprog/genco/issues/new">Open an issue!</a></b></small></p>
+<p>You can run one of the examples by:</p>
+<div class="example-wrap"><pre class="language-bash"><code>cargo +nightly run --example rust</code></pre></div><br>
+<h3 id="rust-example"><a href="#rust-example">Rust Example</a></h3>
+<p>The following is a simple program producing Rust code to stdout with custom
+configuration:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">genco::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="ident">hash_map</span> <span class="op">=</span> <span class="ident">rust::import</span>(<span class="string">&quot;std::collections&quot;</span>, <span class="string">&quot;HashMap&quot;</span>);
+
+<span class="kw">let</span> <span class="ident">tokens</span>: <span class="ident">rust::Tokens</span> <span class="op">=</span> <span class="macro">quote!</span> {
+    <span class="kw">fn</span> <span class="ident">main</span>() {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> #<span class="ident">hash_map::new</span>();
+        <span class="ident">m</span>.<span class="ident">insert</span>(<span class="number">1u32</span>, <span class="number">2u32</span>);
+    }
+};
+
+<span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_file_string</span>()<span class="question-mark">?</span>);</code></pre></div>
+<p>This would produce:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
+    <span class="ident">m</span>.<span class="ident">insert</span>(<span class="number">1u32</span>, <span class="number">2u32</span>);
+}</code></pre></div>
+<br>
+</div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="fmt/index.html" title="genco::fmt mod">fmt</a></div><div class="item-right docblock-short"><p>Code formatting utilities.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="lang/index.html" title="genco::lang mod">lang</a></div><div class="item-right docblock-short"><p>Language specialization for genco</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="genco::prelude mod">prelude</a></div><div class="item-right docblock-short"><p>Prelude containing typical things to import when using the library.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="tokens/index.html" title="genco::tokens mod">tokens</a></div><div class="item-right docblock-short"><p>Utilities for working with token streams.</p>
+</div></div></div><h2 id="macros" class="small-section-header"><a href="#macros">Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.impl_lang.html" title="genco::impl_lang macro">impl_lang</a></div><div class="item-right docblock-short"><p>Macro to implement support for a custom language.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.quote.html" title="genco::quote macro">quote</a></div><div class="item-right docblock-short"><p>Whitespace sensitive quasi-quoting.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.quote_fn.html" title="genco::quote_fn macro">quote_fn</a></div><div class="item-right docblock-short"><p>Convenience macro for constructing a <a href="https://docs.rs/genco/0/genco/tokens/trait.FormatInto.html">FormatInto</a> implementation in-place.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.quote_in.html" title="genco::quote_in macro">quote_in</a></div><div class="item-right docblock-short"><p>Behaves the same as <a href="macro.quote.html">quote!</a> while quoting into an existing token stream
+with <code>&lt;target&gt; =&gt; &lt;quoted&gt;</code>.</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Tokens.html" title="genco::Tokens struct">Tokens</a></div><div class="item-right docblock-short"><p>A stream of tokens.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="genco" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

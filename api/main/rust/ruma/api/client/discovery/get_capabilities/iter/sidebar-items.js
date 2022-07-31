@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["CapabilitiesIter","An iterator over capabilities."],["CapabilityRef","Reference to a capability."]]};

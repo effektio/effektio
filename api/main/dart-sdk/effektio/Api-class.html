@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the Api class from the effektio library, for the Dart programming language.">
+  <title>Api class - effektio library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">effektio_flutter_sdk</a></li>
+    <li><a href="../effektio/effektio-library.html">effektio</a></li>
+    <li class="self-crumb">Api class</li>
+  </ol>
+  <div class="self-name">Api</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-class">Api</span> class 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Main entry point to library.</p>
+</section>
+
+
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+
+    <dl class="constructor-summary-list">
+        <dt id="Api" class="callable">
+          <span class="name"><a href="../effektio/Api/Api.html">Api</a></span><span class="signature">(<span class="parameter" id="-param-dynamicLibrary"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ffi/DynamicLibrary-class.html">DynamicLibrary</a></span> <span class="parameter-name">dynamicLibrary</span></span>)</span>
+        </dt>
+        <dd>
+          The symbols are looked up in <code>dynamicLibrary</code>.
+        </dd>
+        <dt id="Api.fromLookup" class="callable">
+          <span class="name"><a href="../effektio/Api/Api.fromLookup.html">Api.fromLookup</a></span><span class="signature">(<span class="parameter" id="fromLookup-param-lookup"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ffi/Pointer-class.html">Pointer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">lookup</span>(<span class="parameter" id="param-symbolName"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">symbolName</span></span>)</span>)</span>
+        </dt>
+        <dd>
+          The symbols are looked up with <code>lookup</code>.
+        </dd>
+        <dt id="Api.load" class="callable">
+          <span class="name"><a href="../effektio/Api/Api.load.html">Api.load</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          The library is loaded based on platform conventions.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="Api.loadDynamic" class="callable">
+          <span class="name"><a href="../effektio/Api/Api.loadDynamic.html">Api.loadDynamic</a></span><span class="signature">(<span class="parameter" id="loadDynamic-param-name"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)</span>
+        </dt>
+        <dd>
+          The library is dynamically loaded.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="Api.loadStatic" class="callable">
+          <span class="name"><a href="../effektio/Api/Api.loadStatic.html">Api.loadStatic</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          The library is loaded from the executable.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+    </dl>
+  </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features">read-only, inherited</div>
+
+</dd>
+
+      </dl>
+    </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="createFfiListConversation" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListConversation.html">createFfiListConversation</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListConversation-class.html">FfiListConversation</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListEmojiUnit" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListEmojiUnit.html">createFfiListEmojiUnit</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListEmojiUnit-class.html">FfiListEmojiUnit</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListFaq" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListFaq.html">createFfiListFaq</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListFaq-class.html">FfiListFaq</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListGroup" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListGroup.html">createFfiListGroup</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListGroup-class.html">FfiListGroup</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListMember" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListMember.html">createFfiListMember</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListMember-class.html">FfiListMember</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListNews" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListNews.html">createFfiListNews</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListNews-class.html">FfiListNews</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListRoomMessage" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListRoomMessage.html">createFfiListRoomMessage</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListRoomMessage-class.html">FfiListRoomMessage</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="createFfiListTag" class="callable">
+  <span class="name"><a href="../effektio/Api/createFfiListTag.html">createFfiListTag</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListTag-class.html">FfiListTag</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="genMockNews" class="callable">
+  <span class="name"><a href="../effektio/Api/genMockNews.html">genMockNews</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../effektio/FfiListNews-class.html">FfiListNews</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  generate news mock items
+  
+
+</dd>
+
+        <dt id="guestClient" class="callable">
+  <span class="name"><a href="../effektio/Api/guestClient.html">guestClient</a></span><span class="signature">(<wbr><span class="parameter" id="guestClient-param-basepath"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">basepath</span>, </span><span class="parameter" id="guestClient-param-homeserver"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">homeserver</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../effektio/Client-class.html">Client</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Create a new client anonymous client connecting to the homeserver
+  
+
+</dd>
+
+        <dt id="initLogging" class="callable">
+  <span class="name"><a href="../effektio/Api/initLogging.html">initLogging</a></span><span class="signature">(<wbr><span class="parameter" id="initLogging-param-filter"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filter</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Initialize logging
+  
+
+</dd>
+
+        <dt id="loginNewClient" class="callable">
+  <span class="name"><a href="../effektio/Api/loginNewClient.html">loginNewClient</a></span><span class="signature">(<wbr><span class="parameter" id="loginNewClient-param-basepath"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">basepath</span>, </span><span class="parameter" id="loginNewClient-param-username"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">username</span>, </span><span class="parameter" id="loginNewClient-param-password"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../effektio/Client-class.html">Client</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Create a new client for homeserver at url with storage at data_path
+  
+
+</dd>
+
+        <dt id="loginWithToken" class="callable">
+  <span class="name"><a href="../effektio/Api/loginWithToken.html">loginWithToken</a></span><span class="signature">(<wbr><span class="parameter" id="loginWithToken-param-basepath"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">basepath</span>, </span><span class="parameter" id="loginWithToken-param-restoreToken"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">restoreToken</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../effektio/Client-class.html">Client</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Create a new client from the restore token
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a non-existent method or property is accessed.
+  <div class="features">inherited</div>
+
+</dd>
+
+        <dt id="registerWithRegistrationToken" class="callable">
+  <span class="name"><a href="../effektio/Api/registerWithRegistrationToken.html">registerWithRegistrationToken</a></span><span class="signature">(<wbr><span class="parameter" id="registerWithRegistrationToken-param-basepath"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">basepath</span>, </span><span class="parameter" id="registerWithRegistrationToken-param-username"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">username</span>, </span><span class="parameter" id="registerWithRegistrationToken-param-password"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span>, </span><span class="parameter" id="registerWithRegistrationToken-param-registrationToken"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">registrationToken</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../effektio/Client-class.html">Client</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Create a new client from the restore token
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features">inherited</div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features">inherited</div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">effektio_flutter_sdk</a></li>
+  <li><a href="../effektio/effektio-library.html">effektio</a></li>
+  <li class="self-crumb">Api class</li>
+</ol>
+
+
+    <h5>effektio library</h5>
+    <ol>
+  <li class="section-title"><a href="../effektio/effektio-library.html#classes">Classes</a></li>
+  <li><a href="../effektio/Account-class.html">Account</a></li>
+  <li><a href="../effektio/Api-class.html">Api</a></li>
+  <li><a href="../effektio/Client-class.html">Client</a></li>
+  <li><a href="../effektio/Color-class.html">Color</a></li>
+  <li><a href="../effektio/Conversation-class.html">Conversation</a></li>
+  <li><a href="../effektio/CrossSigningEvent-class.html">CrossSigningEvent</a></li>
+  <li><a href="../effektio/CustomIterable-class.html">CustomIterable</a></li>
+  <li><a href="../effektio/CustomIterator-class.html">CustomIterator</a></li>
+  <li><a href="../effektio/EmojiUnit-class.html">EmojiUnit</a></li>
+  <li><a href="../effektio/Faq-class.html">Faq</a></li>
+  <li><a href="../effektio/FfiBufferFloat32-class.html">FfiBufferFloat32</a></li>
+  <li><a href="../effektio/FfiBufferFloat64-class.html">FfiBufferFloat64</a></li>
+  <li><a href="../effektio/FfiBufferInt16-class.html">FfiBufferInt16</a></li>
+  <li><a href="../effektio/FfiBufferInt32-class.html">FfiBufferInt32</a></li>
+  <li><a href="../effektio/FfiBufferInt64-class.html">FfiBufferInt64</a></li>
+  <li><a href="../effektio/FfiBufferInt8-class.html">FfiBufferInt8</a></li>
+  <li><a href="../effektio/FfiBufferUint16-class.html">FfiBufferUint16</a></li>
+  <li><a href="../effektio/FfiBufferUint32-class.html">FfiBufferUint32</a></li>
+  <li><a href="../effektio/FfiBufferUint64-class.html">FfiBufferUint64</a></li>
+  <li><a href="../effektio/FfiBufferUint8-class.html">FfiBufferUint8</a></li>
+  <li><a href="../effektio/FfiListConversation-class.html">FfiListConversation</a></li>
+  <li><a href="../effektio/FfiListEmojiUnit-class.html">FfiListEmojiUnit</a></li>
+  <li><a href="../effektio/FfiListFaq-class.html">FfiListFaq</a></li>
+  <li><a href="../effektio/FfiListGroup-class.html">FfiListGroup</a></li>
+  <li><a href="../effektio/FfiListMember-class.html">FfiListMember</a></li>
+  <li><a href="../effektio/FfiListNews-class.html">FfiListNews</a></li>
+  <li><a href="../effektio/FfiListRoomMessage-class.html">FfiListRoomMessage</a></li>
+  <li><a href="../effektio/FfiListTag-class.html">FfiListTag</a></li>
+  <li><a href="../effektio/FfiString-class.html">FfiString</a></li>
+  <li><a href="../effektio/FileDescription-class.html">FileDescription</a></li>
+  <li><a href="../effektio/Group-class.html">Group</a></li>
+  <li><a href="../effektio/ImageDescription-class.html">ImageDescription</a></li>
+  <li><a href="../effektio/Iter-class.html">Iter</a></li>
+  <li><a href="../effektio/Member-class.html">Member</a></li>
+  <li><a href="../effektio/News-class.html">News</a></li>
+  <li><a href="../effektio/RoomMessage-class.html">RoomMessage</a></li>
+  <li><a href="../effektio/SyncState-class.html">SyncState</a></li>
+  <li><a href="../effektio/Tag-class.html">Tag</a></li>
+  <li><a href="../effektio/TimelineStream-class.html">TimelineStream</a></li>
+  <li><a href="../effektio/UserId-class.html">UserId</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+        <li class="section-title"><a href="../effektio/Api-class.html#constructors">Constructors</a></li>
+          <li><a href="../effektio/Api/Api.html">Api</a></li>
+          <li><a href="../effektio/Api/Api.fromLookup.html">fromLookup</a></li>
+          <li><a href="../effektio/Api/Api.load.html">load</a></li>
+          <li><a href="../effektio/Api/Api.loadDynamic.html">loadDynamic</a></li>
+          <li><a href="../effektio/Api/Api.loadStatic.html">loadStatic</a></li>
+
+
+    <li class="section-title inherited">
+      <a href="../effektio/Api-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../effektio/Api-class.html#instance-methods">Methods</a></li>
+    <li><a href="../effektio/Api/createFfiListConversation.html">createFfiListConversation</a></li>
+    <li><a href="../effektio/Api/createFfiListEmojiUnit.html">createFfiListEmojiUnit</a></li>
+    <li><a href="../effektio/Api/createFfiListFaq.html">createFfiListFaq</a></li>
+    <li><a href="../effektio/Api/createFfiListGroup.html">createFfiListGroup</a></li>
+    <li><a href="../effektio/Api/createFfiListMember.html">createFfiListMember</a></li>
+    <li><a href="../effektio/Api/createFfiListNews.html">createFfiListNews</a></li>
+    <li><a href="../effektio/Api/createFfiListRoomMessage.html">createFfiListRoomMessage</a></li>
+    <li><a href="../effektio/Api/createFfiListTag.html">createFfiListTag</a></li>
+    <li><a href="../effektio/Api/genMockNews.html">genMockNews</a></li>
+    <li><a href="../effektio/Api/guestClient.html">guestClient</a></li>
+    <li><a href="../effektio/Api/initLogging.html">initLogging</a></li>
+    <li><a href="../effektio/Api/loginNewClient.html">loginNewClient</a></li>
+    <li><a href="../effektio/Api/loginWithToken.html">loginWithToken</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../effektio/Api/registerWithRegistrationToken.html">registerWithRegistrationToken</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../effektio/Api-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    effektio_flutter_sdk
+      0.0.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the sendImageMessage method from the Conversation class, for the Dart programming language.">
+  <title>sendImageMessage method - Conversation class - effektio library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">effektio_flutter_sdk</a></li>
+    <li><a href="../../effektio/effektio-library.html">effektio</a></li>
+    <li><a href="../../effektio/Conversation-class.html">Conversation</a></li>
+    <li class="self-crumb">sendImageMessage method</li>
+  </ol>
+  <div class="self-name">sendImageMessage</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">sendImageMessage</span> method 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>
+<span class="name ">sendImageMessage</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="sendImageMessage-param-uri"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">uri</span>, </span></li>
+<li><span class="parameter" id="sendImageMessage-param-name"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span></li>
+<li><span class="parameter" id="sendImageMessage-param-mimetype"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">mimetype</span>, </span></li>
+<li><span class="parameter" id="sendImageMessage-param-size"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">size</span>, </span></li>
+<li><span class="parameter" id="sendImageMessage-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">width</span>, </span></li>
+<li><span class="parameter" id="sendImageMessage-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">height</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; sendImageMessage(
+  String uri,
+  String name,
+  String mimetype,
+  int? size,
+  int? width,
+  int? height,
+) {
+  final tmp1 = uri;
+  final tmp5 = name;
+  final tmp9 = mimetype;
+  final tmp13 = size;
+  final tmp17 = width;
+  final tmp21 = height;
+  var tmp0 = 0;
+  var tmp2 = 0;
+  var tmp3 = 0;
+  var tmp4 = 0;
+  var tmp6 = 0;
+  var tmp7 = 0;
+  var tmp8 = 0;
+  var tmp10 = 0;
+  var tmp11 = 0;
+  var tmp12 = 0;
+  var tmp14 = 0;
+  var tmp16 = 0;
+  var tmp18 = 0;
+  var tmp20 = 0;
+  var tmp22 = 0;
+  var tmp24 = 0;
+  tmp0 = _box.borrow();
+  final tmp1_0 = utf8.encode(tmp1);
+  tmp3 = tmp1_0.length;
+  final ffi.Pointer&lt;ffi.Uint8&gt; tmp2_0 = _api.__allocate(tmp3 * 1, 1);
+  final Uint8List tmp2_1 = tmp2_0.asTypedList(tmp3);
+  tmp2_1.setAll(0, tmp1_0);
+  tmp2 = tmp2_0.address;
+  tmp4 = tmp3;
+  final tmp5_0 = utf8.encode(tmp5);
+  tmp7 = tmp5_0.length;
+  final ffi.Pointer&lt;ffi.Uint8&gt; tmp6_0 = _api.__allocate(tmp7 * 1, 1);
+  final Uint8List tmp6_1 = tmp6_0.asTypedList(tmp7);
+  tmp6_1.setAll(0, tmp5_0);
+  tmp6 = tmp6_0.address;
+  tmp8 = tmp7;
+  final tmp9_0 = utf8.encode(tmp9);
+  tmp11 = tmp9_0.length;
+  final ffi.Pointer&lt;ffi.Uint8&gt; tmp10_0 = _api.__allocate(tmp11 * 1, 1);
+  final Uint8List tmp10_1 = tmp10_0.asTypedList(tmp11);
+  tmp10_1.setAll(0, tmp9_0);
+  tmp10 = tmp10_0.address;
+  tmp12 = tmp11;
+  if (tmp13 == null) {
+    tmp14 = 0;
+  } else {
+    tmp14 = 1;
+    final tmp15 = tmp13;
+    tmp16 = tmp15;
+  }
+  if (tmp17 == null) {
+    tmp18 = 0;
+  } else {
+    tmp18 = 1;
+    final tmp19 = tmp17;
+    tmp20 = tmp19;
+  }
+  if (tmp21 == null) {
+    tmp22 = 0;
+  } else {
+    tmp22 = 1;
+    final tmp23 = tmp21;
+    tmp24 = tmp23;
+  }
+  final tmp25 = _api._conversationSendImageMessage(
+    tmp0,
+    tmp2,
+    tmp3,
+    tmp4,
+    tmp6,
+    tmp7,
+    tmp8,
+    tmp10,
+    tmp11,
+    tmp12,
+    tmp14,
+    tmp16,
+    tmp18,
+    tmp20,
+    tmp22,
+    tmp24,
+  );
+  final tmp27 = tmp25;
+  final ffi.Pointer&lt;ffi.Void&gt; tmp27_0 = ffi.Pointer.fromAddress(tmp27);
+  final tmp27_1 =
+      _Box(_api, tmp27_0, &quot;__Conversation_send_image_message_future_drop&quot;);
+  tmp27_1._finalizer = _api._registerFinalizer(tmp27_1);
+  final tmp26 =
+      _nativeFuture(tmp27_1, _api.__conversationSendImageMessageFuturePoll);
+  return tmp26;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">effektio_flutter_sdk</a></li>
+  <li><a href="../../effektio/effektio-library.html">effektio</a></li>
+  <li><a href="../../effektio/Conversation-class.html">Conversation</a></li>
+  <li class="self-crumb">sendImageMessage method</li>
+</ol>
+
+
+    <h5>Conversation class</h5>
+    <ol>
+
+
+
+    <li class="section-title inherited">
+      <a href="../../effektio/Conversation-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../../effektio/Conversation-class.html#instance-methods">Methods</a></li>
+    <li><a href="../../effektio/Conversation/activeMembers.html">activeMembers</a></li>
+    <li><a href="../../effektio/Conversation/avatar.html">avatar</a></li>
+    <li><a href="../../effektio/Conversation/displayName.html">displayName</a></li>
+    <li><a href="../../effektio/Conversation/drop.html">drop</a></li>
+    <li><a href="../../effektio/Conversation/filePath.html">filePath</a></li>
+    <li><a href="../../effektio/Conversation/getMember.html">getMember</a></li>
+    <li><a href="../../effektio/Conversation/imageBinary.html">imageBinary</a></li>
+    <li><a href="../../effektio/Conversation/latestMessage.html">latestMessage</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../../effektio/Conversation/readReceipt.html">readReceipt</a></li>
+    <li><a href="../../effektio/Conversation/saveFile.html">saveFile</a></li>
+    <li><a href="../../effektio/Conversation/sendFileMessage.html">sendFileMessage</a></li>
+    <li><a href="../../effektio/Conversation/sendImageMessage.html">sendImageMessage</a></li>
+    <li><a href="../../effektio/Conversation/sendPlainMessage.html">sendPlainMessage</a></li>
+    <li><a href="../../effektio/Conversation/timeline.html">timeline</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+    <li><a href="../../effektio/Conversation/typingNotice.html">typingNotice</a></li>
+
+    <li class="section-title inherited"><a href="../../effektio/Conversation-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    effektio_flutter_sdk
+      0.0.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

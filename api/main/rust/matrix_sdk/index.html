@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="A high-level, batteries-included Matrix client library written in Rust."><meta name="keywords" content="rust, rustlang, rust-lang, matrix_sdk"><title>matrix_sdk - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../matrix_sdk/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../matrix_sdk/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate matrix_sdk</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.5.0</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li><li><a href="#attributes">Attribute Macros</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../matrix_sdk/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">matrix_sdk</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/matrix_sdk/lib.rs.html#16-68">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A high-level, batteries-included <a href="https://matrix.org/">Matrix</a> client library
+written in Rust.</p>
+<p>This crate seeks to be a general-purpose library for writing software using the
+Matrix <a href="https://matrix.org/docs/spec/client_server/latest">Client-Server API</a>
+to communicate with a Matrix homeserver. If you’re writing a typical Matrix
+client or bot, this is likely the crate you need.</p>
+<p>However, the crate is designed in a modular way and depends on several
+other lower-level crates. If you’re attempting something more custom, you might be interested in these:</p>
+<ul>
+<li><a href="../matrix_sdk_base/index.html" title="matrix_sdk_base"><code>matrix_sdk_base</code></a>: A no-network-IO client state machine which can be used
+to embed a Matrix client into an existing network stack or to build a new
+Matrix client library on top.</li>
+<li><a href="https://docs.rs/matrix-sdk-crypto/*/matrix_sdk_crypto/"><code>matrix_sdk_crypto</code></a>:
+A no-network-IO encryption state machine which can be used to add Matrix E2EE
+support into an existing client or library.</li>
+</ul>
+<h2 id="getting-started"><a href="#getting-started">Getting started</a></h2>
+<p>The central component you’ll be interacting with is the <a href="struct.Client.html" title="Client"><code>Client</code></a>. A basic use
+case will include instantiating the client, logging in as a user, registering
+some event handlers and then syncing.</p>
+<p>This is demonstrated in the example below.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
+<span class="kw">use</span> <span class="ident">matrix_sdk</span>::{
+    <span class="ident">Client</span>, <span class="ident">config::SyncSettings</span>,
+    <span class="ident">ruma</span>::{<span class="ident">user_id</span>, <span class="ident">events::room::message::SyncRoomMessageEvent</span>},
+};
+
+<span class="attribute">#[<span class="ident">tokio::main</span>]</span>
+<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">main</span>() -&gt; <span class="ident">anyhow::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">alice</span> <span class="op">=</span> <span class="macro">user_id!</span>(<span class="string">&quot;@alice:example.org&quot;</span>);
+    <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">Client::builder</span>().<span class="ident">user_id</span>(<span class="ident">alice</span>).<span class="ident">build</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+
+    <span class="comment">// First we need to log in.</span>
+    <span class="ident">client</span>.<span class="ident">login_username</span>(<span class="ident">alice</span>, <span class="string">&quot;password&quot;</span>).<span class="ident">send</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+
+    <span class="ident">client</span>
+        .<span class="ident">register_event_handler</span>(<span class="op">|</span><span class="ident">ev</span>: <span class="ident">SyncRoomMessageEvent</span><span class="op">|</span> <span class="kw">async</span> <span class="kw">move</span> {
+            <span class="macro">println!</span>(<span class="string">&quot;Received a message {:?}&quot;</span>, <span class="ident">ev</span>);
+        })
+        .<span class="kw">await</span>;
+
+    <span class="comment">// Syncing is important to synchronize the client state with the server.</span>
+    <span class="comment">// This method will never return.</span>
+    <span class="ident">client</span>.<span class="ident">sync</span>(<span class="ident">SyncSettings::default</span>()).<span class="kw">await</span>;
+
+    <span class="prelude-val">Ok</span>(())
+}</code></pre></div>
+<p>More examples can be found in the <a href="https://github.com/matrix-org/matrix-rust-sdk/tree/main/crates/matrix-sdk/examples">examples</a> directory.</p>
+<h2 id="crate-feature-flags"><a href="#crate-feature-flags">Crate Feature Flags</a></h2>
+<p>The following crate feature flags are available:</p>
+<div><table><thead><tr><th>Feature</th><th style="text-align: center">Default</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>anyhow</code></td><td style="text-align: center">No</td><td>Better logging for event handlers that return <code>anyhow::Result</code></td></tr>
+<tr><td><code>e2e-encryption</code></td><td style="text-align: center">Yes</td><td>End-to-end encryption (E2EE) support</td></tr>
+<tr><td><code>eyre</code></td><td style="text-align: center">No</td><td>Better logging for event handlers that return <code>eyre::Result</code></td></tr>
+<tr><td><code>image-proc</code></td><td style="text-align: center">No</td><td>Image processing for generating thumbnails</td></tr>
+<tr><td><code>image-rayon</code></td><td style="text-align: center">No</td><td>Enables faster image processing</td></tr>
+<tr><td><code>markdown</code></td><td style="text-align: center">No</td><td>Support for sending Markdown-formatted messages</td></tr>
+<tr><td><code>qrcode</code></td><td style="text-align: center">Yes</td><td>QR code verification support</td></tr>
+<tr><td><code>sled</code></td><td style="text-align: center">Yes</td><td>Persistent storage of state and E2EE data (optionally, if feature <code>e2e-encryption</code> is enabled), via Sled</td></tr>
+<tr><td><code>indexeddb</code></td><td style="text-align: center">No</td><td>Persistent storage of state and E2EE data (optionally, if feature <code>e2e-encryption</code> is enabled) for browsers, via IndexedDB</td></tr>
+<tr><td><code>socks</code></td><td style="text-align: center">No</td><td>SOCKS support in the default HTTP client, <a href="https://docs.rs/reqwest/0.11.5/reqwest/index.html"><code>reqwest</code></a></td></tr>
+<tr><td><code>sso-login</code></td><td style="text-align: center">No</td><td>Support for SSO login with a local HTTP server</td></tr>
+</tbody></table>
+</div><h2 id="enabling-logging"><a href="#enabling-logging">Enabling logging</a></h2>
+<p>Users of the matrix-sdk crate can enable log output by depending on the
+<code>tracing-subscriber</code> crate and including the following line in their
+application (e.g. at the start of <code>main</code>):</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">tracing_subscriber::fmt::init</span>();</code></pre></div>
+<p>The log output is controlled via the <code>RUST_LOG</code> environment variable by
+setting it to one of the <code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code> or <code>trace</code> levels.
+The output is printed to stdout.</p>
+<p>The <code>RUST_LOG</code> variable also supports a more advanced syntax for filtering
+log output more precisely, for instance with crate-level granularity. For
+more information on this, check out the <a href="https://tracing.rs/tracing_subscriber/filter/struct.envfilter">tracing_subscriber documentation</a>.</p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.bytes"><code>pub use <a class="mod" href="../bytes/index.html" title="mod bytes">bytes</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.reqwest"><code>pub use <a class="mod" href="../reqwest/index.html" title="mod reqwest">reqwest</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.ruma"><code>pub use <a class="mod" href="../ruma/index.html" title="mod ruma">ruma</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="attachment/index.html" title="matrix_sdk::attachment mod">attachment</a></div><div class="item-right docblock-short"><p>Types and traits for attachments.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="config/index.html" title="matrix_sdk::config mod">config</a></div><div class="item-right docblock-short"><p>Configuration to change the behaviour of the <a href="struct.Client.html" title="crate::Client"><code>Client</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="deserialized_responses/index.html" title="matrix_sdk::deserialized_responses mod">deserialized_responses</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="encryption/index.html" title="matrix_sdk::encryption mod">encryption</a></div><div class="item-right docblock-short"><p>End-to-end encryption related types</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="event_handler/index.html" title="matrix_sdk::event_handler mod">event_handler</a></div><div class="item-right docblock-short"><p>Types and traits related for event handlers. For usage, see
+<a href="struct.Client.html#method.register_event_handler" title="Client::register_event_handler"><code>Client::register_event_handler</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="executor/index.html" title="matrix_sdk::executor mod">executor</a></div><div class="item-right docblock-short"><p>Abstraction over an executor so we can spawn tasks under WASM the same way
+we do usually.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="instant/index.html" title="matrix_sdk::instant mod">instant</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="locks/index.html" title="matrix_sdk::locks mod">locks</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="media/index.html" title="matrix_sdk::media mod">media</a></div><div class="item-right docblock-short"><p>Common types for <a href="https://matrix.org/docs/spec/client_server/r0.6.1#id66">media content</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="room/index.html" title="matrix_sdk::room mod">room</a></div><div class="item-right docblock-short"><p>High-level room API</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="store/index.html" title="matrix_sdk::store mod">store</a></div><div class="item-right docblock-short"><p>Functions and types to initialize a store.</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Account.html" title="matrix_sdk::Account struct">Account</a></div><div class="item-right docblock-short"><p>A high-level API to manage the client owner’s account.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BaseRoom.html" title="matrix_sdk::BaseRoom struct">BaseRoom</a></div><div class="item-right docblock-short"><p>The underlying room data structure collecting state for joined, left and
+invited rooms.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BaseRoomMember.html" title="matrix_sdk::BaseRoomMember struct">BaseRoomMember</a></div><div class="item-right docblock-short"><p>A member of a room.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Client.html" title="matrix_sdk::Client struct">Client</a></div><div class="item-right docblock-short"><p>An async/await enabled Matrix client.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ClientBuilder.html" title="matrix_sdk::ClientBuilder struct">ClientBuilder</a></div><div class="item-right docblock-short"><p>Builder that allows creating and configuring various parts of a <a href="struct.Client.html" title="Client"><code>Client</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.LoginBuilder.html" title="matrix_sdk::LoginBuilder struct">LoginBuilder</a></div><div class="item-right docblock-short"><p>Builder type used to configure optional settings for logging in with a
+username or token.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RoomInfo.html" title="matrix_sdk::RoomInfo struct">RoomInfo</a></div><div class="item-right docblock-short"><p>The underlying pure data structure for joined and left rooms.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RoomMember.html" title="matrix_sdk::RoomMember struct">RoomMember</a></div><div class="item-right docblock-short"><p>The high-level <code>RoomMember</code> representation</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Session.html" title="matrix_sdk::Session struct">Session</a></div><div class="item-right docblock-short"><p>A user session, containing an access token and information about the
+associated user account.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.StateChanges.html" title="matrix_sdk::StateChanges struct">StateChanges</a></div><div class="item-right docblock-short"><p>Store state changes and pass them to the StateStore.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ClientBuildError.html" title="matrix_sdk::ClientBuildError enum">ClientBuildError</a></div><div class="item-right docblock-short"><p>Errors that can happen in <a href="struct.ClientBuilder.html#method.build" title="ClientBuilder::build"><code>ClientBuilder::build</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DisplayName.html" title="matrix_sdk::DisplayName enum">DisplayName</a></div><div class="item-right docblock-short"><p>The name of the room, either from the metadata or calculated
+according to <a href="https://matrix.org/docs/spec/client_server/latest#calculating-the-display-name-for-a-room">matrix specification</a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Error.html" title="matrix_sdk::Error enum">Error</a></div><div class="item-right docblock-short"><p>Internal representation of errors.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.HttpError.html" title="matrix_sdk::HttpError enum">HttpError</a></div><div class="item-right docblock-short"><p>An HTTP error, representing either a connection error or an error while
+converting the raw HTTP response into a Matrix response.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.LoopCtrl.html" title="matrix_sdk::LoopCtrl enum">LoopCtrl</a></div><div class="item-right docblock-short"><p>Enum controlling if a loop running callbacks should continue or abort.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.RoomType.html" title="matrix_sdk::RoomType enum">RoomType</a></div><div class="item-right docblock-short"><p>Enum keeping track in which state the room is, e.g. if our own user is
+joined, invited, or has left the room.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.RumaApiError.html" title="matrix_sdk::RumaApiError enum">RumaApiError</a></div><div class="item-right docblock-short"><p>An error response from a Matrix API call, using a client API specific
+representation if the endpoint is from that.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.StoreError.html" title="matrix_sdk::StoreError enum">StoreError</a></div><div class="item-right docblock-short"><p>State store specific error type.</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.AsyncTraitDeps.html" title="matrix_sdk::AsyncTraitDeps trait">AsyncTraitDeps</a></div><div class="item-right docblock-short"><p>Super trait that is used for our store traits, this trait will differ if
+it’s used on WASM. WASM targets will not require <code>Send</code> and <code>Sync</code> to have
+implemented, while other targets will.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.HttpSend.html" title="matrix_sdk::HttpSend trait">HttpSend</a></div><div class="item-right docblock-short"><p>Abstraction around the http layer. The allows implementors to use different
+http libraries.</p>
+</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.HttpResult.html" title="matrix_sdk::HttpResult type">HttpResult</a></div><div class="item-right docblock-short"><p>Result type of a pure HTTP request.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Result.html" title="matrix_sdk::Result type">Result</a></div><div class="item-right docblock-short"><p>Result type of the matrix-sdk.</p>
+</div></div></div><h2 id="attributes" class="small-section-header"><a href="#attributes">Attribute Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.async_trait.html" title="matrix_sdk::async_trait attr">async_trait</a></div><div class="item-right docblock-short"></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="matrix_sdk" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

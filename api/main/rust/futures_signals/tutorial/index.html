@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Tutorial"><meta name="keywords" content="rust, rustlang, rust-lang, tutorial"><title>futures_signals::tutorial - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../futures_signals/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../futures_signals/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Module tutorial</a></h2><div class="sidebar-elems"></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../futures_signals/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Module <a href="../index.html">futures_signals</a>::<wbr><a class="mod" href="#">tutorial</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/futures_signals/lib.rs.html#643">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="tutorial"><a href="#tutorial">Tutorial</a></h2>
+<p>This tutorial is long, but it’s intended to explain everything you need to
+know in order to use Signals.</p>
+<p>It is highly recommended to read through all of it.</p>
+<h3 id="mutable"><a href="#mutable"><code>Mutable</code></a></h3>
+<p>Before I can fully explain Signals, first I have to explain <a href="../signal/struct.Mutable.html"><code>Mutable</code></a>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::signal::Mutable</span>;
+
+<span class="kw">let</span> <span class="ident">my_state</span> <span class="op">=</span> <span class="ident">Mutable::new</span>(<span class="number">5</span>);</code></pre></div>
+<p>The above example creates a new <code>Mutable</code> with an initial value of <code>5</code>.</p>
+<p><code>Mutable</code> is very similar to <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc</code></a> + <a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code>RwLock</code></a>:</p>
+<ul>
+<li>It implements <a href="https://doc.rust-lang.org/std/marker/trait.Send.html"><code>Send</code></a> and
+<a href="https://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a>,
+so it can be sent and used between multiple threads.</li>
+<li>It implements <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>,
+which will create a new reference to the same <code>Mutable</code> (just like <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc</code></a>).</li>
+<li>You can retrieve the current value.</li>
+<li>You can change the current value.</li>
+</ul>
+<p>Let’s see it in action:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Acquires a mutable lock on my_state</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lock</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">lock_mut</span>();
+
+<span class="macro">assert_eq!</span>(<span class="kw-2">*</span><span class="ident">lock</span>, <span class="number">5</span>);
+
+<span class="comment">// Changes the current value of my_state to 10</span>
+<span class="kw-2">*</span><span class="ident">lock</span> <span class="op">=</span> <span class="number">10</span>;
+
+<span class="macro">assert_eq!</span>(<span class="kw-2">*</span><span class="ident">lock</span>, <span class="number">10</span>);</code></pre></div>
+<h3 id="for_each"><a href="#for_each"><code>for_each</code></a></h3>
+<p>However, if that was all <code>Mutable</code> could do, it wouldn’t be very useful,
+because <code>RwLock</code> already exists!</p>
+<p>The major difference between <code>Mutable</code> and <code>RwLock</code> is that it is possible
+to be efficiently notified whenever the <code>Mutable</code> changes:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::signal::SignalExt</span>;
+
+<span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> {
+    <span class="comment">// This code is run for the current value of my_state,</span>
+    <span class="comment">// and also every time my_state changes</span>
+    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">value</span>);
+    <span class="kw">async</span> {}
+});</code></pre></div>
+<p>This is how the <a href="../signal/trait.SignalExt.html#method.for_each"><code>for_each</code></a> method works:</p>
+<ol>
+<li>
+<p>It returns a <a href="https://doc.rust-lang.org/std/future/trait.Future.html"><code>Future</code></a>.</p>
+</li>
+<li>
+<p>When that <a href="https://doc.rust-lang.org/std/future/trait.Future.html"><code>Future</code></a>
+is spawned, it will call the <code>|value| { ... }</code> closure with the <em>current
+value</em> of <code>my_state</code> (which in this case is <code>10</code>).</p>
+</li>
+<li>
+<p>Then whenever <code>my_state</code> changes it will call the closure again with the new value.</p>
+</li>
+</ol>
+<p>This can be used for all sorts of things, such as automatically updating
+your GUI or database whenever the <code>Signal</code> changes.</p>
+<p>Just like <a href="https://doc.rust-lang.org/std/future/trait.Future.html"><code>Future</code></a> and
+<a href="https://docs.rs/futures/%5E0.3.15/futures/stream/trait.Stream.html"><code>Stream</code></a>,
+when you create a <code>Signal</code> it does not actually do anything until it is spawned.</p>
+<p>In order to spawn a <code>Signal</code> you first use the <code>for_each</code> method (as shown
+above) to convert it into a <code>Future</code>, and then you spawn that <code>Future</code>.</p>
+<p>There are many ways to spawn a <code>Future</code>:</p>
+<ul>
+<li><a href="https://docs.rs/futures/%5E0.3.15/futures/executor/fn.block_on.html"><code>block_on(future)</code></a></li>
+<li><a href="https://docs.rs/tokio/%5E1.6.1/tokio/task/fn.spawn.html"><code>tokio::spawn(future)</code></a></li>
+<li><a href="https://docs.rs/async-std/%5E1.9.0/async_std/task/fn.spawn.html"><code>task::spawn(future)</code></a></li>
+<li><a href="https://docs.rs/wasm-bindgen-futures/%5E0.4.24/wasm_bindgen_futures/fn.spawn_local.html"><code>spawn_local(future)</code></a></li>
+</ul>
+<p>And many more! Because <code>for_each</code> returns a normal <code>Future</code>, anything that
+can spawn a <code>Future</code> can also spawn a <code>Signal</code>.</p>
+<p>That also means you can use all of the <a href="https://docs.rs/futures/%5E0.3.15/futures/future/trait.FutureExt.html"><code>FutureExt</code></a>
+methods on it as well.</p>
+<h3 id="to_stream"><a href="#to_stream"><code>to_stream</code></a></h3>
+<p>If you need more control, you can use <a href="../signal/trait.SignalExt.html#method.to_stream"><code>to_stream</code></a> instead:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">stream</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal</span>().<span class="ident">to_stream</span>();</code></pre></div>
+<p>This returns a <a href="https://docs.rs/futures/%5E0.3.15/futures/stream/trait.Stream.html"><code>Stream</code></a>
+of values (starting with the current value of <code>my_state</code>, and then followed
+by the changes to <code>my_state</code>).</p>
+<p>You can use all of the <a href="https://docs.rs/futures/%5E0.3.15/futures/stream/trait.StreamExt.html"><code>StreamExt</code></a>
+methods on it, just like with any other
+<a href="https://docs.rs/futures/%5E0.3.15/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
+<h3 id="signal"><a href="#signal"><code>signal</code></a></h3>
+<p>You might be wondering why you have to call the <code>signal()</code> method: why can’t
+you just use the <code>Mutable</code> directly?</p>
+<p>There are actually three different methods, which you can use depending on
+your needs:</p>
+<ol>
+<li>
+<p><a href="../signal/struct.ReadOnlyMutable.html#method.signal"><code>signal()</code></a> is the
+most convenient but it requires the value to be <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a>.</p>
+</li>
+<li>
+<p><a href="../signal/struct.ReadOnlyMutable.html#method.signal_cloned"><code>signal_cloned()</code></a>
+requires the value to be <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>.</p>
+</li>
+<li>
+<p><a href="../signal/struct.ReadOnlyMutable.html#method.signal_ref"><code>signal_ref(|x| { ... })</code></a>
+gives the closure a <code>&amp;</code> reference to the value, so the value doesn’t need
+to be <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a> or
+<a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>, but
+instead the value is determined by the closure.</p>
+<p>This is the most flexible and also the fastest, but it is the longest and
+most cumbersome to use.</p>
+</li>
+</ol>
+<p>In addition, it is possible to call the <code>signal</code> methods multiple times
+(and mix-and-match them):</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">signal1</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal</span>();
+<span class="kw">let</span> <span class="ident">signal2</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal</span>();
+<span class="kw">let</span> <span class="ident">signal3</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal_cloned</span>();
+<span class="kw">let</span> <span class="ident">signal4</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal_ref</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">x</span> <span class="op">+</span> <span class="number">10</span>);</code></pre></div>
+<p>When the <code>Mutable</code> changes, <em>all</em> of its <code>Signal</code>s are notified.</p>
+<p>This turns out to be very useful in practice: it’s common to put your
+program’s state inside of a global <code>Mutable</code> (or multiple <code>Mutable</code>s) and
+then share it in various places throughout your program.</p>
+<p>Lastly, there is a big difference between <code>Mutable</code> and <code>Signal</code>:
+a <code>Signal</code> can only be notified when its value changes. However, a <code>Mutable</code>
+can do a lot more than that, because it can retrieve the current value, and
+it can also set the value.</p>
+<h3 id="signal-1"><a href="#signal-1"><code>Signal</code></a></h3>
+<p>Now that I’ve fully explained <code>Mutable</code>, I can finally explain <a href="../signal/trait.Signal.html"><code>Signal</code></a>.</p>
+<p>A <code>Signal</code> is an efficient zero-cost value which changes over time, and you
+can be efficiently notified when it changes.</p>
+<p>Just like <a href="https://doc.rust-lang.org/std/future/trait.Future.html"><code>Future</code></a>
+and <a href="https://docs.rs/futures/%5E0.3.15/futures/stream/trait.Stream.html"><code>Stream</code></a>,
+<code>Signal</code>s are inlined and compiled into a very efficient state machine.
+Most of the time they are fully stack allocated (<em>no</em> heap allocation).</p>
+<p>And in the rare cases that they heap allocate they only do it <em>once</em>, when
+the <code>Signal</code> is created, not while the <code>Signal</code> is running. This means the
+performance is excellent, even with millions of <code>Signal</code>s running simultaneously.</p>
+<p>Just like <a href="https://docs.rs/futures/%5E0.3.15/futures/future/trait.FutureExt.html"><code>FutureExt</code></a> and
+<a href="https://docs.rs/futures/0.3.15/futures/stream/trait.StreamExt.html"><code>StreamExt</code></a>,
+the <a href="../signal/trait.SignalExt.html"><code>SignalExt</code></a> trait has many useful
+methods, and most of them return a <code>Signal</code> so they can be chained:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">my_state</span>.<span class="ident">signal</span>()
+    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span> <span class="op">+</span> <span class="number">5</span>)
+    .<span class="ident">map_future</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">do_some_async_calculation</span>(<span class="ident">value</span>))
+    .<span class="ident">dedupe</span>();</code></pre></div>
+<p>Let’s say that the current value of <code>my_state</code> is <code>10</code>.</p>
+<p>When <code>output</code> is spawned it will call the <code>|value| value + 5</code> closure with
+the current value of <code>my_value</code> (the closure returns <code>10 + 5</code>, which is <code>15</code>).</p>
+<p>Then it calls <code>do_some_async_calculation(15)</code> which returns a <code>Future</code>.
+When that <code>Future</code> finishes, <code>dedupe</code> checks if the return value is
+different from the previous value (using <code>==</code>), and if so then <code>output</code>
+notifies with the new value.</p>
+<p>It automatically repeats this process whenever <code>my_state</code> changes, ensuring
+that <code>output</code> is always kept in sync with <code>my_state</code>.</p>
+<p>It is also possible to use <a href="../macro.map_ref.html"><code>map_ref</code></a> which is similar
+to <a href="../signal/trait.SignalExt.html#method.map"><code>map</code></a> except it allows you
+to use multiple input <code>Signal</code>s:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::map_ref</span>;
+
+<span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="macro">map_ref!</span> {
+    <span class="kw">let</span> <span class="ident">foo</span> <span class="op">=</span> <span class="ident">foo</span>.<span class="ident">signal</span>(),
+    <span class="kw">let</span> <span class="ident">bar</span> <span class="op">=</span> <span class="ident">bar</span>.<span class="ident">signal</span>(),
+    <span class="kw">let</span> <span class="ident">qux</span> <span class="op">=</span> <span class="ident">qux</span>.<span class="ident">signal</span>() =&gt;
+    <span class="kw-2">*</span><span class="ident">foo</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">bar</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">qux</span>
+};</code></pre></div>
+<p>In this case <code>map_ref</code> is depending on three <code>Signal</code>s: <code>foo</code>, <code>bar</code>, and <code>qux</code>.</p>
+<p>Whenever any of those <code>Signal</code>s changes, it will rerun the <code>*foo + *bar + *qux</code>
+code.</p>
+<p>This means that <code>output</code> will always be equal to the sum of <code>foo</code>, <code>bar</code>, and <code>qux</code>.</p>
+<h3 id="signals-are-lossy"><a href="#signals-are-lossy">Signals are lossy</a></h3>
+<p>It is important to understand that <code>for_each</code>, <code>to_stream</code>, and <em>all</em>
+other <code>SignalExt</code> methods are <em>lossy</em>: they might skip changes.</p>
+<p>That is because they only care about the <em>most recent value</em>. So if the
+value changes multiple times in a short period of time it will only detect
+the most recent change.</p>
+<p>Here is an example:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">my_state</span>.<span class="ident">set</span>(<span class="number">2</span>);
+<span class="ident">my_state</span>.<span class="ident">set</span>(<span class="number">3</span>);</code></pre></div>
+<p>In this case it will only detect the <code>3</code> change. The <code>2</code> change is
+completely ignored, like as if it never happened.</p>
+<p>This is an intentional design choice: it is necessary for correctness and
+performance.</p>
+<p>So whenever you are using a <code>Signal</code>, you must <em><strong>not</strong></em> rely on it being
+updated for intermediate values.</p>
+<p>That might sound like a problem, but it’s actually not a problem at all:
+<code>Signal</code>s are guaranteed to always be updated with the most recent value,
+so it’s <em>only</em> intermediate values which aren’t guaranteed.</p>
+<p>This is similar to <code>RwLock</code>, which also does not give you access to past
+values (only the current value). So as long as your program only cares about
+the most recent value, then <code>Signal</code>s will work perfectly.</p>
+<p>If you really <em>do</em> need all intermediate values (not just the most recent),
+then using a <a href="https://docs.rs/futures/%5E0.3.15/futures/stream/trait.Stream.html"><code>Stream</code></a>
+(such as <a href="https://docs.rs/futures/%5E0.3.15/futures/channel/mpsc/fn.unbounded.html"><code>futures::channel::mpsc::unbounded</code></a>)
+would be a great choice. In that case you will pay a small performance
+penalty, because it has to hold the values in a queue.</p>
+<p>And of course you can freely mix <code>Future</code>s, <code>Stream</code>s, and <code>Signal</code>s in
+your program, using each one where it is appropriate.</p>
+<h3 id="mutablevec"><a href="#mutablevec"><code>MutableVec</code></a></h3>
+<p>In addition to <code>Mutable</code> and <code>Signal</code>, there is also <a href="../signal_vec/struct.MutableVec.html"><code>MutableVec</code></a>,
+<a href="../signal_vec/trait.SignalVec.html"><code>SignalVec</code></a>, and <a href="../signal_vec/trait.SignalVecExt.html"><code>SignalVecExt</code></a>.</p>
+<p>As its name suggests, <code>MutableVec&lt;A&gt;</code> is very similar to <code>Mutable&lt;Vec&lt;A&gt;&gt;</code>,
+except it’s <em>dramatically</em> more efficient: rather than being notified with
+the new <code>Vec</code>, instead you are notified with the <em>difference</em> between the
+old <code>Vec</code> and the new <code>Vec</code>.</p>
+<p>Here is an example:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::signal_vec::MutableVec</span>;
+
+<span class="kw">let</span> <span class="ident">my_vec</span>: <span class="ident">MutableVec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">MutableVec::new</span>();</code></pre></div>
+<p>The above creates a new empty <code>MutableVec</code>.</p>
+<p>You can then use <a href="../signal_vec/struct.MutableVec.html#method.lock_mut"><code>lock_mut</code></a>,
+which returns a lock. As its name implies, while you are holding the lock
+you have exclusive mutable access to the <code>MutableVec</code>.</p>
+<p>The lock contains many of the <code>Vec</code> methods:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lock</span> <span class="op">=</span> <span class="ident">my_vec</span>.<span class="ident">lock_mut</span>();
+<span class="ident">lock</span>.<span class="ident">push</span>(<span class="number">1</span>);
+<span class="ident">lock</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="number">2</span>);
+<span class="ident">lock</span>.<span class="ident">remove</span>(<span class="number">0</span>);
+<span class="ident">lock</span>.<span class="ident">pop</span>().<span class="ident">unwrap</span>();
+<span class="comment">// And a lot more!</span></code></pre></div>
+<p>The insertion methods require <code>Copy</code>, but there are also <code>_cloned</code> variants
+which require <code>Clone</code> instead:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">lock</span>.<span class="ident">push_cloned</span>(<span class="number">1</span>);
+<span class="ident">lock</span>.<span class="ident">insert_cloned</span>(<span class="number">0</span>, <span class="number">2</span>);
+<span class="comment">// etc.</span></code></pre></div>
+<p>This is needed because when you insert a new value, it has to send a copy to
+all of the <code>SignalVec</code>s which are listening to changes.</p>
+<p>The lock also has a <code>Deref</code> implementation for <code>&amp;[T]</code>, so you can use <em>all</em>
+of the immutable <a href="https://doc.rust-lang.org/std/primitive.slice.html"><code>slice</code></a>
+methods on it:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">lock</span>[<span class="number">0</span>];
+<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">lock</span>.<span class="ident">len</span>();
+<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">lock</span>.<span class="ident">last</span>();
+<span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">lock</span>.<span class="ident">iter</span>();
+<span class="comment">// And a lot more!</span></code></pre></div>
+<p>Lastly, you can use the <a href="../signal_vec/struct.MutableVec.html#method.signal_vec"><code>signal_vec()</code></a>
+or <a href="../signal_vec/struct.MutableVec.html#method.signal_vec_cloned"><code>signal_vec_cloned()</code></a>
+methods to convert it into a <code>SignalVec</code>, and then you can use the
+<a href="../signal_vec/trait.SignalVecExt.html#method.for_each"><code>for_each</code></a> method
+to be efficiently notified when it changes:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::signal_vec</span>::{<span class="ident">SignalVecExt</span>, <span class="ident">VecDiff</span>};
+
+<span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">my_vec</span>.<span class="ident">signal_vec</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">change</span><span class="op">|</span> {
+    <span class="kw">match</span> <span class="ident">change</span> {
+        <span class="ident">VecDiff::Replace</span> { <span class="ident">values</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::InsertAt</span> { <span class="ident">index</span>, <span class="ident">value</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::UpdateAt</span> { <span class="ident">index</span>, <span class="ident">value</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::RemoveAt</span> { <span class="ident">index</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::Move</span> { <span class="ident">old_index</span>, <span class="ident">new_index</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::Push</span> { <span class="ident">value</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::Pop</span> {} =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">VecDiff::Clear</span> {} =&gt; {
+            <span class="comment">// ...</span>
+        },
+    }
+
+    <span class="kw">async</span> {}
+});</code></pre></div>
+<p>Just like <code>SignalExt::for_each</code>, the <code>SignalVecExt::for_each</code> method returns
+a <code>Future</code>.</p>
+<p>When that <code>Future</code> is spawned:</p>
+<ol>
+<li>
+<p>If the <code>SignalVec</code> already has values, it calls the closure with
+<code>VecDiff::Replace</code>, which contains the current values for the <code>SignalVec</code>.</p>
+</li>
+<li>
+<p>If the <code>SignalVec</code> doesn’t have any values, it doesn’t call the closure.</p>
+</li>
+<li>
+<p>Whenever the <code>SignalVec</code> changes, it calls the closure with the <code>VecDiff</code>
+for the change.</p>
+</li>
+</ol>
+<p>Unlike <code>SignalExt::for_each</code>, the <code>SignalVecExt::for_each</code> method calls the
+closure with a <a href="../signal_vec/enum.VecDiff.html"><code>VecDiff</code></a>, which contains
+the difference between the new <code>Vec</code> and the old <code>Vec</code>.</p>
+<p>As an example, if you call <code>lock.push(5)</code>, then the closure will be called with <code>VecDiff::Push { value: 5 }</code></p>
+<p>And if you call <code>lock.insert(3, 10)</code>, then the closure will be called with <code>VecDiff::InsertAt { index: 3, value: 10 }</code></p>
+<p>This allows you to very efficiently update based only on that specific change.</p>
+<p>For example, if you are automatically saving the <code>MutableVec</code> to a database
+whenever it changes, you don’t need to save the entire <code>MutableVec</code> when it
+changes, you only need to save the individual changes. This means that it will
+often be constant <code>O(1)</code> time, no matter how big the <code>MutableVec</code> is.</p>
+<h3 id="signalvecext"><a href="#signalvecext"><code>SignalVecExt</code></a></h3>
+<p>Just like <code>SignalExt</code>, <a href="../signal_vec/trait.SignalVecExt.html"><code>SignalVecExt</code></a>
+has a lot of useful methods, and most of them return a <code>SignalVec</code> so they
+can be chained:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">my_vec</span>.<span class="ident">signal_vec</span>()
+    .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">value</span> <span class="op">&lt;</span> <span class="number">5</span>)
+    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span> <span class="op">+</span> <span class="number">10</span>);</code></pre></div>
+<p>They are generally very efficient (e.g. <code>map</code> is constant time, no matter
+how big the <code>SignalVec</code> is, and <code>filter</code> is linear time).</p>
+<h3 id="signalvec-is-lossless"><a href="#signalvec-is-lossless">SignalVec is lossless</a></h3>
+<p>Unlike <code>Signal</code>, it is guaranteed that the <code>SignalVec</code> will never skip a
+change. In addition, the changes will always be in the correct order.</p>
+<p>This is because it is notifying with the difference between the old <code>Vec</code>
+and the new <code>Vec</code>, so it is very important that it is in the correct order,
+and that it doesn’t skip anything!</p>
+<p>That does mean that <code>MutableVec</code> needs to maintain a queue of changes, so
+this has a minor performance cost.</p>
+<p>But because it’s so efficient to update based upon the difference between
+the old and new <code>Vec</code>, it’s still often faster to use <code>MutableVec&lt;A&gt;</code> rather
+than <code>Mutable&lt;Vec&lt;A&gt;&gt;</code>, even with the extra performance overhead.</p>
+<p>In addition, even though <code>MutableVec</code> needs to maintain a queue, <code>SignalVec</code>
+does <em><strong>not</strong></em>, so it’s quite efficient.</p>
+<p>If you call a <code>MutableVec</code> method which doesn’t <em>actually</em> make any changes,
+then it will not notify at all:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="ident">my_vec</span>.<span class="ident">lock_mut</span>().<span class="ident">retain</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> { <span class="bool-val">true</span> });</code></pre></div>
+<p>The <a href="../signal_vec/struct.MutableVecLockMut.html#method.retain"><code>MutableVec::retain</code></a>
+method is the same as <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.retain"><code>Vec::retain</code></a>,
+it calls the closure for each value in the <code>MutableVec</code>, and if the closure
+returns <code>false</code> it removes that value from the <code>MutableVec</code>.</p>
+<p>But in the above example, it never returns <code>false</code>, so it never removes
+anything, so it doesn’t notify.</p>
+<p>Also, even though it’s guaranteed to send a notification for each change,
+the notification might be different than what you expect.</p>
+<p>For example, when calling the <code>retain</code> method, it will send out a
+notification for each change, so if <code>retain</code> removes 5 values it will send
+out 5 notifications.</p>
+<p>But, contrary to what you might expect, the notifications are in the reverse
+order: it sends notifications for the right-most values first, and
+notifications for the left-most values last. In addition, it sends a mixture
+of <code>VecDiff::Pop</code> and <code>VecDiff::RemoveAt</code>.</p>
+<p>Another example is that <a href="../signal_vec/struct.MutableVecLockMut.html#method.remove"><code>remove</code></a>
+might notify with either <code>VecDiff::RemoveAt</code> or <code>VecDiff::Pop</code> depending on
+whether it removed the last value or not.</p>
+<p>The reason for this is performance, and you should <em><strong>not</strong></em> rely
+upon it: the behavior of exactly which notifications are sent is an
+implementation detail.</p>
+<p>However, there is one thing you <em>can</em> rely on: if you apply the
+notifications in the same order they are received, it will exactly recreate
+the <code>SignalVec</code>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">copied_vec</span> <span class="op">=</span> <span class="macro">vec!</span>[];
+
+<span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="ident">my_vec</span>.<span class="ident">signal_vec</span>().<span class="ident">for_each</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">change</span><span class="op">|</span> {
+    <span class="kw">match</span> <span class="ident">change</span> {
+        <span class="ident">VecDiff::Replace</span> { <span class="ident">values</span> } =&gt; {
+            <span class="ident">copied_vec</span> <span class="op">=</span> <span class="ident">values</span>;
+        },
+        <span class="ident">VecDiff::InsertAt</span> { <span class="ident">index</span>, <span class="ident">value</span> } =&gt; {
+            <span class="ident">copied_vec</span>.<span class="ident">insert</span>(<span class="ident">index</span>, <span class="ident">value</span>);
+        },
+        <span class="ident">VecDiff::UpdateAt</span> { <span class="ident">index</span>, <span class="ident">value</span> } =&gt; {
+            <span class="ident">copied_vec</span>[<span class="ident">index</span>] <span class="op">=</span> <span class="ident">value</span>;
+        },
+        <span class="ident">VecDiff::RemoveAt</span> { <span class="ident">index</span> } =&gt; {
+            <span class="ident">copied_vec</span>.<span class="ident">remove</span>(<span class="ident">index</span>);
+        },
+        <span class="ident">VecDiff::Move</span> { <span class="ident">old_index</span>, <span class="ident">new_index</span> } =&gt; {
+            <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">copied_vec</span>.<span class="ident">remove</span>(<span class="ident">old_index</span>);
+            <span class="ident">copied_vec</span>.<span class="ident">insert</span>(<span class="ident">new_index</span>, <span class="ident">value</span>);
+        },
+        <span class="ident">VecDiff::Push</span> { <span class="ident">value</span> } =&gt; {
+            <span class="ident">copied_vec</span>.<span class="ident">push</span>(<span class="ident">value</span>);
+        },
+        <span class="ident">VecDiff::Pop</span> {} =&gt; {
+            <span class="ident">copied_vec</span>.<span class="ident">pop</span>().<span class="ident">unwrap</span>();
+        },
+        <span class="ident">VecDiff::Clear</span> {} =&gt; {
+            <span class="ident">copied_vec</span>.<span class="ident">clear</span>();
+        },
+    }
+
+    <span class="kw">async</span> {}
+});</code></pre></div>
+<p>In the above example, <code>copied_vec</code> is guaranteed to have exactly the same
+values as <code>my_vec</code>, in the same order as <code>my_vec</code>.</p>
+<p>But even though the <em>end result</em> is guaranteed to be the same, the order of
+the individual changes is an unspecified implementation detail.</p>
+<h3 id="mutablebtreemap"><a href="#mutablebtreemap"><code>MutableBTreeMap</code></a></h3>
+<p>Just like how <code>MutableVec</code> is a <code>Signal</code> version of <code>Vec</code>, there is also
+<a href="../signal_map/struct.MutableBTreeMap.html"><code>MutableBTreeMap</code></a> which is a
+<code>Signal</code> version of <a href="https://doc.rust-lang.org/std/collections/struct.BTreeMap.html"><code>BTreeMap</code></a>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::signal_map::MutableBTreeMap</span>;
+
+<span class="kw">let</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">MutableBTreeMap::new</span>();
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lock</span> <span class="op">=</span> <span class="ident">map</span>.<span class="ident">lock_mut</span>();
+<span class="ident">lock</span>.<span class="ident">insert</span>(<span class="string">&quot;foo&quot;</span>, <span class="number">5</span>);
+<span class="ident">lock</span>.<span class="ident">insert</span>(<span class="string">&quot;bar&quot;</span>, <span class="number">10</span>);</code></pre></div>
+<p>Similar to <code>MutableVec</code>, it notifies with a <a href="../signal_map/enum.MapDiff.html"><code>MapDiff</code></a>,
+and of course it supports <a href="../signal_map/trait.SignalMap.html"><code>SignalMap</code></a>
+and <a href="../signal_map/trait.SignalMapExt.html"><code>SignalMapExt</code></a> for efficient
+transformations and notifications:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">futures_signals::signal_map</span>::{<span class="ident">SignalMapExt</span>, <span class="ident">MapDiff</span>};
+
+<span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">map</span>.<span class="ident">signal_map</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">change</span><span class="op">|</span> {
+    <span class="kw">match</span> <span class="ident">change</span> {
+        <span class="ident">MapDiff::Replace</span> { <span class="ident">entries</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">MapDiff::Insert</span> { <span class="ident">key</span>, <span class="ident">value</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">MapDiff::Update</span> { <span class="ident">key</span>, <span class="ident">value</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">MapDiff::Remove</span> { <span class="ident">key</span> } =&gt; {
+            <span class="comment">// ...</span>
+        },
+        <span class="ident">MapDiff::Clear</span> {} =&gt; {
+            <span class="comment">// ...</span>
+        },
+    }
+
+    <span class="kw">async</span> {}
+});</code></pre></div>
+<h3 id="end"><a href="#end">End</a></h3>
+<p>And that’s the end of the tutorial! We didn’t cover every method, but we
+covered enough for you to get started.</p>
+<p>You can look at the documentation for information on every method (there’s a
+lot of useful stuff in there!).</p>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="futures_signals" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["JsOption","An `Option`-like type with two data-less variants in addition to `Some`: `Null` and `Undefined`."]]};

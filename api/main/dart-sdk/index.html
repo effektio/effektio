@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 6.0.0">
+  <meta name="description" content="effektio_flutter_sdk API docs, for the Dart programming language.">
+  <title>effektio_flutter_sdk - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://flutter.effektio.org/">effektio_flutter_sdk package</a></li>
+  </ol>
+  <div class="self-name">effektio_flutter_sdk</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="effektio_flutter_sdk">effektio_flutter_sdk</h1>
+<h2 id="ios">IOS</h2>
+<p>Ios setup is incomplete as of now. These are the things that need to be done in order to link the native lib with ios:</p>
+<ol>
+<li>Generate bindings to be used during static linking.</li>
+<li>Configure the podspec to use the libeffektio.a during static linking the dependent app.</li>
+</ol>
+<p>The first could be done with <code>ffi-gen</code>. The second step might require adding <code>LIBRARY_SEARCH_PATH</code> entries to <code>s.user_target_xcconfig</code>.
+There is also a thing called frameworks that could be used for dynamic linking in our ios app. Generating headers will not be necessary if we decide to go that route. It would be better if we figure out the entire process before modifying <code>ffi-gen</code>.</p>
+<h3 id="useful-links">Useful links:</h3>
+<p>Linking rust libraries to ios apps. This article describes all the project configuration that needs to be done when linking a static library. We need to figure out how to do all this using cocoapod configuration: <a href="https://blog.mozilla.org/data/2022/01/31/this-week-in-glean-building-and-deploying-a-rust-library-on-ios/">https://blog.mozilla.org/data/2022/01/31/this-week-in-glean-building-and-deploying-a-rust-library-on-ios/</a></p>
+<p>Creating an ios framework. Again this article shows how to do this using xcode. We need to do this using cocoapods: <a href="https://www.raywenderlich.com/17753301-creating-a-framework-for-ios">https://www.raywenderlich.com/17753301-creating-a-framework-for-ios</a></p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="effektio">
+  <span class="name"><a href="effektio/effektio-library.html">effektio</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="effektio_flutter_sdk">
+  <span class="name"><a href="file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk/file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk-library.html">effektio_flutter_sdk</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="effektio_flutter_sdk_web">
+  <span class="name"><a href="file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk_web/file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk_web-library.html">effektio_flutter_sdk_web</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="https://flutter.effektio.org/">effektio_flutter_sdk package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">effektio_flutter_sdk</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="effektio/effektio-library.html">effektio</a></li>
+      <li><a href="file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk/file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk-library.html">effektio_flutter_sdk</a></li>
+      <li><a href="file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk_web/file-___home_runner_work_effektio_effektio_effektio_flutter_sdk_lib_effektio_flutter_sdk_web-library.html">effektio_flutter_sdk_web</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    effektio_flutter_sdk
+      0.0.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

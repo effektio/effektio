@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/git/checkouts/ruma-5201e73f5f917c77/9615591/crates/ruma-client-api/src/filter/create_filter.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>create_filter.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" href="https://www.ruma.io/favicon.ico"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../ruma_client_api/index.html"><div class="logo-container"><img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../ruma_client_api/index.html"><div class="logo-container">
+                    <img src="https://www.ruma.io/images/logo.png" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../ruma_client_api/index.html">
+                        <img src="https://www.ruma.io/images/logo.png" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+</pre><pre class="rust"><code><span class="doccomment">//! `POST /_matrix/client/*/user/{userId}/filter`</span>
+
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">v3</span> {
+    <span class="doccomment">//! `/v3/` ([spec])</span>
+    <span class="doccomment">//!</span>
+    <span class="doccomment">//! [spec]: https://spec.matrix.org/v1.2/client-server-api/#post_matrixclientv3useruseridfilter</span>
+
+    <span class="kw">use</span> <span class="ident">ruma_common</span>::{<span class="ident">api::ruma_api</span>, <span class="ident">UserId</span>};
+
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::filter</span>::{<span class="ident">FilterDefinition</span>, <span class="ident">IncomingFilterDefinition</span>};
+
+    <span class="macro">ruma_api!</span> {
+        <span class="ident">metadata</span>: {
+            <span class="ident">description</span>: <span class="string">&quot;Create a new filter for event retrieval.&quot;</span>,
+            <span class="ident">method</span>: <span class="ident">POST</span>,
+            <span class="ident">name</span>: <span class="string">&quot;create_filter&quot;</span>,
+            <span class="ident">r0_path</span>: <span class="string">&quot;/_matrix/client/r0/user/:user_id/filter&quot;</span>,
+            <span class="ident">stable_path</span>: <span class="string">&quot;/_matrix/client/v3/user/:user_id/filter&quot;</span>,
+            <span class="ident">rate_limited</span>: <span class="bool-val">false</span>,
+            <span class="ident">authentication</span>: <span class="ident">AccessToken</span>,
+            <span class="ident">added</span>: <span class="number">1.0</span>,
+        }
+
+        <span class="ident">request</span>: {
+            <span class="doccomment">/// The ID of the user uploading the filter.</span>
+            <span class="doccomment">///</span>
+            <span class="doccomment">/// The access token must be authorized to make requests for this user ID.</span>
+            <span class="attribute">#[<span class="ident">ruma_api</span>(<span class="ident">path</span>)]</span>
+            <span class="kw">pub</span> <span class="ident">user_id</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">UserId</span>,
+
+            <span class="doccomment">/// The filter definition.</span>
+            <span class="attribute">#[<span class="ident">ruma_api</span>(<span class="ident">body</span>)]</span>
+            <span class="kw">pub</span> <span class="ident">filter</span>: <span class="ident">FilterDefinition</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+        }
+
+        <span class="ident">response</span>: {
+            <span class="doccomment">/// The ID of the filter that was created.</span>
+            <span class="kw">pub</span> <span class="ident">filter_id</span>: <span class="ident">String</span>,
+        }
+
+        <span class="ident">error</span>: <span class="ident"><span class="kw">crate</span>::Error</span>
+    }
+
+    <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Request</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+        <span class="doccomment">/// Creates a new `Request` with the given user ID and filter definition.</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">user_id</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">UserId</span>, <span class="ident">filter</span>: <span class="ident">FilterDefinition</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+            <span class="self">Self</span> { <span class="ident">user_id</span>, <span class="ident">filter</span> }
+        }
+    }
+
+    <span class="kw">impl</span> <span class="ident">Response</span> {
+        <span class="doccomment">/// Creates a new `Response` with the given filter ID.</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">filter_id</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
+            <span class="self">Self</span> { <span class="ident">filter_id</span> }
+        }
+    }
+
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">test</span>, <span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;server&quot;</span>)))]</span>
+    <span class="kw">mod</span> <span class="ident">tests</span> {
+        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;server&quot;</span>)]</span>
+        <span class="attribute">#[<span class="ident">test</span>]</span>
+        <span class="kw">fn</span> <span class="ident">deserialize_request</span>() {
+            <span class="kw">use</span> <span class="ident">ruma_common::api::IncomingRequest</span> <span class="kw">as</span> <span class="kw">_</span>;
+
+            <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::IncomingRequest</span>;
+
+            <span class="kw">let</span> <span class="ident">req</span> <span class="op">=</span> <span class="ident">IncomingRequest::try_from_http_request</span>(
+                <span class="ident">http::Request::builder</span>()
+                    .<span class="ident">method</span>(<span class="ident">http::Method::POST</span>)
+                    .<span class="ident">uri</span>(<span class="string">&quot;https://matrix.org/_matrix/client/r0/user/@foo:bar.com/filter&quot;</span>)
+                    .<span class="ident">body</span>(<span class="string">b&quot;{}&quot;</span> <span class="kw">as</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>])
+                    .<span class="ident">unwrap</span>(),
+                <span class="kw-2">&amp;</span>[<span class="string">&quot;@foo:bar.com&quot;</span>],
+            )
+            .<span class="ident">unwrap</span>();
+
+            <span class="macro">assert_eq!</span>(<span class="ident">req</span>.<span class="ident">user_id</span>, <span class="string">&quot;@foo:bar.com&quot;</span>);
+            <span class="macro">assert!</span>(<span class="ident">req</span>.<span class="ident">filter</span>.<span class="ident">is_empty</span>());
+        }
+
+        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;client&quot;</span>)]</span>
+        <span class="attribute">#[<span class="ident">test</span>]</span>
+        <span class="kw">fn</span> <span class="ident">serialize_request</span>() {
+            <span class="kw">use</span> <span class="ident">ruma_common</span>::{
+                <span class="ident">api</span>::{<span class="ident">MatrixVersion</span>, <span class="ident">OutgoingRequest</span>, <span class="ident">SendAccessToken</span>},
+                <span class="ident">user_id</span>,
+            };
+
+            <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::filter::FilterDefinition</span>;
+
+            <span class="kw">let</span> <span class="ident">req</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::Request::new</span>(<span class="macro">user_id!</span>(<span class="string">&quot;@foo:bar.com&quot;</span>), <span class="ident">FilterDefinition::default</span>())
+                .<span class="ident">try_into_http_request</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>(
+                    <span class="string">&quot;https://matrix.org&quot;</span>,
+                    <span class="ident">SendAccessToken::IfRequired</span>(<span class="string">&quot;tok&quot;</span>),
+                    <span class="kw-2">&amp;</span>[<span class="ident">MatrixVersion::V1_1</span>],
+                )
+                .<span class="ident">unwrap</span>();
+            <span class="macro">assert_eq!</span>(<span class="ident">req</span>.<span class="ident">body</span>(), <span class="string">b&quot;{}&quot;</span>);
+        }
+    }
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="ruma_client_api" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

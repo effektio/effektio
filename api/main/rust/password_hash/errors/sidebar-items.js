@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["B64Error","Generic error, union of [`InvalidLengthError`] and [`InvalidEncodingError`]."],["Error","Password hashing errors."],["InvalidValue","Parse errors relating to invalid parameter values or salts."]],"type":[["Result","Result type."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["gen_mock_faqs",""],["gen_mock_news",""]],"struct":[["ColorFaker",""]]};

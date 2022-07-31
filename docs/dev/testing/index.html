@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://docs.effektio.org/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://docs.effektio.org/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="stylesheet" href="https://docs.effektio.org/main.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Testing | EffektioDocs</title>
+<meta name="description" content="">
+<link rel="canonical" href="https://docs.effektio.org/docs/dev/testing/">
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://docs.effektio.org/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "Docs",
+            "item": "https://docs.effektio.org/docs/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "Dev",
+            "item": "https://docs.effektio.org/docs/dev/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "Testing",
+            "item": "https://docs.effektio.org/docs/dev/testing/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://docs.effektio.org/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://docs.effektio.org/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://docs.effektio.org/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://docs.effektio.org/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+
+<body class="docs single">
+  
+  
+  
+  
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://docs.effektio.org">EffektioDocs</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://twitter.com/effektio"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/effektio/effektio"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item docs active">
+							<a class="nav-link" href="https://docs.effektio.org/docs/">Docs</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search docs..."
+						aria-label="Search docs..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+</header>
+
+
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row flex-xl-nowrap">
+	  
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+	<nav class="docs-links" aria-label="Main navigation">
+			
+			
+			
+			
+					
+					
+					
+							<h3>Getting Started</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/getting-started/setup/">Setting up</a></li>
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/getting-started/troubleshooting/">Troubleshooting</a></li>
+							
+					</ul>
+					
+					
+					
+					
+							<h3>Contributing</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/contributing/how-to-contribute/">How to Contribute</a></li>
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/contributing/reviews/">Reviews process</a></li>
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/contributing/code-of-conduct/">Code of Conduct</a></li>
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/contributing/license/">License &amp; CLA</a></li>
+							
+					</ul>
+					
+					
+					
+					
+							<h3>Development</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/dev/localisations/">Localisation</a></li>
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/dev/style-guide/">Style Guide</a></li>
+							                           
+									<li><a class="docs-link active" href="https://docs.effektio.org/docs/dev/testing/">Testing</a></li>
+							                           
+									<li><a class="docs-link" href="https://docs.effektio.org/docs/dev/api-docs/">API Docs</a></li>
+							
+					</ul>
+					
+					
+			
+	</nav>
+</div>
+
+	  
+  
+  <nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+  	<div class="page-links">
+  			<h3>On this page</h3>
+  			<nav id="TableOfContents">
+  					<ul>
+  							
+  							<li><a href="https://docs.effektio.org/docs/dev/testing/#unit-tests">Unit Tests</a></li>
+  							
+  									<ul>
+  											
+  											<li><a href="https://docs.effektio.org/docs/dev/testing/#rust">Rust</a></li>
+  											
+  									</ul>
+  							
+  							
+  							<li><a href="https://docs.effektio.org/docs/dev/testing/#flutter">Flutter</a></li>
+  							
+  							
+  							<li><a href="https://docs.effektio.org/docs/dev/testing/#integration-tests">Integration Tests</a></li>
+  							
+  									<ul>
+  											
+  											<li><a href="https://docs.effektio.org/docs/dev/testing/#infrastructure">Infrastructure</a></li>
+  											
+  											<li><a href="https://docs.effektio.org/docs/dev/testing/#rust-integration-tests">Rust integration tests</a></li>
+  											
+  											<li><a href="https://docs.effektio.org/docs/dev/testing/#flutter-ui-integration-tests">Flutter UI integration tests</a></li>
+  											
+  									</ul>
+  							
+  							
+  					</ul>
+  			</nav>
+  	</div>
+  </nav>
+  
+
+      <main class="docs-content col-lg-11 col-xl-9">
+        <h1>Testing</h1>
+        
+        <h2 id="unit-tests">Unit Tests</h2>
+<h3 id="rust">Rust</h3>
+<p>We are using <a href="https://doc.rust-lang.org/book/ch11-00-testing.html">regular unit tests as by the Rust Book</a>. You can run them with <code>cargo test</code> .</p>
+<p><em>Note</em>: For async unit test, we are using <code>tokio</code> so mark them with <code>#[tokio:test]</code> (rather than <code>#[test]</code>). Example:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>anyhow::Result;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">tokio</span><span>::</span><span style="color:#bf616a;">test</span><span>]
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">testing_my_feature</span><span>() -&gt; Result&lt;()&gt; {
+</span><span>    </span><span style="color:#65737e;">// ... test code
+</span><span>    Ok(())
+</span><span>}
+</span></code></pre>
+<h2 id="flutter">Flutter</h2>
+<p><em>Note</em>: We currently don't have proper widget tests. So this is mainly here for when we do have them available.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cd app
+</span><span>flutter test
+</span></code></pre>
+<h2 id="integration-tests">Integration Tests</h2>
+<h3 id="infrastructure">Infrastructure</h3>
+<p>You need a fresh <a href="https://matrix-org.github.io/synapse/latest/"><code>synapse</code> matrix backend</a> with the following settings included (in the <code>homeserver.yaml</code>):</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">allow_guest_access</span><span>: </span><span style="color:#d08770;">true
+</span><span style="color:#bf616a;">enable_registration_without_verification</span><span>: </span><span style="color:#d08770;">true
+</span><span style="color:#bf616a;">enable_registration</span><span>: </span><span style="color:#d08770;">true
+</span><span style="color:#bf616a;">registration_shared_secret</span><span>: &quot;</span><span style="color:#a3be8c;">randomly_generated_string</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">rc_message</span><span>:
+</span><span>  </span><span style="color:#bf616a;">per_second</span><span>: </span><span style="color:#d08770;">1000
+</span><span>  </span><span style="color:#bf616a;">burst_count</span><span>: </span><span style="color:#d08770;">1000
+</span><span>
+</span><span style="color:#bf616a;">rc_registration</span><span>:
+</span><span>  </span><span style="color:#bf616a;">per_second</span><span>: </span><span style="color:#d08770;">1000
+</span><span>  </span><span style="color:#bf616a;">burst_count</span><span>: </span><span style="color:#d08770;">1000
+</span><span>
+</span><span style="color:#bf616a;">rc_login</span><span>:
+</span><span>  </span><span style="color:#bf616a;">address</span><span>:
+</span><span>    </span><span style="color:#bf616a;">per_second</span><span>: </span><span style="color:#d08770;">1000
+</span><span>    </span><span style="color:#bf616a;">burst_count</span><span>: </span><span style="color:#d08770;">1000
+</span></code></pre>
+<p>and an <code>admin</code> account with the username <code>admin</code> and passwort <code>admin</code> (which you can create with <code>register_new_matrix_user -u admin -p admin -a -c $HOMESERVER_CONFIG_PATH $HOMESERVER_URL</code>). To avoid the change of server URL under VMWare, you can use NAT mode not Bridged mode as network.</p>
+<p>Please change <code>bind_addresses</code> of <code>listeners</code> from <code>['::1', '127.0.0.1']</code> to <code>['0.0.0.0']</code> (in the <code>homeserver.yaml</code>), that means any address and allows remote connection (non-localhost).</p>
+<h4 id="docker-container">Docker Container</h4>
+<p>We have a <code>docker</code> container image available with that setup already for you at <code>lightyear/effektio-synapse-ci:latest</code>. Easiest is to use <code>docker-compose up -d</code> to run it locally from the root directory. This will also create the necessary <code>admin</code> account.</p>
+<h4 id="firewall">Firewall</h4>
+<p>If you are running synapse on a virtual or remote machine, don't forget update the firewall rules to allow access to the ports. To turn off the public profile of a server firewall on a <code>Ubuntu</code> linux, you can use <code>gufw</code> and disable it like so:</p>
+<p><img src="https://docs.effektio.org/docs/dev/testing/../../../static/images/ubuntu-firewall.png" alt="Ubuntu Firewall" /></p>
+<h4 id="mock-data">Mock data</h4>
+<p>The integration tests expect a certain set of <code>mock</code> data. You can easily get this set up by running</p>
+<p><code>cargo run -p effektio-cli -- mock $HOMESERVER</code></p>
+<p><strong>Reset docker</strong>
+To start the docker-compose afresh:</p>
+<ol>
+<li>stop the service with <code>docker-compose stop</code></li>
+<li>remove the data at <code>rm -rf .local</code></li>
+<li>start the service with <code>docker-compose up -d</code></li>
+</ol>
+<p><strong>Reset database (in case of SQLite)</strong></p>
+<ol>
+<li>Stop service with <code>sudo systemctl stop matrix-synapse</code></li>
+<li>Delete this file <code>/var/lib/matrix-synapse/homeserver.db</code></li>
+<li>Start service with <code>sudo systemctl start matrix-synapse</code></li>
+<li>Run this command <code>cargo run -p effektio-cli -- mock $HOMESERVER</code></li>
+</ol>
+<p>Don't forget to rerun the <code>mock data</code> generation again.</p>
+<h3 id="rust-integration-tests">Rust integration tests</h3>
+<p>To run the rust integration tests, you need a fresh integration testing infrastructure (see above) availabe at <code>$HOMESERVER</code>. Assuming you are running the docker-compose setup, this would be <code>http://localhost:8118</code> (which is the fallback default, so you don't have to put it into your environment). Then you can run the integration test with:</p>
+<h4 id="custom-environment-variable-under-windows-powershell">Custom Environment variable under Windows PowerShell</h4>
+<p>You can set up environment variable for <code>cargo</code> as following (assuming the server is accessible at <code>10.0.0.1:8008</code> and log level is <code>info</code>):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$env:HOMESERVER</span><span>=&quot;</span><span style="color:#a3be8c;">http://10.0.0.1:8008</span><span>&quot;; </span><span style="color:#bf616a;">$env:RUST_LOG</span><span>=&quot;</span><span style="color:#a3be8c;">info</span><span>&quot;; </span><span style="color:#bf616a;">cargo</span><span> test</span><span style="color:#bf616a;"> -p</span><span> effektio-test -- --nocapture
+</span></code></pre>
+<h4 id="custom-environment-variable-under-linux-shell">Custom Environment variable under Linux Shell</h4>
+<p>You can set up environment variable for <code>cargo</code> as following (assuming the server is available at <code>10.0.0.1:8008</code> and log level is <code>warn</code>):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">HOMESERVER</span><span>=&quot;</span><span style="color:#a3be8c;">http://10.0.0.1:8008</span><span>&quot; </span><span style="color:#bf616a;">RUST_LOG</span><span>=&quot;</span><span style="color:#a3be8c;">warn</span><span>&quot; </span><span style="color:#bf616a;">cargo</span><span> test</span><span style="color:#bf616a;"> -p</span><span> effektio-test -- --nocapture
+</span></code></pre>
+<h3 id="flutter-ui-integration-tests">Flutter UI integration tests</h3>
+<p>To run the rust integration tests, you need a fresh integration testing infrastructure (see above) availabe at <code>$HOMESERVER</code> and an Android Emulator up and running. Build the App and run the tests with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>cd app
+</span><span>flutter drive --driver=test_driver/integration_test.dart integration_test/*  --dart-define DEFAULT_EFFEKTIO_SERVER=$HOMESERVER
+</span></code></pre>
+
+        
+        
+<div class="docs-navigation d-flex justify-content-between">
+  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+          
+        
+      
+        
+        
+          
+            
+              
+              <a href="https:&#x2F;&#x2F;docs.effektio.org&#x2F;docs&#x2F;contributing&#x2F;license&#x2F;">
+                <div class="card my-1">
+                  <div class="card-body py-2">
+                    &larr; License &amp; CLA
+                  </div>
+                </div>
+              </a>
+            
+            
+            
+          
+        
+      
+        
+        
+          
+        
+      
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+      
+      
+        
+      
+    
+      
+      
+        
+      
+    
+  
+</div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Proudly build with <a href="https://www.getzola.org/">Zola</a> and <a href="https://github.com/aaranxu/adidoks">AdiDoks</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+						
+							<li class="list-inline-item"><a href="https://docs.effektio.org/https://effektio.org/">Website</a></li>
+						
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://docs.effektio.org/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://docs.effektio.org/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://docs.effektio.org/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://docs.effektio.org/js/search.js" defer></script>
+
+  
+</body>
+</html>

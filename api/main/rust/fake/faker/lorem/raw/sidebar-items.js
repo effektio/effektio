@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Paragraph",""],["Paragraphs",""],["Sentence",""],["Sentences",""],["Word",""],["Words",""]]};

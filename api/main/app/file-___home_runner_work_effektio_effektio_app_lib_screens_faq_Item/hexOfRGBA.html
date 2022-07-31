@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the hexOfRGBA function from the Item library, for the Dart programming language.">
+  <title>hexOfRGBA function - Item library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">effektio</a></li>
+    <li><a href="../file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item/file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item-library.html">Item</a></li>
+    <li class="self-crumb">hexOfRGBA function</li>
+  </ol>
+  <div class="self-name">hexOfRGBA</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-function">hexOfRGBA</span> function 
+    <a href="https://dart.dev/null-safety" class="feature feature-null-safety" title="Supports the null safety language feature.">Null safety</a>
+ 
+</h1></div>
+
+    <section class="multi-line-signature">
+        
+
+<span class="returntype"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+<span class="name ">hexOfRGBA</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="hexOfRGBA-param-r"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">r</span>, </span></li>
+<li><span class="parameter" id="hexOfRGBA-param-g"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">g</span>, </span></li>
+<li><span class="parameter" id="hexOfRGBA-param-b"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">b</span>, </span></li>
+<li><span class="parameter" id="hexOfRGBA-param-opacity">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">opacity</span> = <span class="default-value">1</span>}</span></li>
+</ol>)
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">int hexOfRGBA(int r, int g, int b, {double opacity = 1}) {
+  r = (r &lt; 0) ? -r : r;
+  g = (g &lt; 0) ? -g : g;
+  b = (b &lt; 0) ? -b : b;
+  opacity = (opacity &lt; 0) ? -opacity : opacity;
+  opacity = (opacity &gt; 1) ? 255 : opacity * 255;
+  r = (r &gt; 255) ? 255 : r;
+  g = (g &gt; 255) ? 255 : g;
+  b = (b &gt; 255) ? 255 : b;
+  int a = opacity.toInt();
+  return int.parse(
+    &#39;0x${a.toRadixString(16)}${r.toRadixString(16)}${g.toRadixString(16)}${b.toRadixString(16)}&#39;,
+  );
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../index.html">effektio</a></li>
+  <li><a href="../file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item/file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item-library.html">Item</a></li>
+  <li class="self-crumb">hexOfRGBA function</li>
+</ol>
+
+
+    <h5>Item library</h5>
+    <ol>
+  <li class="section-title"><a href="../file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item/file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item-library.html#classes">Classes</a></li>
+  <li><a href="../file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item/FaqItemScreen-class.html">FaqItemScreen</a></li>
+
+
+
+
+
+  <li class="section-title"><a href="../file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item/file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item-library.html#functions">Functions</a></li>
+  <li><a href="../file-___home_runner_work_effektio_effektio_app_lib_screens_faq_Item/hexOfRGBA.html">hexOfRGBA</a></li>
+
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    effektio
+      0.0.1+1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

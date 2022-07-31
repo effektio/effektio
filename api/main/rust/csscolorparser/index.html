@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Overview"><meta name="keywords" content="rust, rustlang, rust-lang, csscolorparser"><title>csscolorparser - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../csscolorparser/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../csscolorparser/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate csscolorparser</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.5.0</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../csscolorparser/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">csscolorparser</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/csscolorparser/lib.rs.html#1-103">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="overview"><a href="#overview">Overview</a></h2>
+<p>Rust library to parse CSS color string as defined in the W3C’s <a href="https://www.w3.org/TR/css-color-4/">CSS Color Module Level 4</a>.</p>
+<h3 id="supported-color-format"><a href="#supported-color-format">Supported Color Format</a></h3>
+<ul>
+<li><a href="https://www.w3.org/TR/css-color-4/#named-colors">Named colors</a></li>
+<li>RGB hexadecimal (with and without <code>#</code> prefix)
+<ul>
+<li>Short format <code>#rgb</code></li>
+<li>Short format with alpha <code>#rgba</code></li>
+<li>Long format <code>#rrggbb</code></li>
+<li>Long format with alpha <code>#rrggbbaa</code></li>
+</ul>
+</li>
+<li><code>rgb()</code> and <code>rgba()</code></li>
+<li><code>hsl()</code> and <code>hsla()</code></li>
+<li><code>hwb()</code></li>
+<li><code>hwba()</code>, <code>hsv()</code>, <code>hsva()</code> - not in CSS standard.</li>
+</ul>
+<p>Not yet supported: <code>lab()</code>, <code>lch()</code>.</p>
+<h4 id="example-color-format"><a href="#example-color-format">Example Color Format</a></h4><div class="example-wrap"><pre class="language-text"><code>transparent
+gold
+rebeccapurple
+lime
+#0f0
+#0f0f
+#00ff00
+#00ff00ff
+rgb(0,255,0)
+rgb(0% 100% 0%)
+rgb(0 255 0 / 100%)
+rgba(0,255,0,1)
+hsl(120,100%,50%)
+hsl(120deg 100% 50%)
+hsl(-240 100% 50%)
+hsl(-240deg 100% 50%)
+hsl(0.3333turn 100% 50%)
+hsl(133.333grad 100% 50%)
+hsl(2.0944rad 100% 50%)
+hsla(120,100%,50%,100%)
+hwb(120 0% 0%)
+hwb(480deg 0% 0% / 100%)
+hsv(120,100%,100%)
+hsv(120deg 100% 100% / 100%)</code></pre></div><h3 id="usage"><a href="#usage">Usage</a></h3>
+<p>Add this to your <code>Cargo.toml</code></p>
+<div class="example-wrap"><pre class="language-toml"><code>csscolorparser = &quot;0.5.0&quot;</code></pre></div><h3 id="examples"><a href="#examples">Examples</a></h3>
+<p>Using <a href="fn.parse.html"><code>csscolorparser::parse()</code></a> function.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">csscolorparser::parse</span>(<span class="string">&quot;rgb(100%,0%,0%)&quot;</span>)<span class="question-mark">?</span>;
+
+<span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">rgba</span>(), (<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">rgba_u8</span>(), (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">to_hex_string</span>(), <span class="string">&quot;#ff0000&quot;</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">to_rgb_string</span>(), <span class="string">&quot;rgb(255,0,0)&quot;</span>);</code></pre></div>
+<p>Using <code>parse()</code> method on <code>&amp;str</code>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">csscolorparser::Color</span>;
+
+<span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="string">&quot;#ff00007f&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Color</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
+
+<span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">rgba_u8</span>(), (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">127</span>));
+<span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">to_hex_string</span>(), <span class="string">&quot;#ff00007f&quot;</span>);</code></pre></div>
+<h3 id="default-feature"><a href="#default-feature">Default Feature</a></h3>
+<ul>
+<li><code>named-colors</code>: Enables parsing from <a href="https://www.w3.org/TR/css-color-4/#named-colors">named colors</a>. Requires <a href="https://crates.io/crates/phf"><code>phf</code></a>.</li>
+</ul>
+<h3 id="optional-features"><a href="#optional-features">Optional Features</a></h3>
+<ul>
+<li><code>rust-rgb</code>: Enables converting from <a href="https://crates.io/crates/rgb"><code>rgb</code></a> crate types into <code>Color</code>.</li>
+<li><code>cint</code>: Enables converting <a href="https://crates.io/crates/cint"><code>cint</code></a> crate types to and from <code>Color</code>.</li>
+<li><code>serde</code>: Enables serializing (into HEX string) and deserializing (from any supported string color format) using <a href="https://serde.rs/"><code>serde</code></a> framework.</li>
+</ul>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Color.html" title="csscolorparser::Color struct">Color</a></div><div class="item-right docblock-short"><p>The color</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ParseColorError.html" title="csscolorparser::ParseColorError enum">ParseColorError</a></div><div class="item-right docblock-short"></div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.parse.html" title="csscolorparser::parse fn">parse</a></div><div class="item-right docblock-short"><p>Parse CSS color string</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="csscolorparser" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (87588a2af 2022-07-13)" ></div>
+</body></html>

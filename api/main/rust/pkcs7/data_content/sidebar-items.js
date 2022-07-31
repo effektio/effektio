@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["DataContent","The content that is just an octet string."]]};

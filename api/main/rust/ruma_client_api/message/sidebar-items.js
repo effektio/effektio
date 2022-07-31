@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["get_message_events","`GET /_matrix/client/*/rooms/{roomId}/messages`"],["send_message_event","`PUT /_matrix/client/*/rooms/{roomId}/send/{eventType}/{txnId}`"]]};

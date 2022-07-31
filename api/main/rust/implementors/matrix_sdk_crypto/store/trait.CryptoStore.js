@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["matrix_sdk_crypto"] = [];
+implementors["matrix_sdk_sled"] = [{"text":"impl <a class=\"trait\" href=\"matrix_sdk_crypto/store/trait.CryptoStore.html\" title=\"trait matrix_sdk_crypto::store::CryptoStore\">CryptoStore</a> for <a class=\"struct\" href=\"matrix_sdk_sled/struct.CryptoStore.html\" title=\"struct matrix_sdk_sled::CryptoStore\">SledStore</a>","synthetic":false,"types":["matrix_sdk_sled::cryptostore::SledStore"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

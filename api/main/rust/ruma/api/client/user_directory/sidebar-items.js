@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["search_users","`POST /_matrix/client/*/user_directory/search`"]]};

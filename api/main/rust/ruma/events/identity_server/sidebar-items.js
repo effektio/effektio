@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["IdentityServerEventContent","The content of an `m.identity_server` event."]],"type":[["IdentityServerEvent","An `m.identity_server` event."]]};

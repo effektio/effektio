@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["FullyReadEventContent","The content of an `m.fully_read` event."]],"type":[["FullyReadEvent","An `m.fully_read` event."]]};
