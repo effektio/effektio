@@ -1,7 +1,7 @@
-use super::EventId;
 pub use chrono::{DateTime, Utc};
 pub use chrono_tz::Tz as TimeZone;
 pub use csscolorparser::Color;
+use matrix_sdk::ruma::OwnedEventId;
 use serde::{Deserialize, Serialize};
 
 /// Default UTC Datetime Object
@@ -21,7 +21,13 @@ pub struct Colorize {
 #[serde(tag = "rel_type", rename = "m.thread")]
 pub struct InThread {
     /// The event this event archives.
-    pub event_id: Box<EventId>,
+    pub event_id: OwnedEventId,
+}
+
+impl From<OwnedEventId> for InThread {
+    fn from(event_id: OwnedEventId) -> InThread {
+        InThread { event_id }
+    }
 }
 
 pub type BelongsTo = InThread;

@@ -20,6 +20,7 @@ mod messages;
 mod news;
 mod room;
 mod stream;
+mod tasks;
 
 pub use account::Account;
 pub use auth::{
@@ -32,6 +33,7 @@ pub use group::{CreateGroupSettings, CreateGroupSettingsBuilder, Group};
 pub use messages::{FileDescription, ImageDescription, RoomMessage};
 pub use room::{Member, Room};
 pub use stream::TimelineStream;
+pub use tasks::TaskListDraft;
 
 #[cfg(feature = "with-mocks")]
 pub use effektio_core::mocks::*;

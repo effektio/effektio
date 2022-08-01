@@ -2,11 +2,13 @@ mod color;
 mod faq;
 mod news;
 mod tag;
+mod tasks;
 
 pub use color::Color;
 pub use faq::Faq;
 pub use news::News;
 pub use tag::Tag;
+pub use tasks::{Task, TaskList};
 
 #[cfg(feature = "with-mocks")]
 pub mod mocks {

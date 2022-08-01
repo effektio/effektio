@@ -16,6 +16,6 @@ pub use common::{BelongsTo, Color, Colorize, TimeZone, UtcDateTime};
 pub use labels::Labels;
 pub use news::{NewsContentType, NewsEvent, NewsEventDevContent};
 pub use todos::{
-    Priority as TaskPriority, SpecialTaskListRole, Task, TaskDevContent, TaskList,
-    TaskListDevContent,
+    Priority as TaskPriority, SpecialTaskListRole, TaskBuilder, TaskContent, TaskListBuilder,
+    TaskListContent,
 };
