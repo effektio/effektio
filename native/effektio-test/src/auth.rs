@@ -3,7 +3,7 @@ use effektio::api::{guest_client, login_new_client, login_with_token};
 use tempfile::TempDir;
 
 #[tokio::test]
-async fn can_guest_login() -> Result<()> {
+async fn guest_can_login() -> Result<()> {
     let _ = env_logger::try_init();
     let tmp_dir = TempDir::new()?;
     let _client = guest_client(

@@ -14,9 +14,6 @@ fn guest_client(basepath: string, homeserver: string) -> Future<Result<Client>>;
 /// Create a new client from the restore token
 fn register_with_registration_token(basepath: string, username: string, password: string, registration_token: string) -> Future<Result<Client>>;
 
-/// generate news mock items
-fn gen_mock_news() -> Vec<News>;
-
 /// Representing a color
 object Color {
     /// as rgba in u8
@@ -235,11 +232,20 @@ object Account {
 }
 
 object SyncState {
-    /// Get event handler of AnyToDeviceEvent
-    fn get_to_device_rx() -> Option<Stream<CrossSigningEvent>>;
+    /// Get event handler of first synchronization on every launch
+    fn get_first_synced_rx() -> Option<Stream<bool>>;
 
-    /// Get event handler of AnySyncMessageLikeEvent
-    fn get_sync_msg_like_rx() -> Option<Stream<CrossSigningEvent>>;
+    /// Get event handler of emoji verification
+    fn get_emoji_verification_event_rx() -> Option<Stream<EmojiVerificationEvent>>;
+
+    /// Get event handler of devices changed
+    fn get_devices_changed_event_rx() -> Option<Stream<DevicesChangedEvent>>;
+
+    /// Get event handler of devices left
+    fn get_devices_left_event_rx() -> Option<Stream<DevicesLeftEvent>>;
+
+    /// Get event handler of typing notification
+    fn get_typing_notification_rx() -> Option<Stream<TypingNotification>>;
 }
 
 /// Main entry point for `effektio`.
@@ -298,37 +304,59 @@ object Client {
     /// Get the FAQs for the client
     fn faqs() -> Future<Result<Vec<Faq>>>;
 
-    /// Accept the AnyToDeviceEvent::KeyVerificationRequest
-    fn accept_verification_request(sender: string, event_id: string) -> Future<Result<bool>>;
-
-    /// Accept the AnyToDeviceEvent::KeyVerificationStart
-    fn accept_verification_start(sender: string, event_id: string) -> Future<Result<bool>>;
-
-    fn get_verification_emoji(sender: string, event_id: string) -> Future<Result<Vec<EmojiUnit>>>;
-
-    /// Reply Correct to the AnyToDeviceEvent::KeyVerificationKey
-    fn confirm_verification_key(sender: string, event_id: string) -> Future<Result<bool>>;
-
-    /// Reply Wrong to the AnyToDeviceEvent::KeyVerificationKey
-    fn mismatch_verification_key(sender: string, event_id: string) -> Future<Result<bool>>;
-
-    /// Cancel the AnyToDeviceEvent::KeyVerificationKey
-    fn cancel_verification_key(sender: string, event_id: string) -> Future<Result<bool>>;
-
-    /// Review the AnyToDeviceEvent::KeyVerificationMac
-    fn review_verification_mac(sender: string, event_id: string) -> Future<Result<bool>>;
+    /// Whether the user already verified the device
+    fn verified_device(dev_id: string) -> Future<Result<bool>>;
 }
 
 /// Deliver emoji verification event from rust to flutter
-object CrossSigningEvent {
+object EmojiVerificationEvent {
     /// Get event name
     fn get_event_name() -> string;
 
-    /// Get transaction id or flow id
-    fn get_event_id() -> string;
-
     /// Get user id of event sender
     fn get_sender() -> string;
+
+    /// Bob accepts the verification request from Alice
+    fn accept_verification_request() -> Future<Result<bool>>;
+
+    /// Bob cancels the verification request from Alice
+    fn cancel_verification_request() -> Future<Result<bool>>;
+
+    /// Bob accepts the verification request from Alice with specified methods
+    fn accept_verification_request_with_methods(methods: Vec<string>) -> Future<Result<bool>>;
+
+    /// Alice starts the SAS verification
+    fn start_sas_verification() -> Future<Result<bool>>;
+
+    /// Bob accepts the SAS verification
+    fn accept_sas_verification() -> Future<Result<bool>>;
+
+    /// Bob cancels the SAS verification
+    fn cancel_sas_verification() -> Future<Result<bool>>;
+
+    /// Alice and Bob sends the verification key
+    fn send_verification_key() -> Future<Result<bool>>;
+
+    /// Alice and Bob gets the verification emoji
+    fn get_verification_emoji() -> Future<Result<Vec<EmojiUnit>>>;
+
+    /// Alice and Bob confirms the SAS verification matches
+    fn confirm_sas_verification() -> Future<Result<bool>>;
+
+    /// Reply Wrong to the AnyToDeviceEvent::KeyVerificationKey
+    fn mismatch_sas_verification() -> Future<Result<bool>>;
+
+    /// Cancel the AnyToDeviceEvent::KeyVerificationKey
+    fn cancel_verification_key() -> Future<Result<bool>>;
+
+    /// Review the AnyToDeviceEvent::KeyVerificationMac
+    fn review_verification_mac() -> Future<Result<bool>>;
+}
+
+/// Deliver typing notification from rust to flutter
+object TypingNotification {
+    /// Get transaction id or flow id
+    fn get_room_id() -> string;
 }
 
 /// Extend the return value of getVerificationEmoji function
@@ -338,4 +366,40 @@ object EmojiUnit {
 
     /// text description of emoji unicode
     fn get_description() -> string;
+}
+
+/// Deliver devices changed event from rust to flutter
+object DevicesChangedEvent {
+    /// Get the device list, excluding verified ones
+    fn get_unverified_devices() -> Future<Result<Vec<Device>>>;
+
+    /// Request verification
+    fn request_verification(dev_id: string) -> Future<Result<bool>>;
+
+    /// Request verification with methods
+    fn request_verification_with_methods(dev_id: string, methods: Vec<string>) -> Future<Result<bool>>;
+}
+
+/// Deliver devices left event from rust to flutter
+object DevicesLeftEvent {
+    /// Get the device list, including deleted ones
+    fn get_deleted_devices() -> Future<Result<Vec<Device>>>;
+}
+
+/// Provide various device infos
+object Device {
+    /// whether this device was verified
+    fn was_verified() -> bool;
+
+    /// whether this device was deleted
+    fn was_deleted() -> bool;
+
+    /// get the id of this device user
+    fn get_user_id() -> string;
+
+    /// get the id of this device
+    fn get_device_id() -> string;
+
+    /// get the display name of this device
+    fn get_display_name() -> Option<string>;
 }

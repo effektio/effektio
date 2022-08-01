@@ -17,6 +17,8 @@ import 'package:effektio/screens/SideMenuScreens/Gallery.dart';
 import 'package:effektio/screens/UserScreens/SocialProfile.dart';
 import 'package:effektio_flutter_sdk/effektio_flutter_sdk.dart'
     show Client, EffektioSdk;
+import 'package:effektio_flutter_sdk/effektio_flutter_sdk_ffi.dart'
+    show SyncState;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -113,8 +115,12 @@ class _EffektioHomeState extends State<EffektioHome>
   Future<Client> makeClient() async {
     final sdk = await EffektioSdk.instance;
     Client client = await sdk.currentClient;
+    SyncState syncer = client.startSync();
     //Start listening for cross signing events
-    crossSigning.startCrossSigning(client);
+    crossSigning.startCrossSigning(syncer.getEmojiVerificationEventRx()!);
+    syncer.getTypingNotificationRx()!.listen((event) {
+      debugPrint('typing notification for ' + event.getRoomId());
+    });
     return client;
   }
 
