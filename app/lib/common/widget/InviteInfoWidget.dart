@@ -57,11 +57,10 @@ class InviteInfoWidget extends StatelessWidget {
             indent: 15,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.48,
-                padding: const EdgeInsets.only(left: 15),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.46,
                 child: elevatedButton(
                   AppLocalizations.of(context)!.accept,
                   AppCommonTheme.greenButtonColor,
@@ -71,11 +70,7 @@ class InviteInfoWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 15,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.48,
-                padding: const EdgeInsets.only(right: 15),
+                width: MediaQuery.of(context).size.width * 0.46,
                 child: elevatedButton(
                   AppLocalizations.of(context)!.decline,
                   AppCommonTheme.primaryColor,
