@@ -208,7 +208,7 @@ packages:
       name: flutter_blurhash
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0"
+    version: "0.6.6"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -229,7 +229,7 @@ packages:
       name: flutter_chat_ui
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.3"
+    version: "1.6.4"
   flutter_colorpicker:
     dependency: "direct main"
     description:
@@ -546,7 +546,7 @@ packages:
       name: octo_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.1"
   open_file:
     dependency: "direct main"
     description:
@@ -714,7 +714,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.5"
+    version: "0.27.3"
   shared_preferences:
     dependency: transitive
     description:
@@ -789,14 +789,14 @@ packages:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.2"
   sqflite_common:
     dependency: transitive
     description:
       name: sqflite_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.1+1"
+    version: "2.2.1"
   stack_trace:
     dependency: transitive
     description:

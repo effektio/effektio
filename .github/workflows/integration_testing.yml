@@ -68,28 +68,12 @@ jobs:
           CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAG: -C link-arg=-fuse-ld=/usr/local/bin/mold
         run: cargo test -p effektio-test -- --nocapture
 
-  flutter:
+  flutter-ios:
     runs-on: macos-latest
-    name: Flutter Integration Tests
+    name: Flutter Integration Tests on iOS
     continue-on-error: true
-    # services:
-    #   synapse:
-    #     image: "lightyear/effektio-synapse-ci:latest"
-    #     volumes:
-    #       - synapse-data:/data
-    #     ports:
-    #       - 8008:8008
-    #       - 8009:8009
-    #       - 8448:8448
     steps:
       - uses: actions/checkout@v2
-
-      - uses: docker-practice/actions-setup-docker@master
-      - name: Starting synapse
-        run: |
-          set -x
-          docker version
-          docker-compose up -d
 
       - name: Install supported toolchain
         uses: actions-rs/toolchain@v1
@@ -109,14 +93,30 @@ jobs:
         with:
           channel: 'stable'
 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - uses: gnunicorn/setup-matrix-synapse@main
+        with:
+          uploadLogs: false
+          httpPort: 8118
+          disableRateLimiting: true
+          serverName: "ds9.effektio.org"
+          public_baseurl: "http://10.0.2.2:8118/"
+          customConfig: |
+            allow_guest_access: true
+            enable_registration_without_verification: true
+            enable_registration: true
+
+      - name: Initialize e2ee mock data
+        run: cargo run -p effektio-cli -- mock http://localhost:8118/
+
       - name: Build Native
         run: cargo make --profile release ios
 
       - name: Ensure ffi-interface is up to date
         run: git diff --exit-code effektio_flutter_sdk/lib/effektio_flutter_sdk_ffi.dart
-
-      - name: Initialize e2ee mock data
-        run: cargo run -p effektio-cli -- mock http://localhost:8118/
 
       - uses: futureware-tech/simulator-action@v1
         with:
@@ -124,4 +124,65 @@ jobs:
 
       - name: Run flutter integration tests
         working-directory: app
-        run: flutter drive --driver=test_driver/integration_test.dart integration_test/*  --dart-define DEFAULT_EFFEKTIO_SERVER=http://127.0.0.1:8118/
+        run: flutter drive --driver=test_driver/integration_test.dart integration_test/*  --dart-define DEFAULT_EFFEKTIO_SERVER=http://10.0.2.2:8118/
+
+  flutter-android:
+    runs-on: macos-latest
+    name: Flutter Integration Tests on android
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install supported toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+
+      - uses: Swatinem/rust-cache@v1
+
+      - name: Install cargo-make
+        uses: davidB/rust-cargo-make@v1
+
+      - name: Rust Android Setup
+        run: cargo make setup-ios
+
+      - uses: subosito/flutter-action@v2
+        name: "Set up flutter"
+        with:
+          channel: 'stable'
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - uses: gnunicorn/setup-matrix-synapse@main
+        with:
+          uploadLogs: false
+          httpPort: 8118
+          disableRateLimiting: true
+          serverName: "ds9.effektio.org"
+          customConfig: |
+            allow_guest_access: true
+
+      - name: Initialize e2ee mock data
+        run: cargo run -p effektio-cli -- mock http://localhost:8118/
+
+      - name: Build Native
+        run: cargo make --profile release ios
+
+      - name: Ensure ffi-interface is up to date
+        run: git diff --exit-code effektio_flutter_sdk/lib/effektio_flutter_sdk_ffi.dart
+
+      - name: Run integration tests on android
+        uses: reactivecircus/android-emulator-runner@v2
+        continue-on-error: true
+        with:
+          api-level: 28
+          arch: x86
+          profile: Nexus 5X
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          emulator-build: 7425822
+          script: |
+            flutter drive --driver=test_driver/integration_test.dart integration_test/*  --dart-define DEFAULT_EFFEKTIO_SERVER=http://10.0.2.2:8118/
